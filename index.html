@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Consultoría SAP y Desarrollo de Aplicaciones Móbiles | vSApp</title> 
+  <meta name="description" content="vSApp es una consultora chilena boutique especialista en SAP PM (Mantenimiento de Planta), SAP PP (Planificación de Producción) y aplicaciones móviles conectadas a SAP S/4HANA. Más de 25 años de experiencia.">
+  <meta name="theme-color" content="#0A1F3D">
+
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+
+  <!-- Tipografías: Playfair Display (titulares, serif elegante) + Inter (cuerpo, sans moderna) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Fallback sin JavaScript: evita que las secciones queden invisibles si el script no carga -->
+  <noscript>
+    <style>[data-animate] { opacity: 1 !important; transform: none !important; }</style>
+  </noscript>
+</head>
+<body>
+
+  <!-- ==================== SKIP LINK (accesibilidad) ==================== -->
+  <a class="skip-link" href="#main">Saltar al contenido principal</a>
+
+  <!-- ==================== NAVBAR FLOTANTE + MENÚ LATERAL DESDE LA IZQUIERDA ==================== -->
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="#home" class="navbar__brand" aria-label="vSApp - Inicio">
+        <img class="navbar__logo" src="assets/img/logo-header.svg" alt="" width="113" height="44">
+      </a>
+
+      <button class="navbar__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú de navegación">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </div>
+
+    <nav class="navbar__menu" id="navMenu" aria-label="Navegación principal">
+      <span class="navbar__indicator" aria-hidden="true"></span>
+      <ul class="navbar__list">
+        <li><a href="#sobre" class="navbar__link">Sobre nosotros</a></li>
+        <li><a href="#servicios" class="navbar__link">Nuestros Servicios</a></li>
+        <li><a href="#app-movil" class="navbar__link">Aplicaciones móviles</a></li>
+        <li><a href="#contacto" class="navbar__link">Contáctanos</a></li>
+      </ul>
+    </nav>
+
+    <div class="navbar__backdrop" id="navBackdrop" aria-hidden="true"></div>
+  </header>
+
+  <main id="main">
+
+    <!-- ==================== 1. HERO / HOME ==================== -->
+    <section class="hero" id="home">
+      <div class="hero__bg" aria-hidden="true"></div>
+      <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
+      <div class="container hero__inner">
+        <p class="hero__eyebrow" data-animate="fade-up">Bienvenido a vSApp</p>
+        <h1 class="hero__title" data-animate="fade-up" data-delay="1">
+          Especialistas en mantenimiento de planta y planificación de producción sobre
+          <span class="hero__title-accent">SAP S/4HANA</span>
+        </h1>
+        <!--
+        <p class="hero__subtitle" data-animate="fade-up" data-delay="2">
+          Más de 25 años transformando desafíos operacionales en oportunidades de negocio para la industria chilena y regional,
+          con un acompañamiento experto y personalizado en SAP PM y PP.
+        </p>
+        -->
+        <div class="hero__actions" data-animate="fade-up" data-delay="3">
+          <!-- <a href="#contacto" class="btn btn--primary">Conversemos su proyecto</a> -->
+          <a href="#sobre" class="btn btn--light">Conózcanos <span class="btn__arrow" aria-hidden="true">→</span></a>
+        </div>
+      </div>
+      <a href="#sobre" class="hero__scroll-cue" aria-label="Bajar a la siguiente sección">
+        <span></span>
+      </a>
+    </section>
+
+    <!-- ==================== 1. SOBRE VSAPP + CLIENTES + POR QUÉ VSAPP (todo en la sección 01) ====================
+         Izquierda: información. Derecha: collage animado de logos de empresas con las que hemos trabajado.
+         Para agregar un logo: duplicar un <li class="logo-carousel__item"> y reemplazar el placeholder por
+           <img src="assets/img/clientes/nombre.svg" alt="Nombre de la empresa">
+         (js/main.js duplica cada columna automáticamente para el loop continuo).
+         El collage tiene 3 columnas; cada <li> puede llevar --s (bajo) o --l (alto) para variar el tamaño. -->
+    <section class="about" id="sobre">
+      <div class="container">
+
+      <div class="about__grid">
+
+        <div class="about__content-col">
+          <span class="section-kicker">01 — Sobre vSApp</span>
+          <h2 class="section-title" data-animate="fade-up">
+            Acompañamiento experto que transforma desafíos en oportunidades de negocio
+          </h2>
+          <p class="about__text" data-animate="fade-up" data-delay="1">
+            vSApp es una consultora chilena especialista en soluciones de <strong>mantenimiento de planta (SAP PM)</strong> y
+            <strong>planificación de cadena de suministro (SAP PP)</strong> sobre SAP S/4HANA. Ofrecemos servicios de
+            asesoría, proyectos de implementación y mejora continua, con más de <strong>25 años de experiencia</strong> en
+            proyectos SAP en Chile y Sudamérica.
+          </p>
+          <p class="about__text" data-animate="fade-up" data-delay="2">
+            Entendemos las necesidades de cada cliente y entregamos el máximo valor: metodologías probadas, cobertura
+            integral en los módulos SAP clave y una atención personalizada basada en las mejores prácticas de la industria.
+          </p>
+
+          <div class="about__stats" data-animate="fade-up" data-delay="3">
+            <div class="stat">
+              <span class="stat__number" data-count="25" aria-hidden="true">0</span><span class="stat__suffix" aria-hidden="true">+</span>
+              <span class="stat__label"><span class="sr-only">25+ </span>años de experiencia en proyectos SAP</span>
+            </div>
+            <div class="stat">
+              <span class="stat__number" data-count="100" aria-hidden="true">0</span><span class="stat__suffix" aria-hidden="true">%</span>
+              <span class="stat__label"><span class="sr-only">100% </span>de proyectos entregados a tiempo y dentro del presupuesto</span>
+            </div>
+          </div>
+        </div>
+
+        <aside class="logo-carousel" aria-labelledby="clientesTitle" data-animate="fade-left">
+          <h3 class="logo-carousel__title" id="clientesTitle">Empresas con las que hemos trabajado</h3>
+          <div class="logo-carousel__viewport">
+            <div class="logo-carousel__col">
+            <div class="logo-carousel__track">
+              <ul class="logo-carousel__group">
+                <li class="logo-carousel__item logo-carousel__item--l"><span class="logo-placeholder">Logo cliente 1</span></li>
+                <li class="logo-carousel__item logo-carousel__item--s"><span class="logo-placeholder">Logo cliente 2</span></li>
+                <li class="logo-carousel__item"><span class="logo-placeholder">Logo cliente 3</span></li>
+                <li class="logo-carousel__item logo-carousel__item--s"><span class="logo-placeholder">Logo cliente 4</span></li>
+              </ul>
+            </div>
+          </div>
+            <div class="logo-carousel__col logo-carousel__col--reverse">
+            <div class="logo-carousel__track">
+              <ul class="logo-carousel__group">
+                <li class="logo-carousel__item logo-carousel__item--s"><span class="logo-placeholder">Logo cliente 5</span></li>
+                <li class="logo-carousel__item"><span class="logo-placeholder">Logo cliente 6</span></li>
+                <li class="logo-carousel__item logo-carousel__item--l"><span class="logo-placeholder">Logo cliente 7</span></li>
+                <li class="logo-carousel__item"><span class="logo-placeholder">Logo cliente 8</span></li>
+              </ul>
+            </div>
+          </div>
+            <div class="logo-carousel__col">
+            <div class="logo-carousel__track">
+              <ul class="logo-carousel__group">
+                <li class="logo-carousel__item"><span class="logo-placeholder">Logo cliente 9</span></li>
+                <li class="logo-carousel__item logo-carousel__item--l"><span class="logo-placeholder">Logo cliente 10</span></li>
+                <li class="logo-carousel__item logo-carousel__item--s"><span class="logo-placeholder">Logo cliente 11</span></li>
+                <li class="logo-carousel__item logo-carousel__item--l"><span class="logo-placeholder">Logo cliente 12</span></li>
+              </ul>
+            </div>
+          </div>
+          </div>
+        </aside>
+
+      </div>
+
+      <div class="about__why">
+        <h3 class="about__why-title" data-animate="fade-up">Experiencia, agilidad y calidad basada en mejores prácticas</h3>
+
+        <div class="why__grid">
+          <div class="why-card" data-animate="fade-up" data-delay="1">
+            <h3 class="why-card__title">Experiencia multi-rubro</h3>
+            <p class="why-card__text">Amplia trayectoria en proyectos PM y PP en diversos rubros industriales de Chile y la región.</p>
+          </div>
+          <div class="why-card" data-animate="fade-up" data-delay="2">
+            <h3 class="why-card__title">Agilidad</h3>
+            <p class="why-card__text">Agilidad en el servicio y en los proyectos, con respuestas ágiles y especializadas a cada requerimiento.</p>
+          </div>
+          <div class="why-card" data-animate="fade-up" data-delay="3">
+            <h3 class="why-card__title">Soluciones estándar de alto valor</h3>
+            <p class="why-card__text">Búsqueda de soluciones estándares sobre SAP S/4HANA, evitando desarrollos innecesarios.</p>
+          </div>
+          <div class="why-card" data-animate="fade-up" data-delay="4">
+            <h3 class="why-card__title">Calidad y atención personalizada</h3>
+            <p class="why-card__text">Calidad de la solución basada en mejores prácticas, con una atención personalizada a cada cliente.</p>
+          </div>
+        </div>
+      </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 3. SERVICIOS (4 PILARES) ==================== -->
+    <section class="services" id="servicios">
+      <div class="container">
+        <div class="section-heading" data-animate="fade-up">
+          <span class="section-kicker">02 — Servicios</span>
+          <h2 class="section-title">Cuatro pilares para su operación SAP</h2>
+          <p class="section-intro">
+            Somos una empresa especialista en mantenimiento y planificación de producción. Cubrimos el ciclo completo:
+            implementación, mejora continua, movilidad y optimización.
+          </p>
+        </div>
+
+        <div class="services__grid">
+
+          <!-- Pilar 1: Proyectos modulares -->
+          <article class="service-card" data-animate="fade-up" data-delay="1">
+            <span class="service-card__index">01</span>
+            <h3 class="service-card__title">Proyectos modulares</h3>
+            <p class="service-card__text">
+              Implementamos los módulos <strong>SAP PM y PP</strong> integrados completamente con los procesos de compras,
+              logística, WMS y FI-CO, con un método acelerado y confiable respaldado por más de 25 años de experiencia.
+            </p>
+            <ul class="service-card__list">
+              <li>Gestión y mantenimiento de activos empresariales (SAP PM)</li>
+              <li>Planificación y control de piso de planta (SAP PP)</li>
+              <li>Modelo preconfigurado de levantamiento acelerado</li>
+              <li>Activación de apps en SAP Fiori</li>
+            </ul>
+          </article>
+
+          <!-- Pilar 2: Servicio AMS -->
+          <article class="service-card" data-animate="fade-up" data-delay="2">
+            <span class="service-card__index">02</span>
+            <h3 class="service-card__title">Servicio AMS especializado</h3>
+            <p class="service-card__text">
+              Mejora continua personalizada en PM y PP a través de una bolsa mínima de <strong>16 horas mensuales</strong>,
+              acumulable por 3 meses, con consultores dedicados a mantener y evolucionar sus operaciones SAP.
+            </p>
+            <ul class="service-card__list">
+              <li>Respuestas ágiles y especializadas</li>
+              <li>Flexible a su demanda y requerimiento</li>
+              <li>Asesoría y entrenamiento personalizado</li>
+              <li>Facturación mensual el día 20 de cada mes</li>
+            </ul>
+          </article>
+
+          <!-- Pilar 3: Apps móviles (destacado) -->
+          <article class="service-card service-card--featured" data-animate="fade-up" data-delay="3">
+            <span class="service-card__index">03</span>
+            <h3 class="service-card__title">Aplicaciones móviles BTP / Fiori</h3>
+            <p class="service-card__text">
+              Desarrollamos aplicaciones móviles sobre <strong>SAP BTP y Fiori</strong>, llevando la operación al campo con
+              experiencias simples, ágiles y en tiempo real, integradas nativamente con SAP S/4HAN.
+            </p>
+            <ul class="service-card__list">
+              <li>Gestión de órdenes, avisos e inspecciones de mantenimiento</li>
+              <li>Control de piso, notificación y picking</li>
+              <li>Integración online y offline</li>
+            </ul>
+            <a href="#app-movil" class="service-card__link">Conocer PM Mobile →</a>
+          </article>
+
+          <!-- Pilar 4: Optimización -->
+          <article class="service-card" data-animate="fade-up" data-delay="4">
+            <span class="service-card__index">04</span>
+            <h3 class="service-card__title">Proyectos de optimización</h3>
+            <p class="service-card__text">
+              Ejecutamos proyectos de mejora operativa en <strong>MRP</strong>, gestión de repuestos y costo real de
+              inventario, generando eficiencia medible en la cadena productiva.
+            </p>
+            <ul class="service-card__list">
+              <li>Reducción de quiebres de stock y excesos de repuestos</li>
+              <li>Mayor precisión en planificación y programación</li>
+              <li>Distribución de diferencias de inventario por consumo real</li>
+            </ul>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== 4. APLICACIONES MÓVILES (DESTACADA) ==================== -->
+    <section class="mobile-app" id="app-movil">
+      <div class="container mobile-app__grid">
+
+        <div class="mobile-app__content">
+          <span class="section-kicker section-kicker--light">03 — Desarrollo de Aplicaciones</span>
+          <h2 class="section-title section-title--light" data-animate="fade-up">
+            APP Mobile: su operación de planta, en el bolsillo del técnico
+          </h2>
+          <p class="mobile-app__text" data-animate="fade-up" data-delay="1">
+            Implementamos una solución <strong>APP Mobile</strong> sobre la plataforma SAP BTP que integra los procesos de
+            gestión de activos de SAP S/4HANA. Sus técnicos de mantenimiento gestionan avisos, órdenes y notifican el
+            trabajo ejecutado en modo <strong>online / offline</strong>, directamente desde su dispositivo móvil.
+          </p>
+
+          <div class="mobile-app__features" data-animate="fade-up" data-delay="2">
+            <div class="feature">
+              <h3 class="feature__title">Gestión completa en terreno</h3>
+              <p class="feature__text">Creación, modificación y visualización de avisos y órdenes de mantenimiento, con cierre de orden y cambio de responsable desde la app.</p>
+            </div>
+            <div class="feature">
+              <h3 class="feature__title">Captura fotográfica de averías</h3>
+              <p class="feature__text">El técnico fotografía la avería y queda anexada como documento en el Content Server de SAP S/4HANA.</p>
+            </div>
+            <div class="feature">
+              <h3 class="feature__title">Verificación de stock de repuestos</h3>
+              <p class="feature__text">Consulta el stock disponible y lo asigna como componente directamente en la orden de trabajo.</p>
+            </div>
+            <div class="feature">
+              <h3 class="feature__title">Integración nativa online / offline</h3>
+              <p class="feature__text">Conexión directa con SAP S/4HANA, disponible en <strong>Android e iOS</strong>, incluso sin conectividad en terreno.</p>
+            </div>
+            <div class="feature">
+              <h3 class="feature__title">Objetos técnicos y consultas</h3>
+              <p class="feature__text">Visualización de ubicaciones técnicas, equipos y hojas de ruta directamente desde el dispositivo móvil.</p>
+            </div>
+            <div class="feature">
+              <h3 class="feature__title">Sincronización flexible</h3>
+              <p class="feature__text">Sincronización global o selectiva por funcionalidad (avisos, órdenes u objetos técnicos), con conexión directa y segura a SAP.</p>
+            </div>
+          </div>
+
+          <p class="mobile-app__note" data-animate="fade-up" data-delay="3">
+            Reduce el papeleo, mejora la precisión de los datos y aumenta la eficiencia en terreno — con tablas de control
+            que permiten configurar el centro de mantenimiento, tipo de documento y personal habilitado.
+          </p>
+        </div>
+
+        <!-- Mockups de pantallas (placeholders SVG, sin dependencias externas) -->
+        <div class="mobile-app__mockups" data-animate="fade-left" aria-hidden="true">
+          <div class="phone phone--back">
+            <div class="phone__notch"></div>
+            <div class="phone__screen">
+              <div class="mockup-screen">
+                <div class="mockup-screen__header">Stock de repuestos</div>
+                <div class="mockup-screen__row"><span></span><span class="pill pill--ok">Disponible</span></div>
+                <div class="mockup-screen__row"><span></span><span class="pill pill--ok">Disponible</span></div>
+                <div class="mockup-screen__row"><span></span><span class="pill pill--warn">Bajo</span></div>
+                <div class="mockup-screen__bar"></div>
+                <div class="mockup-screen__bar"></div>
+              </div>
+            </div>
+          </div>
+          <div class="phone phone--front">
+            <div class="phone__notch"></div>
+            <div class="phone__screen">
+              <div class="mockup-screen">
+                <div class="mockup-screen__header">Orden de mantenimiento</div>
+                <div class="mockup-screen__chip">OT-004512</div>
+                <div class="mockup-screen__photo" aria-hidden="true">📷</div>
+                <div class="mockup-screen__row"><span></span><span class="pill pill--ok">Offline sync</span></div>
+                <div class="mockup-screen__bar mockup-screen__bar--cta"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== 5. METODOLOGÍA (RAPID DEPLOYMENT) — OCULTA TEMPORALMENTE ====================
+         Para volver a mostrarla: eliminar los marcadores de comentario que envuelven esta sección. -->
+    <!--
+    <section class="methodology" id="metodologia">
+      <div class="container">
+        <div class="section-heading" data-animate="fade-up">
+          <span class="section-kicker">04 — Metodología</span>
+          <h2 class="section-title">Rapid Deployment: prototipo base en 3 a 3.5 meses</h2>
+          <p class="section-intro">
+            Un método acelerado y confiable, respaldado por más de 25 años de implementación de proyectos SAP en Chile y la región.
+          </p>
+        </div>
+
+        <ol class="timeline" data-animate="fade-up" data-delay="1">
+          <li class="timeline__step">
+            <span class="timeline__marker">01</span>
+            <h3 class="timeline__title">Preparación</h3>
+            <p class="timeline__text">Levantamiento de datos y procesos en base a un modelo preconfigurado. Definición de alcance y equipo de proyecto.</p>
+          </li>
+          <li class="timeline__step">
+            <span class="timeline__marker">02</span>
+            <h3 class="timeline__title">Ajustes</h3>
+            <p class="timeline__text">Configuración y ajuste del modelo estándar a los procesos específicos del negocio, validando con los usuarios clave.</p>
+          </li>
+          <li class="timeline__step">
+            <span class="timeline__marker">03</span>
+            <h3 class="timeline__title">Desarrollo</h3>
+            <p class="timeline__text">Construcción de desarrollos específicos, integración con compras, logística, WMS y FI-CO, y pruebas integrales.</p>
+          </li>
+          <li class="timeline__step">
+            <span class="timeline__marker">04</span>
+            <h3 class="timeline__title">Paso a productivo</h3>
+            <p class="timeline__text">Capacitación, migración de datos maestros y puesta en marcha, con acompañamiento post-arranque.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+    -->
+
+    <!-- ==================== 7. CONTACTO ==================== -->
+    <section class="contact" id="contacto">
+      <div class="container contact__grid">
+
+        <div class="contact__info" data-animate="fade-up">
+          <span class="section-kicker">04 — Contacto</span>
+          <h2 class="section-title">Conversemos sobre su próximo proyecto SAP</h2>
+          <p class="contact__lead">
+            Escríbanos y un consultor especialista de vSApp se pondrá en contacto para entender sus necesidades y
+            proponer el mejor camino.
+          </p>
+
+          <ul class="contact__details">
+            <li>
+              <span class="contact__label">Dirección</span>
+              <span>Avda. Costa de Montemar 287, Concón, V Región<br>Edificio Marina de Montemar II</span>
+            </li>
+            <li>
+              <span class="contact__label">Teléfono</span>
+              <a href="tel:+56222871796">+56 2 2287 1796</a>
+            </li>
+            <li>
+              <span class="contact__label">Correo</span>
+              <a href="mailto:contacto@vsapp.cl">contacto@vsapp.cl</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Formulario de contacto desactivado temporalmente (inactivo, no se muestra en pantalla).
+             Para reactivarlo: descomentar este bloque y en css/styles.css devolver
+             .contact__grid a su layout de dos columnas (ver comentario junto a esa regla). -->
+        <!--
+        <form class="contact__form" id="contactForm" data-animate="fade-left" novalidate>
+          <div class="form-field">
+            <label for="name">Nombre completo</label>
+            <input type="text" id="name" name="name" autocomplete="name" required>
+            <span class="form-field__error" id="nameError" role="alert"></span>
+          </div>
+
+          <div class="form-field">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="email" name="email" autocomplete="email" required>
+            <span class="form-field__error" id="emailError" role="alert"></span>
+          </div>
+
+          <div class="form-field">
+            <label for="company">Empresa</label>
+            <input type="text" id="company" name="company" autocomplete="organization">
+          </div>
+
+          <div class="form-field">
+            <label for="subject">Motivo de contacto</label>
+            <select id="subject" name="subject" required>
+              <option value="" selected disabled>Seleccione una opción</option>
+              <option value="proyectos-modulares">Proyectos modulares (PM / PP)</option>
+              <option value="ams">Servicio AMS especializado</option>
+              <option value="app-movil">Aplicaciones móviles BTP / Fiori</option>
+              <option value="optimizacion">Proyectos de optimización</option>
+              <option value="otro">Otro</option>
+            </select>
+            <span class="form-field__error" id="subjectError" role="alert"></span>
+          </div>
+
+          <div class="form-field">
+            <label for="message">Mensaje</label>
+            <textarea id="message" name="message" rows="5" required></textarea>
+            <span class="form-field__error" id="messageError" role="alert"></span>
+          </div>
+
+          <button type="submit" class="btn btn--primary btn--block">Enviar mensaje</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        </form>
+        -->
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <img class="footer__logo" src="assets/img/logo-header.svg" alt="vSApp" width="165" height="64">
+        <p class="footer__tagline">vSApp especialista en soluciones de mantenimiento de planta y planificación de cadena de suministro en SAP S/4&nbsp;HANA.</p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Navegación secundaria">
+        <a href="#sobre">Sobre vSApp</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#app-movil">Apps móviles</a>
+        <!-- <a href="#metodologia">Metodología</a> -->
+        <!-- <a href="#contacto">Contacto</a> -->
+      </nav>
+
+      <div class="footer__legal">
+        <p>&copy; <span id="year"></span> vSApp Ltda. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==================== BOTÓN VOLVER ARRIBA ==================== -->
+  <button class="back-to-top" id="backToTop" aria-label="Volver arriba">↑</button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>
