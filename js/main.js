@@ -18,6 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollAnimations();
   initStatCounters();
   initLogoCarousel();
+  initServicesTabs();
+  initAppShowcase();
   initBackToTop();
   initContactForm();
   initFooterYear();
@@ -409,6 +411,115 @@ function initLogoCarousel() {
   window.addEventListener('resize', () => {
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(build, 200);
+  });
+}
+
+/* -------------------------------------------------------------------------
+   4c. SELECTOR DE SERVICIOS (sección "Servicios"): al hacer clic en un pilar de la
+   lista, se activa su panel de detalle a la derecha; también se puede navegar con
+   las flechas del teclado, como un patrón de pestañas (tabs) accesible.
+   ------------------------------------------------------------------------- */
+function initServicesTabs() {
+  const nav = document.querySelector('.services__nav');
+  if (!nav) return;
+
+  const buttons = [...nav.querySelectorAll('.services__nav-btn')];
+  const panes = [...document.querySelectorAll('.services__pane')];
+
+  const activate = (button) => {
+    const targetId = button.getAttribute('aria-controls');
+
+    buttons.forEach((btn) => {
+      const isActive = btn === button;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-selected', String(isActive));
+      btn.tabIndex = isActive ? 0 : -1;
+    });
+
+    panes.forEach((pane) => pane.classList.toggle('is-active', pane.id === targetId));
+  };
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => activate(btn));
+  });
+
+  nav.addEventListener('keydown', (event) => {
+    const currentIndex = buttons.indexOf(document.activeElement);
+    if (currentIndex === -1) return;
+
+    let nextIndex = null;
+    if (event.key === 'ArrowDown' || event.key === 'ArrowRight') nextIndex = (currentIndex + 1) % buttons.length;
+    if (event.key === 'ArrowUp' || event.key === 'ArrowLeft') nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+
+    if (nextIndex !== null) {
+      event.preventDefault();
+      buttons[nextIndex].focus();
+      activate(buttons[nextIndex]);
+    }
+  });
+}
+
+/* -------------------------------------------------------------------------
+   4d. SELECTOR DE APPS MÓVILES (sección "Aplicaciones móviles"): cada botón de
+   módulo (PM/WM/QM/PP) controla a la vez el panel de texto y la pantalla del
+   teléfono que comparten su [data-module]. Los renglones dentro del teléfono
+   también responden al tacto/clic (solo efecto visual) para que el mockup se
+   sienta como un dispositivo real.
+   ------------------------------------------------------------------------- */
+function initAppShowcase() {
+  const nav = document.querySelector('.app-showcase__modules');
+  if (!nav) return;
+
+  const buttons = [...nav.querySelectorAll('.app-showcase__module-btn')];
+  const infoPanes = [...document.querySelectorAll('.app-showcase__info-pane')];
+  const appScreens = [...document.querySelectorAll('.app-screen')];
+
+  const activate = (button) => {
+    const module = button.dataset.module;
+
+    buttons.forEach((btn) => {
+      const isActive = btn === button;
+      btn.classList.toggle('is-active', isActive);
+      btn.setAttribute('aria-selected', String(isActive));
+      btn.tabIndex = isActive ? 0 : -1;
+    });
+
+    infoPanes.forEach((pane) => pane.classList.toggle('is-active', pane.dataset.module === module));
+    appScreens.forEach((screen) => screen.classList.toggle('is-active', screen.dataset.module === module));
+  };
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => activate(btn));
+  });
+
+  nav.addEventListener('keydown', (event) => {
+    const currentIndex = buttons.indexOf(document.activeElement);
+    if (currentIndex === -1) return;
+
+    let nextIndex = null;
+    if (event.key === 'ArrowRight' || event.key === 'ArrowDown') nextIndex = (currentIndex + 1) % buttons.length;
+    if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+
+    if (nextIndex !== null) {
+      event.preventDefault();
+      buttons[nextIndex].focus();
+      activate(buttons[nextIndex]);
+    }
+  });
+
+  // Tiles de funciones dentro de cada pantalla: al tocar una, muestra su descripción
+  // (una activa a la vez, por pantalla — cada módulo recuerda su propia selección).
+  document.querySelectorAll('.app-screen').forEach((screen) => {
+    const tiles = [...screen.querySelectorAll('.app-screen__tile')];
+    const detailText = screen.querySelector('.app-screen__detail-text');
+    if (!tiles.length || !detailText) return;
+
+    tiles.forEach((tile) => {
+      tile.addEventListener('click', () => {
+        tiles.forEach((t) => t.classList.toggle('is-active', t === tile));
+        detailText.textContent = tile.dataset.detail;
+      });
+    });
   });
 }
 

@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simulador de apps móviles SAP Mobile Service | vSApp</title>
+  <meta name="description" content="Pruebe en un simulador interactivo las aplicaciones móviles que vSApp desarrolla sobre SAP Mobile Service para los módulos PM, WM, QM y PP, conectadas nativamente a SAP S/4HANA.">
+  <meta name="theme-color" content="#0A1F3D">
+
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+
+  <!-- Tipografías: Playfair Display (titulares, serif elegante) + Inter (cuerpo, sans moderna) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Fallback sin JavaScript: evita que el panel quede invisible si el script no carga -->
+  <noscript>
+    <style>[data-animate] { opacity: 1 !important; transform: none !important; }</style>
+  </noscript>
+</head>
+<body class="app-page-body">
+
+  <a class="skip-link" href="#main">Saltar al contenido principal</a>
+
+  <!-- ==================== NAVBAR (igual que index.html; enlaza de vuelta a las secciones del sitio) ==================== -->
+  <header class="navbar" id="navbar">
+    <div class="navbar__inner">
+      <a href="index.html" class="navbar__brand" aria-label="vSApp - Inicio">
+        <img class="navbar__logo" src="assets/img/logo-header.svg" alt="" width="113" height="44">
+      </a>
+
+      <button class="navbar__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú de navegación">
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+        <span class="navbar__toggle-bar"></span>
+      </button>
+    </div>
+
+    <nav class="navbar__menu" id="navMenu" aria-label="Navegación principal">
+      <ul class="navbar__list">
+        <li><a href="index.html#sobre" class="navbar__link">Sobre nosotros</a></li>
+        <li><a href="index.html#servicios" class="navbar__link">Nuestros Servicios</a></li>
+        <li><a href="index.html#app-movil" class="navbar__link">Aplicaciones móviles</a></li>
+        <li><a href="index.html#contacto" class="navbar__link">Contáctanos</a></li>
+      </ul>
+    </nav>
+
+    <div class="navbar__backdrop" id="navBackdrop" aria-hidden="true"></div>
+  </header>
+
+  <main id="main">
+
+    <!-- ==================== SIMULADOR DE APPS MÓVILES ====================
+         Página dedicada (ver README: "si se requiere contenido extenso por sección,
+         separar en páginas propias"). Reutiliza exactamente el mismo componente
+         .app-showcase de index.html#app-movil — mismo HTML/CSS/JS — solo que aquí
+         es el contenido central de la página, con el teléfono más grande
+         (.phone--large) al no competir con el resto de las secciones del sitio. -->
+    <section class="mobile-app app-page">
+      <div class="container">
+
+        <a href="index.html" class="app-page__back">← Volver a vSApp</a>
+
+        <div class="section-heading" data-animate="fade-up">
+          <span class="section-kicker">Simulador interactivo</span>
+          <h1 class="section-title">Pruebe SAP Mobile Service en acción</h1>
+          <p class="section-intro">
+            Seleccione un módulo — PM, WM, QM o PP — y explore su aplicación móvil como si tuviera el dispositivo en sus
+            manos. Las cuatro apps corren sobre <strong>SAP Mobile Service</strong> (SAP BTP), con integración nativa
+            online / offline a SAP S/4HANA.
+          </p>
+        </div>
+
+        <div class="app-showcase" data-animate="fade-up" data-delay="1">
+
+          <div class="app-showcase__modules" role="tablist" aria-label="Módulos SAP">
+            <button type="button" class="app-showcase__module-btn app-showcase__module-btn--pm is-active" id="module-pm" role="tab" aria-selected="true" data-module="pm" tabindex="0">
+              <span class="app-showcase__module-code">PM</span>
+              <span>
+                <span class="app-showcase__module-name">Mantenimiento de Planta</span>
+                <span class="app-showcase__module-desc">Avisos, órdenes y repuestos</span>
+              </span>
+            </button>
+            <button type="button" class="app-showcase__module-btn app-showcase__module-btn--wm" id="module-wm" role="tab" aria-selected="false" data-module="wm" tabindex="-1">
+              <span class="app-showcase__module-code">WM</span>
+              <span>
+                <span class="app-showcase__module-name">Gestión de Almacenes</span>
+                <span class="app-showcase__module-desc">Picking, traspasos y conteos</span>
+              </span>
+            </button>
+            <button type="button" class="app-showcase__module-btn app-showcase__module-btn--qm" id="module-qm" role="tab" aria-selected="false" data-module="qm" tabindex="-1">
+              <span class="app-showcase__module-code">QM</span>
+              <span>
+                <span class="app-showcase__module-name">Gestión de Calidad</span>
+                <span class="app-showcase__module-desc">Inspecciones y liberación de lotes</span>
+              </span>
+            </button>
+            <button type="button" class="app-showcase__module-btn app-showcase__module-btn--pp" id="module-pp" role="tab" aria-selected="false" data-module="pp" tabindex="-1">
+              <span class="app-showcase__module-code">PP</span>
+              <span>
+                <span class="app-showcase__module-name">Planificación de Producción</span>
+                <span class="app-showcase__module-desc">Confirmaciones y avance de orden</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="app-showcase__stage app-showcase__stage--page">
+
+            <div class="app-showcase__info">
+
+              <div class="app-showcase__info-pane is-active" data-module="pm" aria-labelledby="module-pm">
+                <h2 class="app-showcase__info-title">PM Mobile — Mantenimiento de Planta</h2>
+                <p class="app-showcase__info-text">
+                  Sus técnicos gestionan avisos, órdenes y repuestos en modo <strong>online / offline</strong>, con captura
+                  fotográfica de averías directamente desde el equipo en terreno.
+                </p>
+                <ul class="app-showcase__info-list">
+                  <li>Gestión de avisos y órdenes de mantenimiento</li>
+                  <li>Captura fotográfica de averías</li>
+                  <li>Verificación de stock de repuestos</li>
+                  <li>Integración online / offline</li>
+                </ul>
+              </div>
+
+              <div class="app-showcase__info-pane app-showcase__info-pane--wm" data-module="wm" aria-labelledby="module-wm">
+                <h2 class="app-showcase__info-title">WM Mobile — Gestión de Almacenes</h2>
+                <p class="app-showcase__info-text">
+                  Sus operarios ejecutan picking, traspasos y conteos guiados desde el piso de bodega, con lectura de
+                  códigos y confirmación inmediata en SAP.
+                </p>
+                <ul class="app-showcase__info-list">
+                  <li>Recepción y ubicación de materiales</li>
+                  <li>Picking guiado por código</li>
+                  <li>Traspasos entre bodegas</li>
+                  <li>Conteo cíclico de inventario</li>
+                </ul>
+              </div>
+
+              <div class="app-showcase__info-pane app-showcase__info-pane--qm" data-module="qm" aria-labelledby="module-qm">
+                <h2 class="app-showcase__info-title">QM Mobile — Gestión de Calidad</h2>
+                <p class="app-showcase__info-text">
+                  Sus inspectores registran resultados de inspección y liberan o rechazan lotes desde cualquier punto de
+                  la planta, sin papeleo adicional.
+                </p>
+                <ul class="app-showcase__info-list">
+                  <li>Inspecciones de entrada y de proceso</li>
+                  <li>Registro de resultados por característica</li>
+                  <li>Notificaciones de calidad</li>
+                  <li>Liberación o rechazo de lotes</li>
+                </ul>
+              </div>
+
+              <div class="app-showcase__info-pane app-showcase__info-pane--pp" data-module="pp" aria-labelledby="module-pp">
+                <h2 class="app-showcase__info-title">PP Mobile — Planificación de Producción</h2>
+                <p class="app-showcase__info-text">
+                  Sus operadores confirman operaciones y consumos de componentes en línea, con visibilidad inmediata del
+                  avance de cada orden de producción.
+                </p>
+                <ul class="app-showcase__info-list">
+                  <li>Confirmación de operaciones</li>
+                  <li>Consumo de componentes</li>
+                  <li>Seguimiento de avance de la orden</li>
+                  <li>Reporte de paradas y tiempos muertos</li>
+                </ul>
+              </div>
+
+            </div>
+
+            <div class="app-showcase__device">
+              <div class="phone phone--single phone--large" aria-hidden="true">
+                <div class="phone__notch"></div>
+                <div class="phone__screen">
+
+                  <div class="app-screen app-screen--pm is-active" data-module="pm">
+                    <div class="app-screen__header">
+                      <span class="app-screen__icon">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                          <polygon points="50,8 87,29 87,71 50,92 13,71 13,29"/>
+                          <circle cx="50" cy="50" r="15"/>
+                        </svg>
+                      </span>
+                      <span class="app-screen__name">PM Mobile</span>
+                    </div>
+                    <div class="app-screen__tiles">
+                      <button type="button" class="app-screen__tile is-active" data-detail="Cree y dé seguimiento a avisos de avería, con estado y prioridad en tiempo real.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 14a20 20 0 0 0-20 20v12l-10 16h60l-10-16V34A20 20 0 0 0 50 14Z"/><path d="M42 84a8 8 0 0 0 16 0"/></svg></span>
+                        <span class="app-screen__tile-label">Avisos</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Visualice, modifique y cierre órdenes de mantenimiento directamente desde el equipo.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><line x1="34" y1="42" x2="66" y2="42"/><line x1="34" y1="56" x2="66" y2="56"/><line x1="34" y1="70" x2="54" y2="70"/></svg></span>
+                        <span class="app-screen__tile-label">Órdenes</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Consulte el stock disponible y asígnelo como componente en la orden.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8 90 29v42l-40 21-40-21V29Z"/><path d="M10 29l40 21 40-21"/><line x1="50" y1="50" x2="50" y2="92"/></svg></span>
+                        <span class="app-screen__tile-label">Repuestos</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Fotografíe la avería; la imagen queda anexada en el Content Server de SAP.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="28" width="76" height="52" rx="10"/><path d="M34 28l8-12h16l8 12"/><circle cx="50" cy="54" r="16"/></svg></span>
+                        <span class="app-screen__tile-label">Fotos</span>
+                      </button>
+                    </div>
+                    <div class="app-screen__detail">
+                      <p class="app-screen__detail-text">Cree y dé seguimiento a avisos de avería, con estado y prioridad en tiempo real.</p>
+                    </div>
+                  </div>
+
+                  <div class="app-screen app-screen--wm" data-module="wm">
+                    <div class="app-screen__header">
+                      <span class="app-screen__icon">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M50 8 90 29v42l-40 21-40-21V29Z"/>
+                          <path d="M10 29l40 21 40-21"/>
+                          <line x1="50" y1="50" x2="50" y2="92"/>
+                        </svg>
+                      </span>
+                      <span class="app-screen__name">WM Mobile</span>
+                    </div>
+                    <div class="app-screen__tiles">
+                      <button type="button" class="app-screen__tile is-active" data-detail="Registre la recepción de materiales y confirme su ubicación en bodega.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 44h22l8 14h12l8-14h22"/><path d="M14 44V24a4 4 0 0 1 4-4h64a4 4 0 0 1 4 4v20"/><path d="M14 44v30a6 6 0 0 0 6 6h60a6 6 0 0 0 6-6V44"/></svg></span>
+                        <span class="app-screen__tile-label">Recepción</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Ejecute picking guiado leyendo el código de barras de cada ítem.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><line x1="16" y1="20" x2="16" y2="80"/><line x1="28" y1="20" x2="28" y2="80"/><line x1="38" y1="20" x2="38" y2="80"/><line x1="50" y1="20" x2="50" y2="80"/><line x1="58" y1="20" x2="58" y2="80"/><line x1="70" y1="20" x2="70" y2="80"/><line x1="84" y1="20" x2="84" y2="80"/></svg></span>
+                        <span class="app-screen__tile-label">Picking</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Mueva materiales entre bodegas y confirme el traspaso al instante.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 34h54"/><path d="M58 20l14 14-14 14"/><path d="M82 66H28"/><path d="M42 52L28 66l14 14"/></svg></span>
+                        <span class="app-screen__tile-label">Traspasos</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Realice conteos de inventario por zona y reporte diferencias.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><path d="M34 54l10 10 22-24"/></svg></span>
+                        <span class="app-screen__tile-label">Conteo cíclico</span>
+                      </button>
+                    </div>
+                    <div class="app-screen__detail">
+                      <p class="app-screen__detail-text">Registre la recepción de materiales y confirme su ubicación en bodega.</p>
+                    </div>
+                  </div>
+
+                  <div class="app-screen app-screen--qm" data-module="qm">
+                    <div class="app-screen__header">
+                      <span class="app-screen__icon">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M50 8 84 20v28c0 26-15 40-34 44-19-4-34-18-34-44V20Z"/>
+                          <path d="M34 50l11 11 21-23"/>
+                        </svg>
+                      </span>
+                      <span class="app-screen__name">QM Mobile</span>
+                    </div>
+                    <div class="app-screen__tiles">
+                      <button type="button" class="app-screen__tile is-active" data-detail="Registre inspecciones de entrada y de proceso con sus resultados.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><line x1="34" y1="42" x2="66" y2="42"/><line x1="34" y1="56" x2="66" y2="56"/><line x1="34" y1="70" x2="54" y2="70"/></svg></span>
+                        <span class="app-screen__tile-label">Inspecciones</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Capture el resultado de cada característica evaluada del lote.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><path d="M34 54l10 10 22-24"/></svg></span>
+                        <span class="app-screen__tile-label">Resultados</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Genere notificaciones de calidad ante una desviación detectada.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 14a20 20 0 0 0-20 20v12l-10 16h60l-10-16V34A20 20 0 0 0 50 14Z"/><path d="M42 84a8 8 0 0 0 16 0"/></svg></span>
+                        <span class="app-screen__tile-label">Notificaciones</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Libere o rechace lotes según el resultado de la inspección.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8 84 20v28c0 26-15 40-34 44-19-4-34-18-34-44V20Z"/><path d="M34 50l11 11 21-23"/></svg></span>
+                        <span class="app-screen__tile-label">Liberación</span>
+                      </button>
+                    </div>
+                    <div class="app-screen__detail">
+                      <p class="app-screen__detail-text">Registre inspecciones de entrada y de proceso con sus resultados.</p>
+                    </div>
+                  </div>
+
+                  <div class="app-screen app-screen--pp" data-module="pp">
+                    <div class="app-screen__header">
+                      <span class="app-screen__icon">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="18" cy="26" r="9"/><circle cx="50" cy="74" r="9"/><circle cx="82" cy="26" r="9"/>
+                          <line x1="25" y1="32" x2="44" y2="66"/><line x1="75" y1="32" x2="56" y2="66"/>
+                        </svg>
+                      </span>
+                      <span class="app-screen__name">PP Mobile</span>
+                    </div>
+                    <div class="app-screen__tiles">
+                      <button type="button" class="app-screen__tile is-active" data-detail="Confirme operaciones de producción a medida que se ejecutan.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><path d="M34 54l10 10 22-24"/></svg></span>
+                        <span class="app-screen__tile-label">Confirmaciones</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Registre el consumo de componentes contra la orden de producción.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8 90 29v42l-40 21-40-21V29Z"/><path d="M10 29l40 21 40-21"/><line x1="50" y1="50" x2="50" y2="92"/></svg></span>
+                        <span class="app-screen__tile-label">Consumo</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Consulte el porcentaje de avance de cada orden en tiempo real.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 74a32 32 0 1 1 64 0"/><line x1="50" y1="74" x2="66" y2="48"/><circle cx="50" cy="74" r="5"/></svg></span>
+                        <span class="app-screen__tile-label">Avance</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Reporte paradas y tiempos muertos con su motivo asociado.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 16 90 84H10Z"/><line x1="50" y1="40" x2="50" y2="62"/><circle cx="50" cy="72" r="3" fill="currentColor" stroke="none"/></svg></span>
+                        <span class="app-screen__tile-label">Paradas</span>
+                      </button>
+                    </div>
+                    <div class="app-screen__detail">
+                      <p class="app-screen__detail-text">Confirme operaciones de producción a medida que se ejecutan.</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <p class="app-showcase__note">
+            Todas las apps corren sobre <strong>SAP Mobile Service</strong> en SAP BTP, con la misma base de seguridad,
+            sincronización y administración — reduciendo el papeleo y aumentando la precisión de los datos en terreno.
+          </p>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER (igual que index.html) ==================== -->
+  <footer class="footer">
+    <div class="container footer__grid">
+      <div class="footer__brand">
+        <img class="footer__logo" src="assets/img/logo-header.svg" alt="vSApp" width="165" height="64">
+        <p class="footer__tagline">vSApp especialista en soluciones de mantenimiento de planta y planificación de cadena de suministro en SAP S/4&nbsp;HANA.</p>
+      </div>
+
+      <nav class="footer__nav" aria-label="Navegación secundaria">
+        <a href="index.html#sobre">Sobre vSApp</a>
+        <a href="index.html#servicios">Servicios</a>
+        <a href="aplicaciones-moviles.html">Apps móviles</a>
+      </nav>
+
+      <div class="footer__legal">
+        <p>&copy; <span id="year"></span> vSApp Ltda. Todos los derechos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="backToTop" aria-label="Volver arriba">↑</button>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

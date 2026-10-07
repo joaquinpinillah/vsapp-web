@@ -20,6 +20,14 @@
   --color-accent:      #2BB6A3;   /* cian tecnológico — acento, CTAs, detalles */
   --color-accent-dark: #1F8C7E;   /* cian oscuro — hover/estados activos */
   --color-accent-soft: rgba(43, 182, 163, 0.12);
+  --color-warm:        #F5B80A;   /* dorado — mismo tono del destello del logo; CTA secundario del HOME */
+  --color-warm-dark:   #D9A008;   /* dorado oscuro — hover */
+  --color-warm-soft:   rgba(245, 184, 10, 0.08);
+  --color-sky:         #3B82F6;   /* azul tecnológico — mismo tono usado en el fondo animado del HOME */
+  --color-sky-dark:    #2563EB;
+  --color-sky-soft:    rgba(59, 130, 246, 0.08);
+  --color-violet:      #8B7CFF;   /* violeta — mismo tono sutil del resplandor del fondo del HOME; 4° acento (módulo PP) */
+  --color-violet-soft: rgba(139, 124, 255, 0.1);
 
   /* Tipografía */
   --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
@@ -173,6 +181,7 @@ input, textarea, select {
   max-width: 70ch;
   margin-top: var(--space-2);
 }
+.section-intro--light { color: rgba(255, 255, 255, 0.75); }
 
 /* Encabezado de sección: kicker, título y, debajo, la introducción */
 .section-heading { margin-bottom: var(--space-5); }
@@ -199,11 +208,11 @@ input, textarea, select {
 }
 .btn--primary:hover { background: var(--color-accent-dark); color: var(--color-paper); }
 
-.btn--light {
-  background: var(--color-paper);
-  color: var(--color-navy);
+.btn--warm {
+  background: var(--color-warm);
+  color: var(--color-navy-deep);
 }
-.btn--light:hover { background: var(--color-navy); color: var(--color-paper); box-shadow: inset 0 0 0 1px var(--color-paper); }
+.btn--warm:hover { background: var(--color-warm-dark); color: var(--color-navy-deep); }
 
 .btn__arrow {
   margin-left: 0.6rem;
@@ -609,7 +618,7 @@ input, textarea, select {
 
 /* -------------------------------------------------------------------------
    7b. COLLAGE DE CLIENTES (columna derecha de la sección 01)
-   3 columnas de logos de distinta altura que se desplazan en sentidos alternados.
+   2 columnas de logos de distinta altura que se desplazan en sentidos alternados.
    js/main.js duplica cada columna, calcula --loop-distance / --loop-duration y añade .is-animated.
    ------------------------------------------------------------------------- */
 .logo-carousel {
@@ -637,7 +646,7 @@ input, textarea, select {
   flex: 1 1 auto;
   min-height: 420px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: var(--logo-gap);
   overflow: hidden;
   mask-image: linear-gradient(180deg, transparent, #000 10%, #000 90%, transparent);
@@ -718,66 +727,296 @@ input, textarea, select {
 
 /* -------------------------------------------------------------------------
    8. SERVICIOS
+   Selector interactivo (inspirado en paneles de consultoras tipo BCG): a la
+   izquierda la lista de pilares, a la derecha el detalle del pilar seleccionado.
+   js/main.js (initServicesTabs) alterna la clase "is-active" entre botón y panel;
+   no hay recarga de página. Cada pilar conserva su color distintivo (insignia +
+   viñetas), tomado de la paleta ya existente en el sitio.
    ------------------------------------------------------------------------- */
 .services {
   padding: var(--space-8) 0;
   background: var(--color-mist);
 }
 
-.services__grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-4);
-  align-items: stretch;
-}
-
-.service-card {
-  background: var(--color-paper);
-  border: 1px solid var(--color-line);
-  border-radius: var(--radius-md);
-  padding: var(--space-4);
+.services__panel {
   display: flex;
   flex-direction: column;
-  transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
-}
-.service-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 40px rgba(10, 31, 61, 0.08);
-  border-color: var(--color-accent-soft);
+  gap: var(--space-3);
 }
 
-.service-card__index {
+.services__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.services__nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.1rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--color-graphite);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+.services__nav-btn:hover { background: rgba(10, 31, 61, 0.05); color: var(--color-navy); }
+.services__nav-btn.is-active {
+  background: var(--color-paper);
+  color: var(--color-navy);
+  font-weight: 700;
+  box-shadow: 0 4px 14px rgba(10, 31, 61, 0.08);
+}
+
+.services__nav-dot {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+.services__nav-dot--sky { background: var(--color-sky); }
+.services__nav-dot--navy { background: var(--color-navy); }
+.services__nav-dot--warm { background: var(--color-warm); }
+
+/* Efecto flotante: solo el panel blanco se despega del fondo mist de la sección */
+.services__content {
+  background: var(--color-paper);
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  align-items: center;
+  box-shadow: 0 30px 60px -20px rgba(10, 31, 61, 0.25), 0 10px 24px rgba(10, 31, 61, 0.08);
+}
+
+.services__pane { display: none; width: 100%; }
+.services__pane.is-active {
+  display: flex;
+  align-items: stretch;
+  gap: var(--space-6);
+  min-height: 320px;
+  animation: servicesPaneIn 0.4s var(--ease);
+}
+@keyframes servicesPaneIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Título arriba, texto y viñetas debajo, centrado en la altura del panel */
+.services__pane-body {
+  flex: 1 1 50%;
+  max-width: 46ch;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Imagen del servicio: panel oscuro con el ícono "brillando" en el color del pilar
+   (mismo lenguaje visual que la sección oscura de Aplicaciones móviles). */
+.services__pane-media {
+  position: relative;
+  flex: 1 1 42%;
+  min-height: 260px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-navy-deep);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.services__pane-media::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, currentColor, transparent 62%);
+  opacity: 0.35;
+}
+.services__pane-media svg {
+  position: relative;
+  width: 38%;
+  height: 38%;
+  filter: drop-shadow(0 0 18px currentColor);
+}
+.services__pane--sky .services__pane-media { color: var(--color-sky); }
+.services__pane--warm .services__pane-media { color: var(--color-warm); }
+
+@media (max-width: 700px) {
+  .services__pane.is-active { flex-direction: column-reverse; gap: var(--space-4); min-height: 0; }
+  .services__pane-body { max-width: none; }
+  .services__pane-media { min-height: 200px; }
+}
+
+.services__pane-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   font-family: var(--font-display);
   font-size: 0.95rem;
-  color: var(--color-accent-dark);
   font-weight: 700;
+  color: var(--color-accent-dark);
+  background: var(--color-accent-soft);
+  margin-bottom: var(--space-3);
+}
+.services__pane--sky .services__pane-index { color: var(--color-sky-dark); background: rgba(59, 130, 246, 0.14); }
+.services__pane--navy .services__pane-index { color: var(--color-navy); background: rgba(10, 31, 61, 0.1); }
+.services__pane--warm .services__pane-index { color: var(--color-warm-dark); background: rgba(245, 184, 10, 0.2); }
+
+.services__pane-title {
+  font-size: 1.5rem;
   margin-bottom: var(--space-2);
 }
 
-.service-card__title {
-  font-size: 1.25rem;
-  margin-bottom: var(--space-2);
-}
-
-.service-card__text {
+.services__pane-text {
   color: var(--color-graphite);
-  font-size: 0.95rem;
+  font-size: 1rem;
   margin-bottom: var(--space-3);
 }
 
-.service-card__list {
-  margin-top: auto;
+.services__pane-list {
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 0.5rem;
 }
-.service-card__list li {
-  font-size: 0.86rem;
+.services__pane-list li {
+  font-size: 0.9rem;
   color: var(--color-graphite);
   padding-left: 1.1rem;
   position: relative;
 }
-.service-card__list li::before {
+.services__pane-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+.services__pane--sky .services__pane-list li::before { background: var(--color-sky); }
+.services__pane--navy .services__pane-list li::before { background: var(--color-navy); }
+.services__pane--warm .services__pane-list li::before { background: var(--color-warm); }
+
+.services__pane-link {
+  margin-top: var(--space-3);
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--color-accent);
+  transition: transform var(--transition-fast);
+}
+.services__pane-link:hover { transform: translateX(4px); }
+
+
+/* -------------------------------------------------------------------------
+   9. APLICACIONES MÓVILES (selector interactivo de 4 apps + mockup de teléfono)
+   Los botones de módulo (PM/WM/QM/PP) controlan a la vez el panel de texto y la
+   pantalla del teléfono que comparten su [data-module]; initAppShowcase() en
+   js/main.js hace el cambio. Cada módulo tiene su propio color de acento, tomado
+   de la paleta ya existente (cian, azul, dorado) más un violeta nuevo para PP.
+   ------------------------------------------------------------------------- */
+.mobile-app {
+  background: var(--color-navy-deep);
+  padding: var(--space-8) 0;
+  overflow: hidden;
+}
+
+.app-showcase { margin-top: var(--space-6); }
+
+/* Selector de módulos */
+.app-showcase__modules {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: var(--space-5);
+}
+
+.app-showcase__module-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.9rem 1.2rem;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.75);
+  text-align: left;
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+.app-showcase__module-btn:hover { background: rgba(255, 255, 255, 0.1); color: var(--color-paper); }
+.app-showcase__module-btn.is-active {
+  background: var(--color-paper);
+  border-color: transparent;
+  color: var(--color-navy);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.3);
+}
+
+.app-showcase__module-code {
+  flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 0.78rem;
+  background: rgba(255, 255, 255, 0.14);
+  color: var(--color-paper);
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+.app-showcase__module-name { display: block; font-weight: 600; font-size: 0.92rem; }
+.app-showcase__module-desc { display: block; font-size: 0.72rem; color: rgba(255, 255, 255, 0.5); margin-top: 1px; }
+.app-showcase__module-btn.is-active .app-showcase__module-desc { color: var(--color-graphite); }
+
+.app-showcase__module-btn--pm.is-active .app-showcase__module-code { background: var(--color-accent); color: var(--color-navy-deep); }
+.app-showcase__module-btn--wm.is-active .app-showcase__module-code { background: var(--color-sky); color: var(--color-paper); }
+.app-showcase__module-btn--qm.is-active .app-showcase__module-code { background: var(--color-warm); color: var(--color-navy-deep); }
+.app-showcase__module-btn--pp.is-active .app-showcase__module-code { background: var(--color-violet); color: var(--color-paper); }
+
+/* Escenario: texto a la izquierda, teléfono a la derecha */
+.app-showcase__stage {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--space-6);
+  align-items: start;
+}
+
+.app-showcase__info { position: relative; min-height: 280px; }
+
+.app-showcase__info-pane { display: none; }
+.app-showcase__info-pane.is-active { display: block; animation: servicesPaneIn 0.4s var(--ease); }
+
+.app-showcase__info-title {
+  color: var(--color-paper);
+  font-size: 1.4rem;
+  margin-bottom: var(--space-2);
+}
+.app-showcase__info-text {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.98rem;
+  max-width: 56ch;
+  margin-bottom: var(--space-3);
+}
+.app-showcase__info-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.app-showcase__info-list li {
+  position: relative;
+  padding-left: 1.2rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.88rem;
+}
+.app-showcase__info-list li::before {
   content: "";
   position: absolute;
   left: 0;
@@ -787,90 +1026,96 @@ input, textarea, select {
   border-radius: 50%;
   background: var(--color-accent);
 }
+.app-showcase__info-pane--wm .app-showcase__info-list li::before { background: var(--color-sky); }
+.app-showcase__info-pane--qm .app-showcase__info-list li::before { background: var(--color-warm); }
+.app-showcase__info-pane--pp .app-showcase__info-list li::before { background: var(--color-violet); }
 
-.service-card--featured {
-  background: var(--color-navy);
-  border-color: var(--color-navy);
-}
-.service-card--featured .service-card__index,
-.service-card--featured .service-card__title { color: var(--color-paper); }
-.service-card--featured .service-card__text,
-.service-card--featured .service-card__list li { color: rgba(255,255,255,0.75); }
-.service-card--featured .service-card__list li::before { background: var(--color-accent); }
-
-.service-card__link {
-  margin-top: var(--space-3);
-  display: inline-block;
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: var(--color-accent);
-  transition: transform var(--transition-fast);
-}
-.service-card__link:hover { transform: translateX(4px); }
-
-/* -------------------------------------------------------------------------
-   9. APLICACIONES MÓVILES (sección destacada, fondo oscuro)
-   ------------------------------------------------------------------------- */
-.mobile-app {
-  background: var(--color-navy-deep);
-  padding: var(--space-8) 0;
-  overflow: hidden;
-}
-
-.mobile-app__grid {
-  display: grid;
-  grid-template-columns: 1.7fr 1fr;
-  gap: var(--space-6);
-  align-items: center;
-}
-
-.mobile-app__text {
-  color: rgba(255, 255, 255, 0.78);
-  font-size: 1.05rem;
-  margin-bottom: var(--space-5);
-  max-width: 85ch;
-}
-
-.mobile-app__features {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: var(--space-4);
-  margin-bottom: var(--space-4);
-}
-
-.feature__title {
-  color: var(--color-paper);
-  font-size: 1.05rem;
-  margin-bottom: 0.4rem;
-}
-.feature__text {
-  color: rgba(255, 255, 255, 0.65);
-  font-size: 0.88rem;
-}
-
-.mobile-app__note {
-  color: rgba(255, 255, 255, 0.55);
+.app-showcase__note {
+  margin-top: var(--space-5);
+  color: rgba(255, 255, 255, 0.5);
   font-size: 0.88rem;
   font-style: italic;
   border-left: 2px solid var(--color-accent);
   padding-left: var(--space-2);
 }
 
-/* Mockups de teléfono (placeholders construidos en CSS puro) */
-.mobile-app__mockups {
-  position: relative;
-  height: 460px;
+/* Mockup del teléfono (construido en CSS puro, sin imágenes externas) */
+.app-showcase__device {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .phone {
-  position: absolute;
   width: 220px;
   height: 440px;
   background: #0d1b30;
   border: 6px solid #16263f;
   border-radius: 32px;
-  box-shadow: 0 30px 60px rgba(0,0,0,0.45);
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.45);
 }
+.phone--single { position: relative; width: 240px; height: 480px; }
+/* Versión más grande del mockup, para la página dedicada del simulador (aplicaciones-moviles.html) */
+.phone--large { width: 320px; height: 640px; }
+
+/* -------------------------------------------------------------------------
+   Página dedicada del simulador (aplicaciones-moviles.html): fondo claro
+   (a diferencia de la sección oscura .mobile-app original) y el teléfono a la
+   izquierda, más grande. El selector ".app-page" (segunda clase del <section>)
+   sobreescribe únicamente los colores pensados para fondo oscuro; la pantalla
+   del teléfono en sí se mantiene oscura a propósito, como un dispositivo real.
+   ------------------------------------------------------------------------- */
+.app-page { background: var(--color-mist); }
+
+/* El navbar es transparente por defecto pensando en el HERO oscuro; esta página no
+   tiene un hero oscuro arriba, así que aquí se fuerza siempre el fondo sólido
+   (igual al que toma normalmente al hacer scroll) para que siga siendo legible. */
+.app-page-body .navbar {
+  background: rgba(10, 31, 61, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 10px 30px rgba(7, 21, 39, 0.3);
+}
+@media (max-width: 900px) {
+  .app-page-body .navbar__inner {
+    background: rgba(10, 31, 61, 0.92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-color: rgba(255, 255, 255, 0.12);
+    box-shadow: 0 10px 30px rgba(7, 21, 39, 0.3);
+  }
+}
+
+.app-page__back {
+  display: inline-block;
+  margin-bottom: var(--space-4);
+  color: var(--color-graphite);
+  font-size: 0.88rem;
+  transition: color var(--transition-fast);
+}
+.app-page__back:hover { color: var(--color-accent-dark); }
+
+.app-page .app-showcase__module-btn {
+  background: var(--color-paper);
+  border-color: var(--color-line);
+  color: var(--color-graphite);
+}
+.app-page .app-showcase__module-btn:hover { background: var(--color-mist); color: var(--color-navy); border-color: var(--color-accent-soft); }
+.app-page .app-showcase__module-btn.is-active { box-shadow: 0 14px 30px rgba(10, 31, 61, 0.12); }
+.app-page .app-showcase__module-code { background: var(--color-mist); color: var(--color-navy); }
+.app-page .app-showcase__module-desc { color: var(--color-graphite-lt); }
+.app-page .app-showcase__module-btn.is-active .app-showcase__module-desc { color: var(--color-graphite); }
+
+.app-page .app-showcase__info-title { color: var(--color-navy); }
+.app-page .app-showcase__info-text { color: var(--color-graphite); }
+.app-page .app-showcase__info-list li { color: var(--color-graphite); }
+.app-page .app-showcase__note { color: var(--color-graphite-lt); }
+
+/* Escenario de esta página: teléfono a la izquierda (más ancho), texto a la derecha */
+.app-showcase__stage--page { grid-template-columns: minmax(320px, 1.05fr) 1fr; }
+.app-showcase__stage--page .app-showcase__device { order: -1; }
+
 .phone__notch {
   position: absolute;
   top: 0;
@@ -887,80 +1132,83 @@ input, textarea, select {
   border-radius: 26px;
   background: linear-gradient(180deg, #102340, #0a1a30);
   overflow: hidden;
-  padding: var(--space-3) var(--space-2);
+  padding: var(--space-4) var(--space-3);
 }
 
-.phone--back {
-  right: 10px;
-  top: 0;
-  opacity: 0.55;
-  transform: scale(0.92) rotate(4deg);
-}
-.phone--front {
-  left: 10px;
-  top: 40px;
-  transform: rotate(-3deg);
-}
+/* Pantalla de cada app dentro del teléfono */
+.app-screen { display: none; flex-direction: column; height: 100%; }
+.app-screen.is-active { display: flex; animation: servicesPaneIn 0.35s var(--ease); }
 
-.mockup-screen__header {
-  color: var(--color-paper);
-  font-size: 0.85rem;
-  font-weight: 600;
-  margin-bottom: var(--space-2);
-}
-.mockup-screen__chip {
-  display: inline-block;
-  background: var(--color-accent-soft);
-  color: var(--color-accent);
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 20px;
-  margin-bottom: var(--space-2);
-}
-.mockup-screen__row {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-.mockup-screen__row span:first-child {
-  width: 60%;
-  height: 8px;
-  background: rgba(255,255,255,0.18);
-  border-radius: 4px;
-}
-.pill {
-  font-size: 0.62rem;
-  font-weight: 700;
-  padding: 3px 8px;
-  border-radius: 20px;
-}
-.pill--ok { background: rgba(43, 182, 163, 0.18); color: var(--color-accent); }
-.pill--warn { background: rgba(230, 170, 60, 0.18); color: #e6aa3c; }
-
-.mockup-screen__photo {
-  margin: var(--space-2) 0;
-  height: 90px;
-  border-radius: 10px;
-  background: rgba(255,255,255,0.06);
+.app-screen__header { display: flex; align-items: center; gap: 10px; margin-bottom: var(--space-3); }
+.app-screen__icon {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  border-radius: 9px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.6rem;
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
 }
-.mockup-screen__bar {
-  height: 8px;
-  border-radius: 4px;
-  background: rgba(255,255,255,0.12);
-  margin-top: 10px;
+.app-screen__icon svg { width: 60%; height: 60%; }
+.app-screen__name { color: var(--color-paper); font-size: 0.85rem; font-weight: 700; }
+
+.app-screen--wm .app-screen__icon { background: rgba(59, 130, 246, 0.16); color: var(--color-sky); }
+.app-screen--qm .app-screen__icon { background: rgba(245, 184, 10, 0.18); color: var(--color-warm); }
+.app-screen--pp .app-screen__icon { background: var(--color-violet-soft); color: var(--color-violet); }
+
+/* Cuadrícula de funciones: una tarjeta por cada capacidad real del módulo (no una
+   lista de registros genérica) — al tocar una, su descripción aparece abajo. */
+.app-screen__tiles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-bottom: var(--space-3);
 }
-.mockup-screen__bar--cta {
-  height: 30px;
-  border-radius: 8px;
-  background: var(--color-accent);
-  margin-top: var(--space-3);
+
+.app-screen__tile {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  text-align: left;
+  transition: background var(--transition-fast), border-color var(--transition-fast);
+}
+.app-screen__tile:hover { background: rgba(255, 255, 255, 0.08); }
+.app-screen__tile.is-active { background: var(--color-accent-soft); border-color: rgba(43, 182, 163, 0.4); }
+.app-screen--wm .app-screen__tile.is-active { background: rgba(59, 130, 246, 0.14); border-color: rgba(59, 130, 246, 0.4); }
+.app-screen--qm .app-screen__tile.is-active { background: rgba(245, 184, 10, 0.16); border-color: rgba(245, 184, 10, 0.4); }
+.app-screen--pp .app-screen__tile.is-active { background: var(--color-violet-soft); border-color: rgba(139, 124, 255, 0.4); }
+
+.app-screen__tile-icon { display: block; width: 24px; height: 24px; color: var(--color-accent); }
+.app-screen__tile-icon svg { width: 100%; height: 100%; }
+.app-screen--wm .app-screen__tile-icon { color: var(--color-sky); }
+.app-screen--qm .app-screen__tile-icon { color: var(--color-warm); }
+.app-screen--pp .app-screen__tile-icon { color: var(--color-violet); }
+
+.app-screen__tile-label { font-size: 0.72rem; font-weight: 600; color: var(--color-paper); line-height: 1.2; }
+
+/* Descripción de la función seleccionada, anclada abajo de la pantalla */
+.app-screen__detail {
+  margin-top: auto;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.04);
+  border-left: 2px solid var(--color-accent);
+}
+.app-screen--wm .app-screen__detail { border-left-color: var(--color-sky); }
+.app-screen--qm .app-screen__detail { border-left-color: var(--color-warm); }
+.app-screen--pp .app-screen__detail { border-left-color: var(--color-violet); }
+.app-screen__detail-text { color: rgba(255, 255, 255, 0.7); font-size: 0.72rem; line-height: 1.5; }
+
+@media (max-width: 1024px) {
+  .app-showcase__stage { grid-template-columns: 1fr; }
+  .app-showcase__device { order: -1; margin-bottom: var(--space-4); }
 }
 
 /* -------------------------------------------------------------------------
@@ -1268,7 +1516,6 @@ input, textarea, select {
    16. RESPONSIVE (mobile-first breakpoints)
    ------------------------------------------------------------------------- */
 @media (max-width: 1200px) {
-  .services__grid,
   .why__grid { grid-template-columns: repeat(2, 1fr); }
 }
 
@@ -1276,8 +1523,6 @@ input, textarea, select {
   .about__grid { grid-template-columns: minmax(0, 1fr); gap: var(--space-4); }
   .contact__info { grid-template-columns: 1fr; }
   .contact__info > .contact__details { grid-column: 1; grid-row: auto; margin-top: var(--space-4); }
-  .mobile-app__grid { grid-template-columns: 1fr; }
-  .mobile-app__mockups { height: 380px; margin-top: var(--space-5); }
   .footer__grid { grid-template-columns: 1fr; gap: var(--space-4); }
 }
 
@@ -1285,11 +1530,9 @@ input, textarea, select {
   .timeline { grid-template-columns: 1fr 1fr; row-gap: var(--space-6); }
   .timeline::before { display: none; }
   .about__stats { grid-template-columns: 1fr; gap: var(--space-3); }
-  .mobile-app__features { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 760px) {
-  .services__grid { grid-template-columns: 1fr; }
   .timeline { grid-template-columns: 1fr; }
   .why__grid { grid-template-columns: 1fr; }
 }
@@ -1298,6 +1541,5 @@ input, textarea, select {
   :root { --space-8: 5rem; --space-7: 3.5rem; }
   .container { padding: 0 var(--space-3); }
   .hero__actions { flex-direction: column; align-items: stretch; }
-  .mobile-app__mockups { height: 320px; }
-  .phone { width: 170px; height: 340px; }
+  .phone--single { width: 190px; height: 380px; }
 }

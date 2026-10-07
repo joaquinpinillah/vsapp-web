@@ -45,7 +45,7 @@
       <ul class="navbar__list">
         <li><a href="#sobre" class="navbar__link">Sobre nosotros</a></li>
         <li><a href="#servicios" class="navbar__link">Nuestros Servicios</a></li>
-        <li><a href="#app-movil" class="navbar__link">Aplicaciones móviles</a></li>
+        <li><a href="aplicaciones-moviles.html" class="navbar__link">Aplicaciones móviles</a></li>
         <li><a href="#contacto" class="navbar__link">Contáctanos</a></li>
       </ul>
     </nav>
@@ -62,8 +62,9 @@
       <div class="container hero__inner">
         <p class="hero__eyebrow" data-animate="fade-up">Bienvenido a vSApp</p>
         <h1 class="hero__title" data-animate="fade-up" data-delay="1">
-          Especialistas en mantenimiento de planta y planificación de producción sobre
-          <span class="hero__title-accent">SAP S/4HANA</span>
+          Especialistas en soluciones 
+          <span class="hero__title-accent">SAP</span>
+          de mantenimiento planta y planificación de producción
         </h1>
         <!--
         <p class="hero__subtitle" data-animate="fade-up" data-delay="2">
@@ -73,7 +74,7 @@
         -->
         <div class="hero__actions" data-animate="fade-up" data-delay="3">
           <!-- <a href="#contacto" class="btn btn--primary">Conversemos su proyecto</a> -->
-          <a href="#sobre" class="btn btn--light">Conózcanos <span class="btn__arrow" aria-hidden="true">→</span></a>
+          <a href="#sobre" class="btn btn--warm">Conózcanos <span class="btn__arrow" aria-hidden="true">→</span></a>
         </div>
       </div>
       <a href="#sobre" class="hero__scroll-cue" aria-label="Bajar a la siguiente sección">
@@ -83,8 +84,8 @@
 
     <!-- ==================== 1. SOBRE VSAPP + CLIENTES + POR QUÉ VSAPP (todo en la sección 01) ====================
          Izquierda: información. Derecha: collage animado de logos de empresas con las que hemos trabajado.
-         Para agregar un logo: duplicar un <li class="logo-carousel__item"> y reemplazar el placeholder por
-           <img src="assets/img/clientes/nombre.svg" alt="Nombre de la empresa">
+         El collage tiene 2 columnas. Los logos reales están en assets/img/clientes/. Para agregar uno nuevo: duplicar un
+         <li class="logo-carousel__item"> y usar <img src="assets/img/clientes/nombre.ext" alt="Nombre de la empresa">
          (js/main.js duplica cada columna automáticamente para el loop continuo).
          El collage tiene 3 columnas; cada <li> puede llevar --s (bajo) o --l (alto) para variar el tamaño. -->
     <section class="about" id="sobre">
@@ -115,7 +116,7 @@
             </div>
             <div class="stat">
               <span class="stat__number" data-count="100" aria-hidden="true">0</span><span class="stat__suffix" aria-hidden="true">%</span>
-              <span class="stat__label"><span class="sr-only">100% </span>de proyectos entregados a tiempo y dentro del presupuesto</span>
+              <span class="stat__label"><span class="sr-only">100% </span>proyectos altamente existosos y con calidad en la entrega a nuestros clientes</span>
             </div>
           </div>
         </div>
@@ -126,30 +127,24 @@
             <div class="logo-carousel__col">
             <div class="logo-carousel__track">
               <ul class="logo-carousel__group">
-                <li class="logo-carousel__item logo-carousel__item--l"><span class="logo-placeholder">Logo cliente 1</span></li>
-                <li class="logo-carousel__item logo-carousel__item--s"><span class="logo-placeholder">Logo cliente 2</span></li>
-                <li class="logo-carousel__item"><span class="logo-placeholder">Logo cliente 3</span></li>
-                <li class="logo-carousel__item logo-carousel__item--s"><span class="logo-placeholder">Logo cliente 4</span></li>
+                <li class="logo-carousel__item logo-carousel__item--l"><img src="assets/img/clientes/cial.webp" alt="CIAL Alimentos"></li>
+                <li class="logo-carousel__item logo-carousel__item--s"><img src="assets/img/clientes/cintac.jpg" alt="Cintac"></li>
+                <li class="logo-carousel__item"><img src="assets/img/clientes/oxiquim.png" alt="Oxiquim S.A."></li>
+                <li class="logo-carousel__item logo-carousel__item--s"><img src="assets/img/clientes/antalis.png" alt="Antalis"></li>
+                <li class="logo-carousel__item logo-carousel__item--l"><img src="assets/img/clientes/aquachile.webp" alt="AquaChile"></li>
+                <li class="logo-carousel__item"><img src="assets/img/clientes/agrosuper.webp" alt="Agrosuper"></li>
               </ul>
             </div>
           </div>
             <div class="logo-carousel__col logo-carousel__col--reverse">
             <div class="logo-carousel__track">
               <ul class="logo-carousel__group">
-                <li class="logo-carousel__item logo-carousel__item--s"><span class="logo-placeholder">Logo cliente 5</span></li>
-                <li class="logo-carousel__item"><span class="logo-placeholder">Logo cliente 6</span></li>
-                <li class="logo-carousel__item logo-carousel__item--l"><span class="logo-placeholder">Logo cliente 7</span></li>
-                <li class="logo-carousel__item"><span class="logo-placeholder">Logo cliente 8</span></li>
-              </ul>
-            </div>
-          </div>
-            <div class="logo-carousel__col">
-            <div class="logo-carousel__track">
-              <ul class="logo-carousel__group">
-                <li class="logo-carousel__item"><span class="logo-placeholder">Logo cliente 9</span></li>
-                <li class="logo-carousel__item logo-carousel__item--l"><span class="logo-placeholder">Logo cliente 10</span></li>
-                <li class="logo-carousel__item logo-carousel__item--s"><span class="logo-placeholder">Logo cliente 11</span></li>
-                <li class="logo-carousel__item logo-carousel__item--l"><span class="logo-placeholder">Logo cliente 12</span></li>
+                <li class="logo-carousel__item logo-carousel__item--s"><img src="assets/img/clientes/agrosuper.webp" alt="Agrosuper"></li>
+                <li class="logo-carousel__item logo-carousel__item--l"><img src="assets/img/clientes/antalis.png" alt="Antalis"></li>
+                <li class="logo-carousel__item"><img src="assets/img/clientes/cintac.jpg" alt="Cintac"></li>
+                <li class="logo-carousel__item logo-carousel__item--s"><img src="assets/img/clientes/oxiquim.png" alt="Oxiquim S.A."></li>
+                <li class="logo-carousel__item"><img src="assets/img/clientes/aquachile.webp" alt="AquaChile"></li>
+                <li class="logo-carousel__item logo-carousel__item--l"><img src="assets/img/clientes/cial.webp" alt="CIAL Alimentos"></li>
               </ul>
             </div>
           </div>
@@ -184,166 +179,415 @@
       </div>
     </section>
 
-    <!-- ==================== 3. SERVICIOS (4 PILARES) ==================== -->
+    <!-- ==================== 2. SERVICIOS (selector interactivo) ====================
+         Panel con lista de pilares a la izquierda; al hacer clic (o navegar con flechas)
+         initServicesTabs() en js/main.js alterna la clase "is-active" entre botones y
+         paneles — el contenido de la derecha se actualiza sin recargar la página. -->
     <section class="services" id="servicios">
       <div class="container">
         <div class="section-heading" data-animate="fade-up">
           <span class="section-kicker">02 — Servicios</span>
           <h2 class="section-title">Cuatro pilares para su operación SAP</h2>
           <p class="section-intro">
-            Somos una empresa especialista en mantenimiento y planificación de producción. Cubrimos el ciclo completo:
-            implementación, mejora continua, movilidad y optimización.
+            Somos una empresa especialista en mantenimiento y planificación de producción. Seleccione un pilar para ver
+            el detalle de cada servicio.
           </p>
         </div>
 
-        <div class="services__grid">
+        <div class="services__panel" data-animate="fade-up" data-delay="1">
 
-          <!-- Pilar 1: Proyectos modulares -->
-          <article class="service-card" data-animate="fade-up" data-delay="1">
-            <span class="service-card__index">01</span>
-            <h3 class="service-card__title">Proyectos modulares</h3>
-            <p class="service-card__text">
-              Implementamos los módulos <strong>SAP PM y PP</strong> integrados completamente con los procesos de compras,
-              logística, WMS y FI-CO, con un método acelerado y confiable respaldado por más de 25 años de experiencia.
-            </p>
-            <ul class="service-card__list">
-              <li>Gestión y mantenimiento de activos empresariales (SAP PM)</li>
-              <li>Planificación y control de piso de planta (SAP PP)</li>
-              <li>Modelo preconfigurado de levantamiento acelerado</li>
-              <li>Activación de apps en SAP Fiori</li>
-            </ul>
-          </article>
+          <div class="services__nav" role="tablist" aria-label="Pilares de servicio">
+            <button type="button" class="services__nav-btn is-active" id="tab-modulares" role="tab" aria-selected="true" aria-controls="pane-modulares" tabindex="0">
+              <span class="services__nav-dot"></span> Proyectos modulares
+            </button>
+            <button type="button" class="services__nav-btn" id="tab-ams" role="tab" aria-selected="false" aria-controls="pane-ams" tabindex="-1">
+              <span class="services__nav-dot services__nav-dot--sky"></span> Servicio AMS especializado
+            </button>
+            <button type="button" class="services__nav-btn" id="tab-movil" role="tab" aria-selected="false" aria-controls="pane-movil" tabindex="-1">
+              <span class="services__nav-dot services__nav-dot--navy"></span> Aplicaciones móviles BTP / Fiori
+            </button>
+            <button type="button" class="services__nav-btn" id="tab-optimizacion" role="tab" aria-selected="false" aria-controls="pane-optimizacion" tabindex="-1">
+              <span class="services__nav-dot services__nav-dot--warm"></span> Proyectos de optimización
+            </button>
+          </div>
 
-          <!-- Pilar 2: Servicio AMS -->
-          <article class="service-card" data-animate="fade-up" data-delay="2">
-            <span class="service-card__index">02</span>
-            <h3 class="service-card__title">Servicio AMS especializado</h3>
-            <p class="service-card__text">
-              Mejora continua personalizada en PM y PP a través de una bolsa mínima de <strong>16 horas mensuales</strong>,
-              acumulable por 3 meses, con consultores dedicados a mantener y evolucionar sus operaciones SAP.
-            </p>
-            <ul class="service-card__list">
-              <li>Respuestas ágiles y especializadas</li>
-              <li>Flexible a su demanda y requerimiento</li>
-              <li>Asesoría y entrenamiento personalizado</li>
-              <li>Facturación mensual el día 20 de cada mes</li>
-            </ul>
-          </article>
+          <div class="services__content">
 
-          <!-- Pilar 3: Apps móviles (destacado) -->
-          <article class="service-card service-card--featured" data-animate="fade-up" data-delay="3">
-            <span class="service-card__index">03</span>
-            <h3 class="service-card__title">Aplicaciones móviles BTP / Fiori</h3>
-            <p class="service-card__text">
-              Desarrollamos aplicaciones móviles sobre <strong>SAP BTP y Fiori</strong>, llevando la operación al campo con
-              experiencias simples, ágiles y en tiempo real, integradas nativamente con SAP S/4HAN.
-            </p>
-            <ul class="service-card__list">
-              <li>Gestión de órdenes, avisos e inspecciones de mantenimiento</li>
-              <li>Control de piso, notificación y picking</li>
-              <li>Integración online y offline</li>
-            </ul>
-            <a href="#app-movil" class="service-card__link">Conocer PM Mobile →</a>
-          </article>
+            <!-- Cada panel lleva una ilustración propia (SVG en línea, sin imágenes externas)
+                 que refuerza visualmente de qué trata el servicio. -->
+            <article class="services__pane is-active" id="pane-modulares" role="tabpanel" aria-labelledby="tab-modulares">
+              <div class="services__pane-body">
+                <span class="services__pane-index">01</span>
+                <h3 class="services__pane-title">Proyectos modulares</h3>
+                <p class="services__pane-text">
+                  Implementamos los módulos <strong>SAP PM y PP</strong> integrados completamente con los procesos de compras,
+                  logística, WMS y FI-CO, con un método acelerado y confiable respaldado por más de 25 años de experiencia.
+                </p>
+                <ul class="services__pane-list">
+                  <li>Gestión y mantenimiento de activos empresariales (SAP PM)</li>
+                  <li>Planificación y control de piso de planta (SAP PP)</li>
+                  <li>Modelo preconfigurado de levantamiento acelerado</li>
+                  <li>Activación de apps en SAP Fiori</li>
+                </ul>
+              </div>
+              <div class="services__pane-media" aria-hidden="true">
+                <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="14" y="14" width="32" height="32" rx="7"/>
+                  <rect x="54" y="14" width="32" height="32" rx="7"/>
+                  <rect x="14" y="54" width="32" height="32" rx="7"/>
+                  <rect x="54" y="54" width="32" height="32" rx="7"/>
+                </svg>
+              </div>
+            </article>
 
-          <!-- Pilar 4: Optimización -->
-          <article class="service-card" data-animate="fade-up" data-delay="4">
-            <span class="service-card__index">04</span>
-            <h3 class="service-card__title">Proyectos de optimización</h3>
-            <p class="service-card__text">
-              Ejecutamos proyectos de mejora operativa en <strong>MRP</strong>, gestión de repuestos y costo real de
-              inventario, generando eficiencia medible en la cadena productiva.
-            </p>
-            <ul class="service-card__list">
-              <li>Reducción de quiebres de stock y excesos de repuestos</li>
-              <li>Mayor precisión en planificación y programación</li>
-              <li>Distribución de diferencias de inventario por consumo real</li>
-            </ul>
-          </article>
+            <article class="services__pane services__pane--sky" id="pane-ams" role="tabpanel" aria-labelledby="tab-ams">
+              <div class="services__pane-body">
+                <span class="services__pane-index">02</span>
+                <h3 class="services__pane-title">Servicio AMS especializado</h3>
+                <p class="services__pane-text">
+                  Mejora continua personalizada en PM y PP a través de una <strong>bolsa mínima de horas mensuales</strong>,
+                  acumulable por 3 meses, con consultores dedicados a mantener y evolucionar sus operaciones SAP.
+                </p>
+                <ul class="services__pane-list">
+                  <li>Respuestas ágiles y especializadas</li>
+                  <li>Flexible a su demanda y requerimiento</li>
+                  <li>Asesoría y entrenamiento personalizado</li>
+                  <li>Facturación mensual</li>
+                </ul>
+              </div>
+              <div class="services__pane-media" aria-hidden="true">
+                <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M78 32a28 28 0 1 1 -6 -8"/>
+                  <path d="M78 14v18h-18"/>
+                </svg>
+              </div>
+            </article>
 
+            <article class="services__pane services__pane--navy" id="pane-movil" role="tabpanel" aria-labelledby="tab-movil">
+              <div class="services__pane-body">
+                <span class="services__pane-index">03</span>
+                <h3 class="services__pane-title">Aplicaciones móviles BTP / Fiori</h3>
+                <p class="services__pane-text">
+                  Desarrollamos aplicaciones móviles sobre <strong>SAP BTP y Fiori</strong>, llevando la operación al campo con
+                  experiencias simples, ágiles y en tiempo real, integradas nativamente con SAP S/4HANA.
+                </p>
+                <ul class="services__pane-list">
+                  <li>Gestión de órdenes, avisos e inspecciones de mantenimiento</li>
+                  <li>Control de piso, notificación y picking</li>
+                  <li>Integración online y offline</li>
+                </ul>
+                <a href="aplicaciones-moviles.html" class="services__pane-link" target="_blank" rel="noopener">
+                  Probar el simulador de la app ↗
+                  <span class="sr-only"> (se abre en una pestaña nueva)</span>
+                </a>
+              </div>
+              <div class="services__pane-media" aria-hidden="true">
+                <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="32" y="10" width="36" height="80" rx="9"/>
+                  <line x1="43" y1="80" x2="57" y2="80"/>
+                  <line x1="41" y1="28" x2="59" y2="28"/>
+                  <line x1="41" y1="40" x2="59" y2="40"/>
+                  <line x1="41" y1="52" x2="52" y2="52"/>
+                </svg>
+              </div>
+            </article>
+
+            <article class="services__pane services__pane--warm" id="pane-optimizacion" role="tabpanel" aria-labelledby="tab-optimizacion">
+              <div class="services__pane-body">
+                <span class="services__pane-index">04</span>
+                <h3 class="services__pane-title">Proyectos de optimización</h3>
+                <p class="services__pane-text">
+                  Ejecutamos proyectos de mejora operativa en <strong>MRP</strong>, gestión de repuestos y costo real de
+                  inventario, generando eficiencia medible en la cadena productiva.
+                </p>
+                <ul class="services__pane-list">
+                  <li>Reducción de quiebres de stock y excesos de repuestos</li>
+                  <li>Mayor precisión en planificación y programación</li>
+                  <li>Distribución de diferencias de inventario por consumo real</li>
+                </ul>
+              </div>
+              <div class="services__pane-media" aria-hidden="true">
+                <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="86" x2="18" y2="14"/>
+                  <line x1="18" y1="86" x2="86" y2="86"/>
+                  <rect x="30" y="60" width="12" height="26"/>
+                  <rect x="50" y="44" width="12" height="42"/>
+                  <rect x="70" y="28" width="12" height="58"/>
+                </svg>
+              </div>
+            </article>
+
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ==================== 4. APLICACIONES MÓVILES (DESTACADA) ==================== -->
+    <!-- ==================== 4. APLICACIONES MÓVILES — OCULTA (vive ahora en aplicaciones-moviles.html) ====================
+         4 apps (PM, WM, QM, PP) sobre SAP Mobile Service. Este mismo bloque (selector de módulos + teléfono
+         interactivo) ahora vive como página propia en aplicaciones-moviles.html, enlazada desde el pilar
+         "Aplicaciones móviles" de la sección 02 — Servicios. Para volver a mostrarla aquí también: eliminar
+         los marcadores de comentario que envuelven esta sección. -->
+    <!--
     <section class="mobile-app" id="app-movil">
-      <div class="container mobile-app__grid">
+      <div class="container">
 
-        <div class="mobile-app__content">
+        <div class="section-heading" data-animate="fade-up">
           <span class="section-kicker section-kicker--light">03 — Desarrollo de Aplicaciones</span>
-          <h2 class="section-title section-title--light" data-animate="fade-up">
-            APP Mobile: su operación de planta, en el bolsillo del técnico
-          </h2>
-          <p class="mobile-app__text" data-animate="fade-up" data-delay="1">
-            Implementamos una solución <strong>APP Mobile</strong> sobre la plataforma SAP BTP que integra los procesos de
-            gestión de activos de SAP S/4HANA. Sus técnicos de mantenimiento gestionan avisos, órdenes y notifican el
-            trabajo ejecutado en modo <strong>online / offline</strong>, directamente desde su dispositivo móvil.
-          </p>
-
-          <div class="mobile-app__features" data-animate="fade-up" data-delay="2">
-            <div class="feature">
-              <h3 class="feature__title">Gestión completa en terreno</h3>
-              <p class="feature__text">Creación, modificación y visualización de avisos y órdenes de mantenimiento, con cierre de orden y cambio de responsable desde la app.</p>
-            </div>
-            <div class="feature">
-              <h3 class="feature__title">Captura fotográfica de averías</h3>
-              <p class="feature__text">El técnico fotografía la avería y queda anexada como documento en el Content Server de SAP S/4HANA.</p>
-            </div>
-            <div class="feature">
-              <h3 class="feature__title">Verificación de stock de repuestos</h3>
-              <p class="feature__text">Consulta el stock disponible y lo asigna como componente directamente en la orden de trabajo.</p>
-            </div>
-            <div class="feature">
-              <h3 class="feature__title">Integración nativa online / offline</h3>
-              <p class="feature__text">Conexión directa con SAP S/4HANA, disponible en <strong>Android e iOS</strong>, incluso sin conectividad en terreno.</p>
-            </div>
-            <div class="feature">
-              <h3 class="feature__title">Objetos técnicos y consultas</h3>
-              <p class="feature__text">Visualización de ubicaciones técnicas, equipos y hojas de ruta directamente desde el dispositivo móvil.</p>
-            </div>
-            <div class="feature">
-              <h3 class="feature__title">Sincronización flexible</h3>
-              <p class="feature__text">Sincronización global o selectiva por funcionalidad (avisos, órdenes u objetos técnicos), con conexión directa y segura a SAP.</p>
-            </div>
-          </div>
-
-          <p class="mobile-app__note" data-animate="fade-up" data-delay="3">
-            Reduce el papeleo, mejora la precisión de los datos y aumenta la eficiencia en terreno — con tablas de control
-            que permiten configurar el centro de mantenimiento, tipo de documento y personal habilitado.
+          <h2 class="section-title section-title--light">Cuatro apps móviles, un mismo motor: SAP Mobile Service</h2>
+          <p class="section-intro section-intro--light">
+            Implementamos aplicaciones móviles sobre <strong>SAP Mobile Service</strong> (SAP BTP) para los módulos PM, WM, QM y PP,
+            con integración nativa online / offline a SAP S/4HANA. Seleccione un módulo para ver su app en acción.
           </p>
         </div>
 
-        <!-- Mockups de pantallas (placeholders SVG, sin dependencias externas) -->
-        <div class="mobile-app__mockups" data-animate="fade-left" aria-hidden="true">
-          <div class="phone phone--back">
-            <div class="phone__notch"></div>
-            <div class="phone__screen">
-              <div class="mockup-screen">
-                <div class="mockup-screen__header">Stock de repuestos</div>
-                <div class="mockup-screen__row"><span></span><span class="pill pill--ok">Disponible</span></div>
-                <div class="mockup-screen__row"><span></span><span class="pill pill--ok">Disponible</span></div>
-                <div class="mockup-screen__row"><span></span><span class="pill pill--warn">Bajo</span></div>
-                <div class="mockup-screen__bar"></div>
-                <div class="mockup-screen__bar"></div>
-              </div>
-            </div>
-          </div>
-          <div class="phone phone--front">
-            <div class="phone__notch"></div>
-            <div class="phone__screen">
-              <div class="mockup-screen">
-                <div class="mockup-screen__header">Orden de mantenimiento</div>
-                <div class="mockup-screen__chip">OT-004512</div>
-                <div class="mockup-screen__photo" aria-hidden="true">📷</div>
-                <div class="mockup-screen__row"><span></span><span class="pill pill--ok">Offline sync</span></div>
-                <div class="mockup-screen__bar mockup-screen__bar--cta"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <div class="app-showcase" data-animate="fade-up" data-delay="1">
 
+          <div class="app-showcase__modules" role="tablist" aria-label="Módulos SAP">
+            <button type="button" class="app-showcase__module-btn app-showcase__module-btn--pm is-active" id="module-pm" role="tab" aria-selected="true" data-module="pm" tabindex="0">
+              <span class="app-showcase__module-code">PM</span>
+              <span>
+                <span class="app-showcase__module-name">Mantenimiento de Planta</span>
+                <span class="app-showcase__module-desc">Avisos, órdenes y repuestos</span>
+              </span>
+            </button>
+            <button type="button" class="app-showcase__module-btn app-showcase__module-btn--wm" id="module-wm" role="tab" aria-selected="false" data-module="wm" tabindex="-1">
+              <span class="app-showcase__module-code">WM</span>
+              <span>
+                <span class="app-showcase__module-name">Gestión de Almacenes</span>
+                <span class="app-showcase__module-desc">Picking, traspasos y conteos</span>
+              </span>
+            </button>
+            <button type="button" class="app-showcase__module-btn app-showcase__module-btn--qm" id="module-qm" role="tab" aria-selected="false" data-module="qm" tabindex="-1">
+              <span class="app-showcase__module-code">QM</span>
+              <span>
+                <span class="app-showcase__module-name">Gestión de Calidad</span>
+                <span class="app-showcase__module-desc">Inspecciones y liberación de lotes</span>
+              </span>
+            </button>
+            <button type="button" class="app-showcase__module-btn app-showcase__module-btn--pp" id="module-pp" role="tab" aria-selected="false" data-module="pp" tabindex="-1">
+              <span class="app-showcase__module-code">PP</span>
+              <span>
+                <span class="app-showcase__module-name">Planificación de Producción</span>
+                <span class="app-showcase__module-desc">Confirmaciones y avance de orden</span>
+              </span>
+            </button>
+          </div>
+
+          <div class="app-showcase__stage">
+
+            <div class="app-showcase__info">
+
+              <div class="app-showcase__info-pane is-active" data-module="pm" aria-labelledby="module-pm">
+                <h3 class="app-showcase__info-title">PM Mobile — Mantenimiento de Planta</h3>
+                <p class="app-showcase__info-text">
+                  Sus técnicos gestionan avisos, órdenes y repuestos en modo <strong>online / offline</strong>, con captura
+                  fotográfica de averías directamente desde el equipo en terreno.
+                </p>
+                <ul class="app-showcase__info-list">
+                  <li>Gestión de avisos y órdenes de mantenimiento</li>
+                  <li>Captura fotográfica de averías</li>
+                  <li>Verificación de stock de repuestos</li>
+                  <li>Integración online / offline</li>
+                </ul>
+              </div>
+
+              <div class="app-showcase__info-pane app-showcase__info-pane--wm" data-module="wm" aria-labelledby="module-wm">
+                <h3 class="app-showcase__info-title">WM Mobile — Gestión de Almacenes</h3>
+                <p class="app-showcase__info-text">
+                  Sus operarios ejecutan picking, traspasos y conteos guiados desde el piso de bodega, con lectura de
+                  códigos y confirmación inmediata en SAP.
+                </p>
+                <ul class="app-showcase__info-list">
+                  <li>Recepción y ubicación de materiales</li>
+                  <li>Picking guiado por código</li>
+                  <li>Traspasos entre bodegas</li>
+                  <li>Conteo cíclico de inventario</li>
+                </ul>
+              </div>
+
+              <div class="app-showcase__info-pane app-showcase__info-pane--qm" data-module="qm" aria-labelledby="module-qm">
+                <h3 class="app-showcase__info-title">QM Mobile — Gestión de Calidad</h3>
+                <p class="app-showcase__info-text">
+                  Sus inspectores registran resultados de inspección y liberan o rechazan lotes desde cualquier punto de
+                  la planta, sin papeleo adicional.
+                </p>
+                <ul class="app-showcase__info-list">
+                  <li>Inspecciones de entrada y de proceso</li>
+                  <li>Registro de resultados por característica</li>
+                  <li>Notificaciones de calidad</li>
+                  <li>Liberación o rechazo de lotes</li>
+                </ul>
+              </div>
+
+              <div class="app-showcase__info-pane app-showcase__info-pane--pp" data-module="pp" aria-labelledby="module-pp">
+                <h3 class="app-showcase__info-title">PP Mobile — Planificación de Producción</h3>
+                <p class="app-showcase__info-text">
+                  Sus operadores confirman operaciones y consumos de componentes en línea, con visibilidad inmediata del
+                  avance de cada orden de producción.
+                </p>
+                <ul class="app-showcase__info-list">
+                  <li>Confirmación de operaciones</li>
+                  <li>Consumo de componentes</li>
+                  <li>Seguimiento de avance de la orden</li>
+                  <li>Reporte de paradas y tiempos muertos</li>
+                </ul>
+              </div>
+
+            </div>
+
+            <div class="app-showcase__device">
+              <div class="phone phone--single" aria-hidden="true">
+                <div class="phone__notch"></div>
+                <div class="phone__screen">
+
+                  <div class="app-screen app-screen--pm is-active" data-module="pm">
+                    <div class="app-screen__header">
+                      <span class="app-screen__icon">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                          <polygon points="50,8 87,29 87,71 50,92 13,71 13,29"/>
+                          <circle cx="50" cy="50" r="15"/>
+                        </svg>
+                      </span>
+                      <span class="app-screen__name">PM Mobile</span>
+                    </div>
+                    <div class="app-screen__tiles">
+                      <button type="button" class="app-screen__tile is-active" data-detail="Cree y dé seguimiento a avisos de avería, con estado y prioridad en tiempo real.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 14a20 20 0 0 0-20 20v12l-10 16h60l-10-16V34A20 20 0 0 0 50 14Z"/><path d="M42 84a8 8 0 0 0 16 0"/></svg></span>
+                        <span class="app-screen__tile-label">Avisos</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Visualice, modifique y cierre órdenes de mantenimiento directamente desde el equipo.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><line x1="34" y1="42" x2="66" y2="42"/><line x1="34" y1="56" x2="66" y2="56"/><line x1="34" y1="70" x2="54" y2="70"/></svg></span>
+                        <span class="app-screen__tile-label">Órdenes</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Consulte el stock disponible y asígnelo como componente en la orden.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8 90 29v42l-40 21-40-21V29Z"/><path d="M10 29l40 21 40-21"/><line x1="50" y1="50" x2="50" y2="92"/></svg></span>
+                        <span class="app-screen__tile-label">Repuestos</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Fotografíe la avería; la imagen queda anexada en el Content Server de SAP.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="28" width="76" height="52" rx="10"/><path d="M34 28l8-12h16l8 12"/><circle cx="50" cy="54" r="16"/></svg></span>
+                        <span class="app-screen__tile-label">Fotos</span>
+                      </button>
+                    </div>
+                    <div class="app-screen__detail">
+                      <p class="app-screen__detail-text">Cree y dé seguimiento a avisos de avería, con estado y prioridad en tiempo real.</p>
+                    </div>
+                  </div>
+
+                  <div class="app-screen app-screen--wm" data-module="wm">
+                    <div class="app-screen__header">
+                      <span class="app-screen__icon">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M50 8 90 29v42l-40 21-40-21V29Z"/>
+                          <path d="M10 29l40 21 40-21"/>
+                          <line x1="50" y1="50" x2="50" y2="92"/>
+                        </svg>
+                      </span>
+                      <span class="app-screen__name">WM Mobile</span>
+                    </div>
+                    <div class="app-screen__tiles">
+                      <button type="button" class="app-screen__tile is-active" data-detail="Registre la recepción de materiales y confirme su ubicación en bodega.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 44h22l8 14h12l8-14h22"/><path d="M14 44V24a4 4 0 0 1 4-4h64a4 4 0 0 1 4 4v20"/><path d="M14 44v30a6 6 0 0 0 6 6h60a6 6 0 0 0 6-6V44"/></svg></span>
+                        <span class="app-screen__tile-label">Recepción</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Ejecute picking guiado leyendo el código de barras de cada ítem.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><line x1="16" y1="20" x2="16" y2="80"/><line x1="28" y1="20" x2="28" y2="80"/><line x1="38" y1="20" x2="38" y2="80"/><line x1="50" y1="20" x2="50" y2="80"/><line x1="58" y1="20" x2="58" y2="80"/><line x1="70" y1="20" x2="70" y2="80"/><line x1="84" y1="20" x2="84" y2="80"/></svg></span>
+                        <span class="app-screen__tile-label">Picking</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Mueva materiales entre bodegas y confirme el traspaso al instante.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 34h54"/><path d="M58 20l14 14-14 14"/><path d="M82 66H28"/><path d="M42 52L28 66l14 14"/></svg></span>
+                        <span class="app-screen__tile-label">Traspasos</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Realice conteos de inventario por zona y reporte diferencias.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><path d="M34 54l10 10 22-24"/></svg></span>
+                        <span class="app-screen__tile-label">Conteo cíclico</span>
+                      </button>
+                    </div>
+                    <div class="app-screen__detail">
+                      <p class="app-screen__detail-text">Registre la recepción de materiales y confirme su ubicación en bodega.</p>
+                    </div>
+                  </div>
+
+                  <div class="app-screen app-screen--qm" data-module="qm">
+                    <div class="app-screen__header">
+                      <span class="app-screen__icon">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="M50 8 84 20v28c0 26-15 40-34 44-19-4-34-18-34-44V20Z"/>
+                          <path d="M34 50l11 11 21-23"/>
+                        </svg>
+                      </span>
+                      <span class="app-screen__name">QM Mobile</span>
+                    </div>
+                    <div class="app-screen__tiles">
+                      <button type="button" class="app-screen__tile is-active" data-detail="Registre inspecciones de entrada y de proceso con sus resultados.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><line x1="34" y1="42" x2="66" y2="42"/><line x1="34" y1="56" x2="66" y2="56"/><line x1="34" y1="70" x2="54" y2="70"/></svg></span>
+                        <span class="app-screen__tile-label">Inspecciones</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Capture el resultado de cada característica evaluada del lote.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><path d="M34 54l10 10 22-24"/></svg></span>
+                        <span class="app-screen__tile-label">Resultados</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Genere notificaciones de calidad ante una desviación detectada.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 14a20 20 0 0 0-20 20v12l-10 16h60l-10-16V34A20 20 0 0 0 50 14Z"/><path d="M42 84a8 8 0 0 0 16 0"/></svg></span>
+                        <span class="app-screen__tile-label">Notificaciones</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Libere o rechace lotes según el resultado de la inspección.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8 84 20v28c0 26-15 40-34 44-19-4-34-18-34-44V20Z"/><path d="M34 50l11 11 21-23"/></svg></span>
+                        <span class="app-screen__tile-label">Liberación</span>
+                      </button>
+                    </div>
+                    <div class="app-screen__detail">
+                      <p class="app-screen__detail-text">Registre inspecciones de entrada y de proceso con sus resultados.</p>
+                    </div>
+                  </div>
+
+                  <div class="app-screen app-screen--pp" data-module="pp">
+                    <div class="app-screen__header">
+                      <span class="app-screen__icon">
+                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+                          <circle cx="18" cy="26" r="9"/><circle cx="50" cy="74" r="9"/><circle cx="82" cy="26" r="9"/>
+                          <line x1="25" y1="32" x2="44" y2="66"/><line x1="75" y1="32" x2="56" y2="66"/>
+                        </svg>
+                      </span>
+                      <span class="app-screen__name">PP Mobile</span>
+                    </div>
+                    <div class="app-screen__tiles">
+                      <button type="button" class="app-screen__tile is-active" data-detail="Confirme operaciones de producción a medida que se ejecutan.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><path d="M34 54l10 10 22-24"/></svg></span>
+                        <span class="app-screen__tile-label">Confirmaciones</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Registre el consumo de componentes contra la orden de producción.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8 90 29v42l-40 21-40-21V29Z"/><path d="M10 29l40 21 40-21"/><line x1="50" y1="50" x2="50" y2="92"/></svg></span>
+                        <span class="app-screen__tile-label">Consumo</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Consulte el porcentaje de avance de cada orden en tiempo real.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 74a32 32 0 1 1 64 0"/><line x1="50" y1="74" x2="66" y2="48"/><circle cx="50" cy="74" r="5"/></svg></span>
+                        <span class="app-screen__tile-label">Avance</span>
+                      </button>
+                      <button type="button" class="app-screen__tile" data-detail="Reporte paradas y tiempos muertos con su motivo asociado.">
+                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 16 90 84H10Z"/><line x1="50" y1="40" x2="50" y2="62"/><circle cx="50" cy="72" r="3" fill="currentColor" stroke="none"/></svg></span>
+                        <span class="app-screen__tile-label">Paradas</span>
+                      </button>
+                    </div>
+                    <div class="app-screen__detail">
+                      <p class="app-screen__detail-text">Confirme operaciones de producción a medida que se ejecutan.</p>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <p class="app-showcase__note">
+            Todas las apps corren sobre <strong>SAP Mobile Service</strong> en SAP BTP, con la misma base de seguridad,
+            sincronización y administración — reduciendo el papeleo y aumentando la precisión de los datos en terreno.
+          </p>
+
+        </div>
       </div>
     </section>
+    -->
 
     <!-- ==================== 5. METODOLOGÍA (RAPID DEPLOYMENT) — OCULTA TEMPORALMENTE ====================
          Para volver a mostrarla: eliminar los marcadores de comentario que envuelven esta sección. -->
@@ -389,7 +633,7 @@
       <div class="container contact__grid">
 
         <div class="contact__info" data-animate="fade-up">
-          <span class="section-kicker">04 — Contacto</span>
+          <span class="section-kicker">03 — Contacto</span>
           <h2 class="section-title">Conversemos sobre su próximo proyecto SAP</h2>
           <p class="contact__lead">
             Escríbanos y un consultor especialista de vSApp se pondrá en contacto para entender sus necesidades y
@@ -474,7 +718,7 @@
       <nav class="footer__nav" aria-label="Navegación secundaria">
         <a href="#sobre">Sobre vSApp</a>
         <a href="#servicios">Servicios</a>
-        <a href="#app-movil">Apps móviles</a>
+        <a href="aplicaciones-moviles.html">Apps móviles</a>
         <!-- <a href="#metodologia">Metodología</a> -->
         <!-- <a href="#contacto">Contacto</a> -->
       </nav>
