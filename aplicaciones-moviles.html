@@ -1,351 +1,478 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Simulador de apps móviles SAP Mobile Service | vSApp</title>
-  <meta name="description" content="Pruebe en un simulador interactivo las aplicaciones móviles que vSApp desarrolla sobre SAP Mobile Service para los módulos PM, WM, QM y PP, conectadas nativamente a SAP S/4HANA.">
-  <meta name="theme-color" content="#0A1F3D">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>vSApp · Aplicaciones móviles</title>
+<meta name="description" content="Aplicaciones móviles conectadas a SAP para PM, PP, WM y QM, con trabajo online y offline.">
+<link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;family=Archivo:wdth,wght@100..125,600..800&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">
+<style>
+v-if{display:contents}v-if[hidden]{display:none!important}
+body{margin:0}
+h1,h2,h3,h4,p,ul,ol{margin:0}
+ul{padding:0;list-style:none}
+a{color:#0A1F3D}a:hover{color:#1F8C7E}
+.v-reveal{animation:reveal 1.1s cubic-bezier(.65,0,.35,1) both}
+@keyframes reveal{from{clip-path:circle(0% at 70% 40%)}to{clip-path:circle(150% at 70% 40%)}}
+.nav-row{display:none!important}
+.nav-ic-open{display:none}
+@media (hover:hover){.nav-pill:hover .nav-row{display:flex!important}.nav-pill:hover .nav-ic-open{display:block}.nav-pill:hover .nav-ic-closed{display:none}}
+.nav-pill[data-open="true"] .nav-row{display:flex!important}
+.nav-pill[data-open="true"] .nav-ic-open{display:block}.nav-pill[data-open="true"] .nav-ic-closed{display:none}
+.nav-btn{transition:background .3s}.nav-btn:hover{background:rgba(255,255,255,0.22)}
+.nav-row{animation:navSlide .45s cubic-bezier(.22,1,.36,1) both}
+.nav-link{transition:background .2s,color .2s}.nav-link:hover{background:rgba(255,255,255,0.10);color:#FFFFFF}
+@keyframes navSlide{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+/* Selector de módulos */
+.m-tab{display:flex;align-items:center;gap:16px;width:100%;padding:16px 18px;border-radius:14px;border:1px solid #E4E8EE;background:#FFFFFF;color:#0A1F3D;font-family:inherit;cursor:pointer;transition:border-color .3s,box-shadow .3s,transform .3s}
+.m-tab:hover{border-color:#A7C8EC;transform:translateX(4px)}
+.m-tab .m-code{flex:none;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;background:#EEF3FA;color:#205A9B;transition:background .3s,color .3s}
+.m-tab .m-sub{color:#4A5568}
+.m-tab.on{border-color:#205A9B;box-shadow:0 18px 40px -24px rgba(32,90,155,.55)}
+.m-tab.on .m-code{background:#205A9B;color:#FFFFFF}
+.m-swap{animation:swap .5s cubic-bezier(.22,1,.36,1) both}
+@keyframes swap{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.phone{animation:float 6s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+/* Aplicaciones: portada y bloques */
+.ph{flex:none}
+.f1{animation:float 6s ease-in-out infinite}.f2{animation:float 6s ease-in-out -2s infinite}.f3{animation:float 6s ease-in-out -4s infinite}
+.a-glow{animation:glow 9s ease-in-out infinite alternate}
+@keyframes glow{to{transform:translate(-60px,40px) scale(1.1)}}
+.a-tile{padding:28px;border-radius:16px;background:#F3F6FA;transition:transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s,background .5s}
+.a-tile:hover{transform:translateY(-6px);background:#FFFFFF;box-shadow:0 30px 60px -34px rgba(33,95,156,.45)}
+.a-ic{width:52px;height:52px;border-radius:14px;background:#FFFFFF;color:#215F9C;display:flex;align-items:center;justify-content:center;flex:none;transition:background .4s,color .4s,transform .5s cubic-bezier(.22,1,.36,1)}
+.a-tile:hover .a-ic{background:#215F9C;color:#FFFFFF;transform:rotate(-6deg) scale(1.06)}
+.a-tab{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:99px;border:1px solid #D5DEEA;background:#FFFFFF;color:#0A1F3D;font-family:inherit;font-size:15.5px;font-weight:600;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.a-tab:hover{border-color:#215F9C}
+.a-tab.on{background:#215F9C;border-color:#215F9C;color:#FFFFFF}
+.a-field{display:flex;gap:16px;align-items:flex-start;padding:20px;border-radius:14px;background:#FFFFFF;border:1px solid #E4E8EE;color:#215F9C;transition:transform .4s,box-shadow .4s}
+.a-field .a-ic{background:#EEF3FA}
+.a-field .a-ft{color:#4A5568}
+.a-field:hover{transform:translateY(-4px);box-shadow:0 24px 48px -30px rgba(33,95,156,.45)}
+.a-field.hl{background:#215F9C;border-color:#215F9C;color:#FFFFFF}
+.a-field.hl .a-ft{color:rgba(255,255,255,.8)}
+.a-field.hl .a-ic{background:rgba(255,255,255,.15);color:#FFFFFF}
+.a-flow{display:flex;flex-direction:column;align-items:center;gap:12px;width:150px;padding:22px 12px;border-radius:14px;background:#F3F6FA;text-align:center;font-weight:600;font-size:14px;color:#215F9C}
+.a-arrow{animation:nudge 1.6s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateX(5px)}}
+.a-spin svg{animation:spin 4s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.a-photo img{transition:transform 1.2s cubic-bezier(.22,1,.36,1)}.a-photo:hover img{transform:scale(1.04)}
+.a-chev{display:flex;flex-direction:column;gap:2px;padding:18px 34px 18px 22px;color:#FFFFFF;clip-path:polygon(0 0,calc(100% - 18px) 0,100% 50%,calc(100% - 18px) 100%,0 100%,12px 50%);transition:transform .4s cubic-bezier(.22,1,.36,1),filter .4s}
+.a-step:first-child .a-chev{clip-path:polygon(0 0,calc(100% - 18px) 0,100% 50%,calc(100% - 18px) 100%,0 100%)}
+.a-step:hover .a-chev{transform:translateY(-4px);filter:brightness(1.12)}
+.v-why{transition:border-color .5s}.v-why:hover{border-color:#0A1F3D}
+.a-scan{animation:scan 5s linear infinite}
+@keyframes scan{from{top:-80px}to{top:100%}}
+.a-grid{animation:gridmove 12s linear infinite}
+@keyframes gridmove{to{background-position:28px 28px}}
+.m-ph{margin:0}
+v-if:has(> .m-row){display:block;width:100%}
+@media (max-width:900px){.m-ph{margin:0 auto}}
+@media (min-width:1280px){.m-row .m-ph{margin:-210px auto 0}}
+.a-fgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+@media (max-width:640px){.a-fgrid{grid-template-columns:1fr}}
+@media (min-width:1100px){.a-sync-col .a-sync{margin-top:-48px;margin-right:64px}}
+@media (prefers-reduced-motion:reduce){.a-scan,.a-grid{animation:none}.f1,.f2,.f3,.a-glow,.a-arrow,.a-spin svg{animation:none}}
 
-  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
-
-  <!-- Tipografías: Playfair Display (titulares, serif elegante) + Inter (cuerpo, sans moderna) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/styles.css">
-
-  <!-- Fallback sin JavaScript: evita que el panel quede invisible si el script no carga -->
-  <noscript>
-    <style>[data-animate] { opacity: 1 !important; transform: none !important; }</style>
-  </noscript>
+@media (max-width:640px){.ph.f1,.ph.f3{display:none}}
+</style>
+<style>
+/* Carga uniforme: los bloques aparecen al llegar a ellos (js/vsapp-motion.js) */
+.v-reveal,.v-up,.s-card{animation:none!important}
+.js-motion [data-rv]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);transition-delay:var(--rv-d,0ms)}
+.js-motion [data-rv].rv-in{opacity:1;transform:none}
+/* Pantalla esqueleto: solo aparece si la carga tarda más de 0,3 s */
+.vs-skel{position:fixed;inset:0;z-index:5000;background:#FFFFFF;opacity:0;pointer-events:none;animation:skelIn .25s .3s forwards;transition:opacity .4s;overflow:hidden}
+.vs-skel.done{opacity:0!important;animation:none}
+.vs-skel i{display:block;border-radius:10px;background:linear-gradient(90deg,#EDF1F6 0%,#F6F8FB 40%,#EDF1F6 80%);background-size:200% 100%;animation:skelShine 1.3s linear infinite}
+.vs-skel .sk-in{max-width:1440px;margin:0 auto;padding:16px clamp(16px,3vw,48px)}
+.vs-skel .sk-nav{width:min(520px,70%);height:66px;border-radius:16px}
+.vs-skel .sk-hero{display:flex;gap:48px;align-items:center;margin-top:72px}
+.vs-skel .sk-col{flex:1 1 0;min-width:0}
+.vs-skel .sk-kick{width:160px;height:14px;margin-bottom:22px}
+.vs-skel .sk-h{height:44px;margin-bottom:14px}
+.vs-skel .sk-t{height:14px;margin-top:12px}
+.vs-skel .sk-media{flex:0 0 38%;height:320px;border-radius:20px}
+.vs-skel .sk-cards{display:flex;gap:24px;margin-top:64px}
+.vs-skel .sk-card{flex:1 1 0;height:180px;border-radius:20px}
+@media (max-width:760px){.vs-skel .sk-media,.vs-skel .sk-card:nth-child(n+2){display:none}}
+@keyframes skelIn{to{opacity:1}}
+@keyframes skelShine{from{background-position:200% 0}to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.js-motion [data-rv]{transition:opacity .3s;transform:none}.vs-skel i{animation:none}}
+</style>
 </head>
-<body class="app-page-body">
+<body>
+<div class="vs-skel" id="vsSkel" aria-hidden="true"><div class="sk-in">
+  <i class="sk-nav"></i>
+  <div class="sk-hero"><div class="sk-col"><i class="sk-kick"></i><i class="sk-h" style="width:88%"></i><i class="sk-h" style="width:64%"></i><i class="sk-t" style="width:72%"></i><i class="sk-t" style="width:58%"></i></div><i class="sk-media"></i></div>
+  <div class="sk-cards"><i class="sk-card"></i><i class="sk-card"></i><i class="sk-card"></i></div>
+</div></div>
+<noscript><style>.vs-skel{display:none}</style></noscript>
+<div class="v-reveal" style="font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.6; color: #0A1F3D; background: #FFFFFF; -webkit-font-smoothing: antialiased;">
 
-  <a class="skip-link" href="#main">Saltar al contenido principal</a>
-
-  <!-- ==================== NAVBAR (igual que index.html; enlaza de vuelta a las secciones del sitio) ==================== -->
-  <header class="navbar" id="navbar">
-    <div class="navbar__inner">
-      <a href="index.html" class="navbar__brand" aria-label="vSApp - Inicio">
-        <img class="navbar__logo" src="assets/img/logo-header.svg" alt="" width="113" height="44">
-      </a>
-
-      <button class="navbar__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú de navegación">
-        <span class="navbar__toggle-bar"></span>
-        <span class="navbar__toggle-bar"></span>
-        <span class="navbar__toggle-bar"></span>
-      </button>
-    </div>
-
-    <nav class="navbar__menu" id="navMenu" aria-label="Navegación principal">
-      <ul class="navbar__list">
-        <li><a href="index.html#sobre" class="navbar__link">Sobre nosotros</a></li>
-        <li><a href="index.html#servicios" class="navbar__link">Nuestros Servicios</a></li>
-        <li><a href="index.html#app-movil" class="navbar__link">Aplicaciones móviles</a></li>
-        <li><a href="index.html#contacto" class="navbar__link">Contáctanos</a></li>
-      </ul>
-    </nav>
-
-    <div class="navbar__backdrop" id="navBackdrop" aria-hidden="true"></div>
-  </header>
-
-  <main id="main">
-
-    <!-- ==================== SIMULADOR DE APPS MÓVILES ====================
-         Página dedicada (ver README: "si se requiere contenido extenso por sección,
-         separar en páginas propias"). Reutiliza exactamente el mismo componente
-         .app-showcase de index.html#app-movil — mismo HTML/CSS/JS — solo que aquí
-         es el contenido central de la página, con el teléfono más grande
-         (.phone--large) al no competir con el resto de las secciones del sitio. -->
-    <section class="mobile-app app-page">
-      <div class="container">
-
-        <a href="index.html" class="app-page__back">← Volver a vSApp</a>
-
-        <div class="section-heading" data-animate="fade-up">
-          <span class="section-kicker">Simulador interactivo</span>
-          <h1 class="section-title">Pruebe SAP Mobile Service en acción</h1>
-          <p class="section-intro">
-            Seleccione un módulo — PM, WM, QM o PP — y explore su aplicación móvil como si tuviera el dispositivo en sus
-            manos. Las cuatro apps corren sobre <strong>SAP Mobile Service</strong> (SAP BTP), con integración nativa
-            online / offline a SAP S/4HANA.
-          </p>
+<!-- Barra superior: mismo navbar del Inicio, con menú desplegable que indica la sección actual -->
+<header style="position: sticky; top: 0; z-index: 20; pointer-events: none; height: 0; overflow: visible;">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 16px clamp(16px, 3vw, 48px);">
+    <div class="nav-pill" data-bind-data-open="navExpanded" style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 12px 32px; padding: 10px 12px 10px 26px; border: 1px solid rgba(255,255,255,0.22); border-radius: 16px; max-width: 100%; box-sizing: border-box; pointer-events: auto; background: rgba(10,31,61,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 18px 40px -22px rgba(7,21,39,0.6);">
+      <a href="index.html" aria-label="vSApp, inicio" style="display: flex; align-items: center;"><img src="assets/img/logo-blanco.svg" alt="vSApp" style="height: 44px; width: auto; display: block;"></a>
+      <nav aria-label="Navegación principal" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+        <button type="button" class="nav-btn" data-on-click="toggleNav" data-bind-aria-expanded="navExpanded" aria-label="Menú de secciones" style="display: flex; align-items: center; gap: 0; padding: 14px; border-radius: 12px; border: 0; background: rgba(255,255,255,0.14); color: #FFFFFF; font-family: inherit; font-size: 18px; font-weight: 600; cursor: pointer;">
+          <svg class="nav-ic-open" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex: none;"><path d="M15 6l-6 6 6 6"></path></svg>
+          <svg class="nav-ic-closed" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex: none;"><path d="M9 6l6 6-6 6"></path></svg>
+        </button>
+        <div class="nav-row" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+          <a href="index.html" class="nav-link" style="color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 500; text-decoration: none; padding: 10px 18px; border-radius: 8px; white-space: nowrap;">Inicio</a>
+          <a href="conozcanos.html" class="nav-link" style="color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 500; text-decoration: none; padding: 10px 18px; border-radius: 8px; white-space: nowrap;">Sobre nosotros</a>
+          <a href="servicios.html" class="nav-link" style="color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 500; text-decoration: none; padding: 10px 18px; border-radius: 8px; white-space: nowrap;">Nuestros Servicios</a>
+          <a href="index.html#contacto" class="nav-link" style="color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 500; text-decoration: none; padding: 10px 18px; border-radius: 8px; white-space: nowrap;">Contáctanos</a>
         </div>
-
-        <div class="app-showcase" data-animate="fade-up" data-delay="1">
-
-          <div class="app-showcase__modules" role="tablist" aria-label="Módulos SAP">
-            <button type="button" class="app-showcase__module-btn app-showcase__module-btn--pm is-active" id="module-pm" role="tab" aria-selected="true" data-module="pm" tabindex="0">
-              <span class="app-showcase__module-code">PM</span>
-              <span>
-                <span class="app-showcase__module-name">Mantenimiento de Planta</span>
-                <span class="app-showcase__module-desc">Avisos, órdenes y repuestos</span>
-              </span>
-            </button>
-            <button type="button" class="app-showcase__module-btn app-showcase__module-btn--wm" id="module-wm" role="tab" aria-selected="false" data-module="wm" tabindex="-1">
-              <span class="app-showcase__module-code">WM</span>
-              <span>
-                <span class="app-showcase__module-name">Gestión de Almacenes</span>
-                <span class="app-showcase__module-desc">Picking, traspasos y conteos</span>
-              </span>
-            </button>
-            <button type="button" class="app-showcase__module-btn app-showcase__module-btn--qm" id="module-qm" role="tab" aria-selected="false" data-module="qm" tabindex="-1">
-              <span class="app-showcase__module-code">QM</span>
-              <span>
-                <span class="app-showcase__module-name">Gestión de Calidad</span>
-                <span class="app-showcase__module-desc">Inspecciones y liberación de lotes</span>
-              </span>
-            </button>
-            <button type="button" class="app-showcase__module-btn app-showcase__module-btn--pp" id="module-pp" role="tab" aria-selected="false" data-module="pp" tabindex="-1">
-              <span class="app-showcase__module-code">PP</span>
-              <span>
-                <span class="app-showcase__module-name">Planificación de Producción</span>
-                <span class="app-showcase__module-desc">Confirmaciones y avance de orden</span>
-              </span>
-            </button>
-          </div>
-
-          <div class="app-showcase__stage app-showcase__stage--page">
-
-            <div class="app-showcase__info">
-
-              <div class="app-showcase__info-pane is-active" data-module="pm" aria-labelledby="module-pm">
-                <h2 class="app-showcase__info-title">PM Mobile — Mantenimiento de Planta</h2>
-                <p class="app-showcase__info-text">
-                  Sus técnicos gestionan avisos, órdenes y repuestos en modo <strong>online / offline</strong>, con captura
-                  fotográfica de averías directamente desde el equipo en terreno.
-                </p>
-                <ul class="app-showcase__info-list">
-                  <li>Gestión de avisos y órdenes de mantenimiento</li>
-                  <li>Captura fotográfica de averías</li>
-                  <li>Verificación de stock de repuestos</li>
-                  <li>Integración online / offline</li>
-                </ul>
-              </div>
-
-              <div class="app-showcase__info-pane app-showcase__info-pane--wm" data-module="wm" aria-labelledby="module-wm">
-                <h2 class="app-showcase__info-title">WM Mobile — Gestión de Almacenes</h2>
-                <p class="app-showcase__info-text">
-                  Sus operarios ejecutan picking, traspasos y conteos guiados desde el piso de bodega, con lectura de
-                  códigos y confirmación inmediata en SAP.
-                </p>
-                <ul class="app-showcase__info-list">
-                  <li>Recepción y ubicación de materiales</li>
-                  <li>Picking guiado por código</li>
-                  <li>Traspasos entre bodegas</li>
-                  <li>Conteo cíclico de inventario</li>
-                </ul>
-              </div>
-
-              <div class="app-showcase__info-pane app-showcase__info-pane--qm" data-module="qm" aria-labelledby="module-qm">
-                <h2 class="app-showcase__info-title">QM Mobile — Gestión de Calidad</h2>
-                <p class="app-showcase__info-text">
-                  Sus inspectores registran resultados de inspección y liberan o rechazan lotes desde cualquier punto de
-                  la planta, sin papeleo adicional.
-                </p>
-                <ul class="app-showcase__info-list">
-                  <li>Inspecciones de entrada y de proceso</li>
-                  <li>Registro de resultados por característica</li>
-                  <li>Notificaciones de calidad</li>
-                  <li>Liberación o rechazo de lotes</li>
-                </ul>
-              </div>
-
-              <div class="app-showcase__info-pane app-showcase__info-pane--pp" data-module="pp" aria-labelledby="module-pp">
-                <h2 class="app-showcase__info-title">PP Mobile — Planificación de Producción</h2>
-                <p class="app-showcase__info-text">
-                  Sus operadores confirman operaciones y consumos de componentes en línea, con visibilidad inmediata del
-                  avance de cada orden de producción.
-                </p>
-                <ul class="app-showcase__info-list">
-                  <li>Confirmación de operaciones</li>
-                  <li>Consumo de componentes</li>
-                  <li>Seguimiento de avance de la orden</li>
-                  <li>Reporte de paradas y tiempos muertos</li>
-                </ul>
-              </div>
-
-            </div>
-
-            <div class="app-showcase__device">
-              <div class="phone phone--single phone--large" aria-hidden="true">
-                <div class="phone__notch"></div>
-                <div class="phone__screen">
-
-                  <div class="app-screen app-screen--pm is-active" data-module="pm">
-                    <div class="app-screen__header">
-                      <span class="app-screen__icon">
-                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-                          <polygon points="50,8 87,29 87,71 50,92 13,71 13,29"/>
-                          <circle cx="50" cy="50" r="15"/>
-                        </svg>
-                      </span>
-                      <span class="app-screen__name">PM Mobile</span>
-                    </div>
-                    <div class="app-screen__tiles">
-                      <button type="button" class="app-screen__tile is-active" data-detail="Cree y dé seguimiento a avisos de avería, con estado y prioridad en tiempo real.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 14a20 20 0 0 0-20 20v12l-10 16h60l-10-16V34A20 20 0 0 0 50 14Z"/><path d="M42 84a8 8 0 0 0 16 0"/></svg></span>
-                        <span class="app-screen__tile-label">Avisos</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Visualice, modifique y cierre órdenes de mantenimiento directamente desde el equipo.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><line x1="34" y1="42" x2="66" y2="42"/><line x1="34" y1="56" x2="66" y2="56"/><line x1="34" y1="70" x2="54" y2="70"/></svg></span>
-                        <span class="app-screen__tile-label">Órdenes</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Consulte el stock disponible y asígnelo como componente en la orden.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8 90 29v42l-40 21-40-21V29Z"/><path d="M10 29l40 21 40-21"/><line x1="50" y1="50" x2="50" y2="92"/></svg></span>
-                        <span class="app-screen__tile-label">Repuestos</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Fotografíe la avería; la imagen queda anexada en el Content Server de SAP.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="28" width="76" height="52" rx="10"/><path d="M34 28l8-12h16l8 12"/><circle cx="50" cy="54" r="16"/></svg></span>
-                        <span class="app-screen__tile-label">Fotos</span>
-                      </button>
-                    </div>
-                    <div class="app-screen__detail">
-                      <p class="app-screen__detail-text">Cree y dé seguimiento a avisos de avería, con estado y prioridad en tiempo real.</p>
-                    </div>
-                  </div>
-
-                  <div class="app-screen app-screen--wm" data-module="wm">
-                    <div class="app-screen__header">
-                      <span class="app-screen__icon">
-                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M50 8 90 29v42l-40 21-40-21V29Z"/>
-                          <path d="M10 29l40 21 40-21"/>
-                          <line x1="50" y1="50" x2="50" y2="92"/>
-                        </svg>
-                      </span>
-                      <span class="app-screen__name">WM Mobile</span>
-                    </div>
-                    <div class="app-screen__tiles">
-                      <button type="button" class="app-screen__tile is-active" data-detail="Registre la recepción de materiales y confirme su ubicación en bodega.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 44h22l8 14h12l8-14h22"/><path d="M14 44V24a4 4 0 0 1 4-4h64a4 4 0 0 1 4 4v20"/><path d="M14 44v30a6 6 0 0 0 6 6h60a6 6 0 0 0 6-6V44"/></svg></span>
-                        <span class="app-screen__tile-label">Recepción</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Ejecute picking guiado leyendo el código de barras de cada ítem.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><line x1="16" y1="20" x2="16" y2="80"/><line x1="28" y1="20" x2="28" y2="80"/><line x1="38" y1="20" x2="38" y2="80"/><line x1="50" y1="20" x2="50" y2="80"/><line x1="58" y1="20" x2="58" y2="80"/><line x1="70" y1="20" x2="70" y2="80"/><line x1="84" y1="20" x2="84" y2="80"/></svg></span>
-                        <span class="app-screen__tile-label">Picking</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Mueva materiales entre bodegas y confirme el traspaso al instante.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 34h54"/><path d="M58 20l14 14-14 14"/><path d="M82 66H28"/><path d="M42 52L28 66l14 14"/></svg></span>
-                        <span class="app-screen__tile-label">Traspasos</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Realice conteos de inventario por zona y reporte diferencias.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><path d="M34 54l10 10 22-24"/></svg></span>
-                        <span class="app-screen__tile-label">Conteo cíclico</span>
-                      </button>
-                    </div>
-                    <div class="app-screen__detail">
-                      <p class="app-screen__detail-text">Registre la recepción de materiales y confirme su ubicación en bodega.</p>
-                    </div>
-                  </div>
-
-                  <div class="app-screen app-screen--qm" data-module="qm">
-                    <div class="app-screen__header">
-                      <span class="app-screen__icon">
-                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M50 8 84 20v28c0 26-15 40-34 44-19-4-34-18-34-44V20Z"/>
-                          <path d="M34 50l11 11 21-23"/>
-                        </svg>
-                      </span>
-                      <span class="app-screen__name">QM Mobile</span>
-                    </div>
-                    <div class="app-screen__tiles">
-                      <button type="button" class="app-screen__tile is-active" data-detail="Registre inspecciones de entrada y de proceso con sus resultados.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><line x1="34" y1="42" x2="66" y2="42"/><line x1="34" y1="56" x2="66" y2="56"/><line x1="34" y1="70" x2="54" y2="70"/></svg></span>
-                        <span class="app-screen__tile-label">Inspecciones</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Capture el resultado de cada característica evaluada del lote.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><path d="M34 54l10 10 22-24"/></svg></span>
-                        <span class="app-screen__tile-label">Resultados</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Genere notificaciones de calidad ante una desviación detectada.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 14a20 20 0 0 0-20 20v12l-10 16h60l-10-16V34A20 20 0 0 0 50 14Z"/><path d="M42 84a8 8 0 0 0 16 0"/></svg></span>
-                        <span class="app-screen__tile-label">Notificaciones</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Libere o rechace lotes según el resultado de la inspección.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8 84 20v28c0 26-15 40-34 44-19-4-34-18-34-44V20Z"/><path d="M34 50l11 11 21-23"/></svg></span>
-                        <span class="app-screen__tile-label">Liberación</span>
-                      </button>
-                    </div>
-                    <div class="app-screen__detail">
-                      <p class="app-screen__detail-text">Registre inspecciones de entrada y de proceso con sus resultados.</p>
-                    </div>
-                  </div>
-
-                  <div class="app-screen app-screen--pp" data-module="pp">
-                    <div class="app-screen__header">
-                      <span class="app-screen__icon">
-                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-                          <circle cx="18" cy="26" r="9"/><circle cx="50" cy="74" r="9"/><circle cx="82" cy="26" r="9"/>
-                          <line x1="25" y1="32" x2="44" y2="66"/><line x1="75" y1="32" x2="56" y2="66"/>
-                        </svg>
-                      </span>
-                      <span class="app-screen__name">PP Mobile</span>
-                    </div>
-                    <div class="app-screen__tiles">
-                      <button type="button" class="app-screen__tile is-active" data-detail="Confirme operaciones de producción a medida que se ejecutan.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><path d="M34 54l10 10 22-24"/></svg></span>
-                        <span class="app-screen__tile-label">Confirmaciones</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Registre el consumo de componentes contra la orden de producción.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8 90 29v42l-40 21-40-21V29Z"/><path d="M10 29l40 21 40-21"/><line x1="50" y1="50" x2="50" y2="92"/></svg></span>
-                        <span class="app-screen__tile-label">Consumo</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Consulte el porcentaje de avance de cada orden en tiempo real.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 74a32 32 0 1 1 64 0"/><line x1="50" y1="74" x2="66" y2="48"/><circle cx="50" cy="74" r="5"/></svg></span>
-                        <span class="app-screen__tile-label">Avance</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Reporte paradas y tiempos muertos con su motivo asociado.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 16 90 84H10Z"/><line x1="50" y1="40" x2="50" y2="62"/><circle cx="50" cy="72" r="3" fill="currentColor" stroke="none"/></svg></span>
-                        <span class="app-screen__tile-label">Paradas</span>
-                      </button>
-                    </div>
-                    <div class="app-screen__detail">
-                      <p class="app-screen__detail-text">Confirme operaciones de producción a medida que se ejecutan.</p>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <p class="app-showcase__note">
-            Todas las apps corren sobre <strong>SAP Mobile Service</strong> en SAP BTP, con la misma base de seguridad,
-            sincronización y administración — reduciendo el papeleo y aumentando la precisión de los datos en terreno.
-          </p>
-
-        </div>
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ==================== FOOTER (igual que index.html) ==================== -->
-  <footer class="footer">
-    <div class="container footer__grid">
-      <div class="footer__brand">
-        <img class="footer__logo" src="assets/img/logo-header.svg" alt="vSApp" width="165" height="64">
-        <p class="footer__tagline">vSApp especialista en soluciones de mantenimiento de planta y planificación de cadena de suministro en SAP S/4&nbsp;HANA.</p>
-      </div>
-
-      <nav class="footer__nav" aria-label="Navegación secundaria">
-        <a href="index.html#sobre">Sobre vSApp</a>
-        <a href="index.html#servicios">Servicios</a>
-        <a href="aplicaciones-moviles.html">Apps móviles</a>
       </nav>
+    </div>
+  </div>
+</header>
 
-      <div class="footer__legal">
-        <p>&copy; <span id="year"></span> vSApp Ltda. Todos los derechos reservados.</p>
+<!-- Portada -->
+<section style="position: relative; overflow: hidden; background: linear-gradient(135deg, #0A1F3D 0%, #14365C 55%, #215F9C 100%); color: #FFFFFF;">
+  <div aria-hidden="true" style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 56px 56px;"></div>
+  <div aria-hidden="true" class="a-glow" style="position: absolute; width: 620px; height: 620px; right: -120px; top: -160px; border-radius: 50%; background: radial-gradient(circle, rgba(234,118,40,0.28), transparent 62%);"></div>
+  <div style="position: relative; max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 3vw, 48px); padding-top: 132px; padding-bottom: 69px; display: flex; flex-wrap: wrap; align-items: center; gap: 40px 46px;">
+    <div style="flex: 1 1 440px; min-width: 0;">
+      <p style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #8DBAF0; margin-bottom: 14px;">Aplicaciones móviles</p>
+      <h1 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(30px, 3.52vw, 46px); line-height: 1.1; max-width: 14em;">Aplicaciones móviles conectadas a SAP</h1>
+      <p style="color: #F5B80A; font-size: clamp(19px, 1.8vw, 24px); font-weight: 500; margin-top: 18px;">Mantenimiento, producción, bodega y calidad en tiempo real</p>
+      <p style="color: rgba(255,255,255,0.78); font-size: 17px; margin-top: 16px; max-width: 52ch;">Desarrollamos aplicaciones para <strong style="color: #FFFFFF;">PM, PP, WM y QM</strong> sobre una misma base: escaneo de códigos, usuarios configurables y sincronización online / offline con SAP. Cada empresa activa los módulos que necesita.</p>
+      
+    </div>
+    <div style="flex: 1 1 560px; min-width: 0; display: flex; justify-content: center; align-items: flex-end; gap: 18px;">
+      <div class="ph f1" style="width: 190px; height: 390px; border-radius: 30px; background: #1F232A; padding: 7px; box-sizing: border-box; box-shadow: 0 40px 70px -36px rgba(7,21,39,.7); margin-bottom: 29px;">
+          <div style="position: relative; width: 100%; height: 100%; border-radius: 24px; overflow: hidden; background: #FFFFFF; color: #13243A; font-family: 'Inter', sans-serif; line-height: 1.35;"><div style="background: #EA7628; color: #FFFFFF; padding: 30px 12px 11px; text-align: center; font-weight: 600; font-size: 12px;">Aviso de avería</div><div style="padding: 12px;"><div style="border: 1.5px dashed #215F9C; border-radius: 8px; background: #EEF3FA; padding: 12px 8px; text-align: center; color: #215F9C; font-size: 10px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; flex: none;"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path><path d="M8 9v6M11 9v6M14 9v6M17 9v6"></path></svg>Escanear TAG del equipo</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Equipo</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">P-201 · Bomba centrífuga</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Tipo de avería</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">Fuga en sello</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Prioridad</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">Alta</div><div style="margin-top: 14px; background: #EA7628; color: #FFFFFF; border-radius: 7px; text-align: center; padding: 8px; font-size: 11px; font-weight: 600;">Crear aviso en SAP</div></div><span aria-hidden="true" style="position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 34%; height: 14px; border-radius: 99px; background: #1F232A;"></span><span aria-hidden="true" style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 30%; height: 3px; border-radius: 99px; background: #C9D3DF;"></span></div>
+        </div>
+      <div class="ph f2" style="width: 210px; height: 430px; border-radius: 33px; background: #1F232A; padding: 7px; box-sizing: border-box; box-shadow: 0 40px 70px -36px rgba(7,21,39,.7); ">
+          <div style="position: relative; width: 100%; height: 100%; border-radius: 27px; overflow: hidden; background: #FFFFFF; color: #13243A; font-family: 'Inter', sans-serif; line-height: 1.35;"><div style="background: #EA7628; color: #FFFFFF; padding: 30px 12px 11px; text-align: center; font-weight: 600; font-size: 12px;">Ingreso de Producción</div><div style="padding: 12px;"><div style="border: 1.5px dashed #215F9C; border-radius: 8px; background: #EEF3FA; padding: 12px 8px; text-align: center; color: #215F9C; font-size: 10px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; flex: none;"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path><path d="M8 9v6M11 9v6M14 9v6M17 9v6"></path></svg>Escanear código de producto</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Orden de fabricación</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">1000234</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Producto</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">MAT-4501 · Caja 12 un.</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Cantidad</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">120 UN</div><div style="margin-top: 14px; background: #215F9C; color: #FFFFFF; border-radius: 7px; text-align: center; padding: 8px; font-size: 11px; font-weight: 600;">Ingresar a SAP</div></div><span aria-hidden="true" style="position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 34%; height: 14px; border-radius: 99px; background: #1F232A;"></span><span aria-hidden="true" style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 30%; height: 3px; border-radius: 99px; background: #C9D3DF;"></span></div>
+        </div>
+      <div class="ph f3" style="width: 190px; height: 390px; border-radius: 30px; background: #1F232A; padding: 7px; box-sizing: border-box; box-shadow: 0 40px 70px -36px rgba(7,21,39,.7); margin-bottom: 29px;">
+          <div style="position: relative; width: 100%; height: 100%; border-radius: 24px; overflow: hidden; background: #FFFFFF; color: #13243A; font-family: 'Inter', sans-serif; line-height: 1.35;"><div style="background: #EA7628; color: #FFFFFF; padding: 30px 12px 11px; text-align: center; font-weight: 600; font-size: 12px;">Recepción</div><div style="padding: 12px;"><div style="border: 1.5px dashed #215F9C; border-radius: 8px; background: #EEF3FA; padding: 12px 8px; text-align: center; color: #215F9C; font-size: 10px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; flex: none;"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path><path d="M8 9v6M11 9v6M14 9v6M17 9v6"></path></svg>Escanear pedido de compra</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Pedido</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">4500128 · Pos. 10</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Material</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">Rodamiento 6309-2RS</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Cantidad recibida</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">12 UN</div><div style="margin-top: 14px; background: #215F9C; color: #FFFFFF; border-radius: 7px; text-align: center; padding: 8px; font-size: 11px; font-weight: 600;">Confirmar en SAP</div></div><span aria-hidden="true" style="position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 34%; height: 14px; border-radius: 99px; background: #1F232A;"></span><span aria-hidden="true" style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 30%; height: 3px; border-radius: 99px; background: #C9D3DF;"></span></div>
+        </div>
+    </div>
+  </div>
+</section>
+
+<!-- Presentación general -->
+
+
+<!-- Explorar por módulo (PP / PM / WM / QM, formato PP) -->
+
+
+<!-- Cómo funciona (general) -->
+<section style="padding: 60px 0 55px">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 3vw, 48px);">
+    <p style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #205A9B; margin-bottom: 14px;">Transforma tu operación</p>
+    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(25px, 2.4vw, 34px); line-height: 1.15; color: #0A1F3D;">Una plataforma móvil para toda la planta</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 29px 52px; margin-top: 35px; align-items: flex-start;">
+      <ul style="flex: 1 1 100%; min-width: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 20px;">
+<li class="a-tile" style="display: flex; flex-direction: column; gap: 22px; padding: 36px 30px;"><span class="a-ic" style="width: 60px; height: 60px; border-radius: 16px;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px; flex: none;"><path d="M7 3h7l5 5v13H7z"></path><path d="M14 3v5h5M10 13h6M10 17h4"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 20px; color: #215F9C; margin-bottom: 8px;">Menos papeleo</span><span style="color: #4A5568; font-size: 16px;">Adiós a las planillas: todo se registra en el móvil.</span></span></li>
+<li class="a-tile" style="display: flex; flex-direction: column; gap: 22px; padding: 36px 30px;"><span class="a-ic" style="width: 60px; height: 60px; border-radius: 16px;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px; flex: none;"><circle cx="12" cy="12" r="8"></circle><circle cx="12" cy="12" r="4"></circle><circle cx="12" cy="12" r="1"></circle></svg></span><span><span style="display: block; font-weight: 600; font-size: 20px; color: #215F9C; margin-bottom: 8px;">Mayor precisión</span><span style="color: #4A5568; font-size: 16px;">Escaneo de códigos, sin errores de digitación.</span></span></li>
+<li class="a-tile" style="display: flex; flex-direction: column; gap: 22px; padding: 36px 30px;"><span class="a-ic" style="width: 60px; height: 60px; border-radius: 16px;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px; flex: none;"><path d="M5 20V10M10 20V4M15 20v-7M20 20v-11"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 20px; color: #215F9C; margin-bottom: 8px;">Más eficiencia</span><span style="color: #4A5568; font-size: 16px;">Registros en segundos, donde ocurre el trabajo.</span></span></li>
+<li class="a-tile" style="display: flex; flex-direction: column; gap: 22px; padding: 36px 30px;"><span class="a-ic" style="width: 60px; height: 60px; border-radius: 16px;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px; flex: none;"><path d="M7 18a4 4 0 0 1-.6-7.95A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 20px; color: rgb(33, 95, 156); margin-bottom: 8px">Conectado con SAP</span><span style="color: rgb(74, 85, 104); font-size: 16px">Integración nativa con SAP S/4HANA.</span></span></li>
+      </ul>
+    </div>
+  </div>
+</section><section id="modulos" style="padding: 24px 0 60px">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 3vw, 48px);">
+    
+    <p style="color: #4A5568; font-size: 20px; margin-top: 12px; max-width: 64ch">Elija un módulo y luego una función: el celular le muestra la pantalla tal como la usa su equipo en planta.</p>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 29px;">
+        <button type="button" data-bind-class="mcls.pp" data-on-click="mpick.pp">
+          <span class="m-code">PP</span>
+          <span style="display: flex; flex-direction: column; text-align: left; line-height: 1.3;"><span style="font-weight: 600; font-size: 15.5px;">Planificación de Producción</span><span class="m-sub" style="font-size: 13px;">Producción y mermas</span></span>
+        </button>
+        <button type="button" data-bind-class="mcls.pm" data-on-click="mpick.pm">
+          <span class="m-code">PM</span>
+          <span style="display: flex; flex-direction: column; text-align: left; line-height: 1.3;"><span style="font-weight: 600; font-size: 15.5px;">Mantenimiento de Planta</span><span class="m-sub" style="font-size: 13px;">Avisos y órdenes</span></span>
+        </button>
+        <button type="button" data-bind-class="mcls.wm" data-on-click="mpick.wm">
+          <span class="m-code">WM</span>
+          <span style="display: flex; flex-direction: column; text-align: left; line-height: 1.3;"><span style="font-weight: 600; font-size: 15.5px;">Gestión de Almacenes</span><span class="m-sub" style="font-size: 13px;">Recepción y picking</span></span>
+        </button>
+        <button type="button" data-bind-class="mcls.qm" data-on-click="mpick.qm">
+          <span class="m-code">QM</span>
+          <span style="display: flex; flex-direction: column; text-align: left; line-height: 1.3;"><span style="font-weight: 600; font-size: 15.5px;">Gestión de Calidad</span><span class="m-sub" style="font-size: 13px;">Inspecciones y defectos</span></span>
+        </button>
+    </div>
+    <div style="margin-top: 40px; padding-top: 48px; border-top: 1px solid #E4E8EE">
+      <v-if data-if="mshow.pp">
+        <div class="m-swap">
+          <h2 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(23px, 2.08vw, 29px); line-height: 1.2;">PP Mobile · Ingreso de Producción y Mermas</h2>
+          <p style="color: #4A5568; font-size: 17px; margin-top: 10px; max-width: 64ch;">Registra la producción y las mermas de planta con solo escanear un código, directo en SAP S/4HANA.</p>
+          <div role="tablist" style="display: flex; flex-wrap: wrap; gap: 10px; margin: 32px 0 33px;"><button type="button" data-bind-class="fcls.pp0" data-on-click="fpick.pp0"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex: none;"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path><path d="M8 9v6M11 9v6M14 9v6M17 9v6"></path></svg><span>Ingreso de Producción</span></button><button type="button" data-bind-class="fcls.pp1" data-on-click="fpick.pp1"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex: none;"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"></path></svg><span>Ingreso de Mermas</span></button><button type="button" data-bind-class="fcls.pp2" data-on-click="fpick.pp2"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex: none;"><circle cx="9" cy="8" r="3.2"></circle><path d="M3 20a6 6 0 0 1 12 0"></path><circle cx="17" cy="9" r="2.4"></circle><path d="M15.5 14.2A5 5 0 0 1 21 19"></path></svg><span>Usuarios y accesos</span></button></div>
+        <v-if data-if="fshow.pp0">
+          <div class="m-swap m-row" style="display: flex; flex-wrap: wrap; gap: 35px 64px; align-items: flex-start; justify-content: flex-start; width: 100%; box-sizing: border-box;">
+            <div style="flex: 0 1 760px; min-width: 0;"><p style="color: #4A5568; font-size: 17px; margin-bottom: 28px;">Órdenes de fabricación en SAP con solo escanear.</p><ol style="list-style: none; padding: 0; margin: 0;"><li style="display: flex; gap: 20px; position: relative; padding-bottom: 26px;"><span style="width: 44px; height: 44px; border-radius: 50%; background: #215F9C; color: #FFF; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; position: relative; z-index: 1;">1</span><span aria-hidden="true" style="position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: #C9D8EC;"></span><span><span style="display: block; font-weight: 600; font-size: 17px; color: #215F9C; margin-top: 9px;">Escanea el código del producto</span><span style="color: #4A5568; font-size: 15px;">El operador escanea el producto terminado desde el dispositivo, en la misma línea de producción.</span></span></li>
+<li style="display: flex; gap: 20px; position: relative; padding-bottom: 26px;"><span style="width: 44px; height: 44px; border-radius: 50%; background: #215F9C; color: #FFF; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; position: relative; z-index: 1;">2</span><span aria-hidden="true" style="position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: #C9D8EC;"></span><span><span style="display: block; font-weight: 600; font-size: 17px; color: #215F9C; margin-top: 9px;">La app arma el registro</span><span style="color: #4A5568; font-size: 15px;">La orden de fabricación se completa automáticamente, sin digitar datos.</span></span></li>
+<li style="display: flex; gap: 20px; position: relative; padding-bottom: 26px;"><span style="width: 44px; height: 44px; border-radius: 50%; background: #215F9C; color: #FFF; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; position: relative; z-index: 1;">3</span><span><span style="display: block; font-weight: 600; font-size: 17px; color: #215F9C; margin-top: 9px;">Ingreso automático en SAP</span><span style="color: #4A5568; font-size: 15px;">La orden queda registrada en SAP al instante, o al sincronizar si se trabajó sin conexión.</span></span></li></ol><div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px;"><span style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 99px; background: #EEF3FA; color: #215F9C; font-size: 13.5px; font-weight: 600;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; flex: none;"><path d="M5 12l5 5 9-10"></path></svg>Sin digitación manual</span><span style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 99px; background: #EEF3FA; color: #215F9C; font-size: 13.5px; font-weight: 600;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; flex: none;"><path d="M20 11a8 8 0 0 0-14.5-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.5 4.5L20 16M20 20v-4h-4"></path></svg>Registro al instante</span><span style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 99px; background: #EEF3FA; color: #215F9C; font-size: 13.5px; font-weight: 600;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg>Trazabilidad por usuario</span></div></div>
+            <div class="m-ph" style="flex: 0 0 auto;"><div class="ph phone" style="width: 270px; height: 550px; border-radius: 40px; background: #1F232A; padding: 7px; box-sizing: border-box; box-shadow: 0 40px 70px -36px rgba(7,21,39,.7)">
+          <div style="position: relative; width: 100%; height: 100%; border-radius: 35px; overflow: hidden; background: #FFFFFF; color: #13243A; font-family: 'Inter', sans-serif; line-height: 1.35;"><div style="background: #EA7628; color: #FFFFFF; padding: 30px 12px 11px; text-align: center; font-weight: 600; font-size: 12px;">Ingreso de Producción</div><div style="padding: 12px;"><div style="border: 1.5px dashed #215F9C; border-radius: 8px; background: #EEF3FA; padding: 12px 8px; text-align: center; color: #215F9C; font-size: 10px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; flex: none;"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path><path d="M8 9v6M11 9v6M14 9v6M17 9v6"></path></svg>Escanear código de producto</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Orden de fabricación</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">1000234</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Producto</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">MAT-4501 · Caja 12 un.</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Cantidad</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">120 UN</div><div style="margin-top: 14px; background: #215F9C; color: #FFFFFF; border-radius: 7px; text-align: center; padding: 8px; font-size: 11px; font-weight: 600;">Ingresar a SAP</div></div><span aria-hidden="true" style="position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 34%; height: 14px; border-radius: 99px; background: #1F232A;"></span><span aria-hidden="true" style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 30%; height: 3px; border-radius: 99px; background: #C9D3DF;"></span></div>
+        </div></div>
+          </div>
+        </v-if>
+        <v-if data-if="fshow.pp1" hidden>
+          <div class="m-swap m-row" style="display: flex; flex-wrap: wrap; gap: 35px 64px; align-items: flex-start; justify-content: flex-start; width: 100%; box-sizing: border-box;">
+            <div style="flex: 0 1 760px; min-width: 0;"><p style="color: #4A5568; font-size: 17px; margin-bottom: 28px;">Cada merma registrada con su motivo e imputación en SAP.</p><div class="a-fgrid" style="display: grid; gap: 14px;"><div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path><path d="M8 9v6M11 9v6M14 9v6M17 9v6"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Producto</span><span class="a-ft" style="font-size: 14px;">Se identifica escaneando su código.</span></span></div>
+<div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M12 3l9.5 17h-19z"></path><path d="M12 10v4M12 17.5v.01"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Motivo de merma</span><span class="a-ft" style="font-size: 14px;">Selección desde los motivos configurados.</span></span></div>
+<div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M3 10l9-6 9 6v10H3z"></path><path d="M9 20v-6h6v6"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Centro / Almacén</span><span class="a-ft" style="font-size: 14px;">Desde dónde se da de baja el producto.</span></span></div>
+<div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M3 9l9-5 9 5M5 9v9M10 9v9M14 9v9M19 9v9M3 20h18"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Centro de costo</span><span class="a-ft" style="font-size: 14px;">Imputación del costo de la merma.</span></span></div>
+<div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M6 3h12M6 21h12M7 3c0 5 10 5 10 9s-10 4-10 9M17 3c0 5-10 5-10 9s10 4 10 9"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Cantidad</span><span class="a-ft" style="font-size: 14px;">Unidades a registrar como merma.</span></span></div>
+<div class="a-field hl"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M7 18a4 4 0 0 1-.6-7.95A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"></path><path d="M12 11v6M9.5 13.5L12 11l2.5 2.5"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Registro en SAP</span><span class="a-ft" style="font-size: 14px;">La merma queda contabilizada en SAP.</span></span></div></div></div>
+            <div class="m-ph" style="flex: 0 0 auto;"><div class="ph phone" style="width: 270px; height: 550px; border-radius: 43px; background: #1F232A; padding: 7px; box-sizing: border-box; box-shadow: 0 40px 70px -36px rgba(7,21,39,.7); ">
+          <div style="position: relative; width: 100%; height: 100%; border-radius: 35px; overflow: hidden; background: #FFFFFF; color: #13243A; font-family: 'Inter', sans-serif; line-height: 1.35;"><div style="background: #EA7628; color: #FFFFFF; padding: 30px 12px 11px; text-align: center; font-weight: 600; font-size: 12px;">Ingreso de Mermas</div><div style="padding: 12px;"><div style="border: 1.5px dashed #215F9C; border-radius: 8px; background: #EEF3FA; padding: 12px 8px; text-align: center; color: #215F9C; font-size: 10px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; flex: none;"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path><path d="M8 9v6M11 9v6M14 9v6M17 9v6"></path></svg>Escanear código de producto</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Motivo de merma</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">Producto dañado</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Centro / Almacén</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">1000 / 0001</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Centro de costo</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">CC-PROD-01</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Cantidad</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">8 UN</div><div style="margin-top: 14px; background: #EA7628; color: #FFFFFF; border-radius: 7px; text-align: center; padding: 8px; font-size: 11px; font-weight: 600;">Registrar merma</div></div><span aria-hidden="true" style="position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 34%; height: 14px; border-radius: 99px; background: #1F232A;"></span><span aria-hidden="true" style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 30%; height: 3px; border-radius: 99px; background: #C9D3DF;"></span></div>
+        </div></div>
+          </div>
+        </v-if>
+        <v-if data-if="fshow.pp2" hidden>
+          <div class="m-swap m-row" style="display: flex; flex-wrap: wrap; gap: 35px 64px; align-items: flex-start; justify-content: flex-start; width: 100%; box-sizing: border-box;">
+            <div style="flex: 0 1 760px; min-width: 0;"><p style="color: #4A5568; font-size: 17px; margin-bottom: 28px;">Cada usuario accede solo a lo que necesita.</p><div style="display: flex; flex-wrap: wrap; gap: 32px;">
+              <ul style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 22px;"><li style="display: flex; gap: 16px;"><span style="width: 44px; height: 44px; border-radius: 12px; background: #EEF3FA; color: #215F9C; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16.5px; color: #215F9C;">Selección de usuario al ingresar</span><span style="color: #4A5568; font-size: 15px;">Al abrir la app se elige uno de los usuarios configurados.</span></span></li>
+<li style="display: flex; gap: 16px;"><span style="width: 44px; height: 44px; border-radius: 12px; background: #EEF3FA; color: #215F9C; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg></span><span><span style="display: block; font-weight: 600; font-size: 16.5px; color: #215F9C;">Funciones según perfil</span><span style="color: #4A5568; font-size: 15px;">Cada usuario ve Producción, Mermas o ambas, según su configuración.</span></span></li>
+<li style="display: flex; gap: 16px;"><span style="width: 44px; height: 44px; border-radius: 12px; background: #EEF3FA; color: #215F9C; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><rect x="7" y="2.5" width="10" height="19" rx="2"></rect><path d="M11 18.5h2"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16.5px; color: #215F9C;">Un dispositivo, varios usuarios</span><span style="color: #4A5568; font-size: 15px;">Ideal para turnos y equipos que comparten el mismo equipo.</span></span></li></ul>
+            </div></div>
+            <div class="m-ph" style="flex: 0 0 auto;"><div class="ph phone" style="width: 270px; height: 550px; border-radius: 43px; background: #1F232A; padding: 7px; box-sizing: border-box; box-shadow: 0 40px 70px -36px rgba(7,21,39,.7); ">
+          <div style="position: relative; width: 100%; height: 100%; border-radius: 35px; overflow: hidden; background: #FFFFFF; color: #13243A; font-family: 'Inter', sans-serif; line-height: 1.35;"><div style="background: #EA7628; color: #FFFFFF; padding: 30px 12px 11px; text-align: center; font-weight: 600; font-size: 12px;">Usuarios</div><div style="padding: 14px 12px;"><div style="display: flex; gap: 8px; align-items: center; background: #F3F6FA; border-radius: 8px; padding: 8px; margin-bottom: 7px;"><span style="width: 22px; height: 22px; border-radius: 50%; background: #215F9C; color: #FFF; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span><span style="line-height: 1.25;"><span style="display: block; font-size: 10.5px; font-weight: 600;">Operador Línea 1</span><span style="font-size: 9px; color: #6B7A8C;">Ingreso de Producción</span></span></div><div style="display: flex; gap: 8px; align-items: center; background: #F3F6FA; border-radius: 8px; padding: 8px; margin-bottom: 7px;"><span style="width: 22px; height: 22px; border-radius: 50%; background: #215F9C; color: #FFF; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span><span style="line-height: 1.25;"><span style="display: block; font-size: 10.5px; font-weight: 600;">Encargado de Calidad</span><span style="font-size: 9px; color: #6B7A8C;">Ingreso de Mermas</span></span></div><div style="display: flex; gap: 8px; align-items: center; background: #F3F6FA; border-radius: 8px; padding: 8px; margin-bottom: 7px;"><span style="width: 22px; height: 22px; border-radius: 50%; background: #215F9C; color: #FFF; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span><span style="line-height: 1.25;"><span style="display: block; font-size: 10.5px; font-weight: 600;">Supervisor de Planta</span><span style="font-size: 9px; color: #6B7A8C;">Producción y Mermas</span></span></div><div style="margin-top: 14px; background: #215F9C; color: #FFFFFF; border-radius: 7px; text-align: center; padding: 8px; font-size: 11px; font-weight: 600;">Ingresar</div></div><span aria-hidden="true" style="position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 34%; height: 14px; border-radius: 99px; background: #1F232A;"></span><span aria-hidden="true" style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 30%; height: 3px; border-radius: 99px; background: #C9D3DF;"></span></div>
+        </div></div>
+          </div>
+        </v-if>
+        </div>
+      </v-if>
+      <v-if data-if="mshow.pm" hidden>
+        <div class="m-swap">
+          <h2 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(23px, 2.08vw, 29px); line-height: 1.2;">PM Mobile · Avisos y Órdenes de Mantenimiento</h2>
+          <p style="color: #4A5568; font-size: 17px; margin-top: 10px; max-width: 64ch;">Los técnicos crean avisos, ejecutan órdenes y consultan repuestos desde el equipo en terreno, con foto de la avería.</p>
+          <div role="tablist" style="display: flex; flex-wrap: wrap; gap: 10px; margin: 32px 0 33px;"><button type="button" data-bind-class="fcls.pm0" data-on-click="fpick.pm0"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex: none;"><path d="M12 3l9.5 17h-19z"></path><path d="M12 10v4M12 17.5v.01"></path></svg><span>Avisos de avería</span></button><button type="button" data-bind-class="fcls.pm1" data-on-click="fpick.pm1"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex: none;"><path d="M14.7 6.3a4 4 0 0 0 5 5L21 13l-8 8-3-3 8-8-1.3-1.3a4 4 0 0 1-5-5z" transform="translate(-2 0)"></path></svg><span>Órdenes de trabajo</span></button><button type="button" data-bind-class="fcls.pm2" data-on-click="fpick.pm2"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex: none;"><circle cx="9" cy="8" r="3.2"></circle><path d="M3 20a6 6 0 0 1 12 0"></path><circle cx="17" cy="9" r="2.4"></circle><path d="M15.5 14.2A5 5 0 0 1 21 19"></path></svg><span>Usuarios y accesos</span></button></div>
+        <v-if data-if="fshow.pm0" hidden>
+          <div class="m-swap m-row" style="display: flex; flex-wrap: wrap; gap: 35px 64px; align-items: flex-start; justify-content: flex-start; width: 100%; box-sizing: border-box;">
+            <div style="flex: 0 1 760px; min-width: 0;"><p style="color: #4A5568; font-size: 17px; margin-bottom: 28px;">Reporta una falla en segundos, frente al equipo.</p><ol style="list-style: none; padding: 0; margin: 0;"><li style="display: flex; gap: 20px; position: relative; padding-bottom: 26px;"><span style="width: 44px; height: 44px; border-radius: 50%; background: #215F9C; color: #FFF; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; position: relative; z-index: 1;">1</span><span aria-hidden="true" style="position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: #C9D8EC;"></span><span><span style="display: block; font-weight: 600; font-size: 17px; color: #215F9C; margin-top: 9px;">Escanea el TAG del equipo</span><span style="color: #4A5568; font-size: 15px;">El técnico escanea el código del equipo y la app identifica su ubicación técnica.</span></span></li>
+<li style="display: flex; gap: 20px; position: relative; padding-bottom: 26px;"><span style="width: 44px; height: 44px; border-radius: 50%; background: #215F9C; color: #FFF; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; position: relative; z-index: 1;">2</span><span aria-hidden="true" style="position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: #C9D8EC;"></span><span><span style="display: block; font-weight: 600; font-size: 17px; color: #215F9C; margin-top: 9px;">Describe la falla y adjunta una foto</span><span style="color: #4A5568; font-size: 15px;">Selecciona el tipo de avería, la prioridad y captura la evidencia con la cámara.</span></span></li>
+<li style="display: flex; gap: 20px; position: relative; padding-bottom: 26px;"><span style="width: 44px; height: 44px; border-radius: 50%; background: #215F9C; color: #FFF; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; position: relative; z-index: 1;">3</span><span><span style="display: block; font-weight: 600; font-size: 17px; color: #215F9C; margin-top: 9px;">Aviso creado en SAP PM</span><span style="color: #4A5568; font-size: 15px;">El aviso queda en SAP al instante, listo para que el planificador genere la orden.</span></span></li></ol><div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px;"><span style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 99px; background: #EEF3FA; color: #215F9C; font-size: 13.5px; font-weight: 600;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; flex: none;"><path d="M4 8h3l2-3h6l2 3h3v11H4z"></path><circle cx="12" cy="13" r="3.5"></circle></svg>Foto de la avería</span><span style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 99px; background: #EEF3FA; color: #215F9C; font-size: 13.5px; font-weight: 600;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; flex: none;"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>Ubicación técnica automática</span><span style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 99px; background: #EEF3FA; color: #215F9C; font-size: 13.5px; font-weight: 600;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; flex: none;"><path d="M20 11a8 8 0 0 0-14.5-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.5 4.5L20 16M20 20v-4h-4"></path></svg>Registro al instante</span></div></div>
+            <div class="m-ph" style="flex: 0 0 auto;"><div class="ph phone" style="width: 270px; height: 550px; border-radius: 43px; background: #1F232A; padding: 7px; box-sizing: border-box; box-shadow: 0 40px 70px -36px rgba(7,21,39,.7); ">
+          <div style="position: relative; width: 100%; height: 100%; border-radius: 35px; overflow: hidden; background: #FFFFFF; color: #13243A; font-family: 'Inter', sans-serif; line-height: 1.35;"><div style="background: #EA7628; color: #FFFFFF; padding: 30px 12px 11px; text-align: center; font-weight: 600; font-size: 12px;">Aviso de avería</div><div style="padding: 12px;"><div style="border: 1.5px dashed #215F9C; border-radius: 8px; background: #EEF3FA; padding: 12px 8px; text-align: center; color: #215F9C; font-size: 10px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; flex: none;"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path><path d="M8 9v6M11 9v6M14 9v6M17 9v6"></path></svg>Escanear TAG del equipo</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Equipo</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">P-201 · Bomba centrífuga</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Tipo de avería</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">Fuga en sello</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Prioridad</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">Alta</div><div style="margin-top: 14px; background: #EA7628; color: #FFFFFF; border-radius: 7px; text-align: center; padding: 8px; font-size: 11px; font-weight: 600;">Crear aviso en SAP</div></div><span aria-hidden="true" style="position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 34%; height: 14px; border-radius: 99px; background: #1F232A;"></span><span aria-hidden="true" style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 30%; height: 3px; border-radius: 99px; background: #C9D3DF;"></span></div>
+        </div></div>
+          </div>
+        </v-if>
+        <v-if data-if="fshow.pm1" hidden>
+          <div class="m-swap m-row" style="display: flex; flex-wrap: wrap; gap: 35px 64px; align-items: flex-start; justify-content: flex-start; width: 100%; box-sizing: border-box;">
+            <div style="flex: 0 1 760px; min-width: 0;"><p style="color: #4A5568; font-size: 17px; margin-bottom: 28px;">Ejecución y cierre de la orden sin volver a la oficina.</p><div class="a-fgrid" style="display: grid; gap: 14px;"><div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M7 3h7l5 5v13H7z"></path><path d="M14 3v5h5M10 13h6M10 17h4"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Orden de mantenimiento</span><span class="a-ft" style="font-size: 14px;">Lista de órdenes asignadas al técnico.</span></span></div>
+<div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M9 6h11M9 12h11M9 18h11"></path><circle cx="4.5" cy="6" r="1"></circle><circle cx="4.5" cy="12" r="1"></circle><circle cx="4.5" cy="18" r="1"></circle></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Operaciones</span><span class="a-ft" style="font-size: 14px;">Pasos a ejecutar según la hoja de ruta.</span></span></div>
+<div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Tiempos trabajados</span><span class="a-ft" style="font-size: 14px;">Notificación de horas por operación.</span></span></div>
+<div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M3 7.5L12 3l9 4.5v9L12 21l-9-4.5z"></path><path d="M3 7.5l9 4.5 9-4.5M12 12v9"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Repuestos</span><span class="a-ft" style="font-size: 14px;">Consulta de stock y consumo de materiales.</span></span></div>
+<div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M4 8h3l2-3h6l2 3h3v11H4z"></path><circle cx="12" cy="13" r="3.5"></circle></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Evidencia</span><span class="a-ft" style="font-size: 14px;">Fotos antes y después del trabajo.</span></span></div>
+<div class="a-field hl"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M7 18a4 4 0 0 1-.6-7.95A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"></path><path d="M12 11v6M9.5 13.5L12 11l2.5 2.5"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Cierre en SAP</span><span class="a-ft" style="font-size: 14px;">Notificación final y cierre técnico de la orden.</span></span></div></div></div>
+            <div class="m-ph" style="flex: 0 0 auto;"><div class="ph phone" style="width: 270px; height: 550px; border-radius: 43px; background: #1F232A; padding: 7px; box-sizing: border-box; box-shadow: 0 40px 70px -36px rgba(7,21,39,.7); ">
+          <div style="position: relative; width: 100%; height: 100%; border-radius: 35px; overflow: hidden; background: #FFFFFF; color: #13243A; font-family: 'Inter', sans-serif; line-height: 1.35;"><div style="background: #EA7628; color: #FFFFFF; padding: 30px 12px 11px; text-align: center; font-weight: 600; font-size: 12px;">Orden de trabajo</div><div style="padding: 12px;"><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Orden</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">4001872 · Correctivo</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Operación</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">0010 · Cambio de sello</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Horas trabajadas</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">2,5 H</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Repuesto</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">Sello mecánico 45 mm · 1 UN</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Estado</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">En ejecución</div><div style="margin-top: 14px; background: #215F9C; color: #FFFFFF; border-radius: 7px; text-align: center; padding: 8px; font-size: 11px; font-weight: 600;">Notificar y cerrar</div></div><span aria-hidden="true" style="position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 34%; height: 14px; border-radius: 99px; background: #1F232A;"></span><span aria-hidden="true" style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 30%; height: 3px; border-radius: 99px; background: #C9D3DF;"></span></div>
+        </div></div>
+          </div>
+        </v-if>
+        <v-if data-if="fshow.pm2" hidden>
+          <div class="m-swap m-row" style="display: flex; flex-wrap: wrap; gap: 35px 64px; align-items: flex-start; justify-content: flex-start; width: 100%; box-sizing: border-box;">
+            <div style="flex: 0 1 760px; min-width: 0;"><p style="color: #4A5568; font-size: 17px; margin-bottom: 28px;">Técnicos, planificadores y supervisores con su propio acceso.</p><div style="display: flex; flex-wrap: wrap; gap: 32px;">
+              <ul style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 22px;"><li style="display: flex; gap: 16px;"><span style="width: 44px; height: 44px; border-radius: 12px; background: #EEF3FA; color: #215F9C; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16.5px; color: #215F9C;">Selección de usuario al ingresar</span><span style="color: #4A5568; font-size: 15px;">Al abrir la app se elige uno de los usuarios configurados.</span></span></li>
+<li style="display: flex; gap: 16px;"><span style="width: 44px; height: 44px; border-radius: 12px; background: #EEF3FA; color: #215F9C; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg></span><span><span style="display: block; font-weight: 600; font-size: 16.5px; color: #215F9C;">Funciones según perfil</span><span style="color: #4A5568; font-size: 15px;">Cada usuario ve Avisos, Órdenes o ambas, según su configuración.</span></span></li>
+<li style="display: flex; gap: 16px;"><span style="width: 44px; height: 44px; border-radius: 12px; background: #EEF3FA; color: #215F9C; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><rect x="7" y="2.5" width="10" height="19" rx="2"></rect><path d="M11 18.5h2"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16.5px; color: #215F9C;">Un dispositivo, varios usuarios</span><span style="color: #4A5568; font-size: 15px;">Ideal para turnos y equipos que comparten el mismo equipo.</span></span></li></ul>
+            </div></div>
+            <div class="m-ph" style="flex: 0 0 auto;"><div class="ph phone" style="width: 270px; height: 550px; border-radius: 43px; background: #1F232A; padding: 7px; box-sizing: border-box; box-shadow: 0 40px 70px -36px rgba(7,21,39,.7); ">
+          <div style="position: relative; width: 100%; height: 100%; border-radius: 35px; overflow: hidden; background: #FFFFFF; color: #13243A; font-family: 'Inter', sans-serif; line-height: 1.35;"><div style="background: #EA7628; color: #FFFFFF; padding: 30px 12px 11px; text-align: center; font-weight: 600; font-size: 12px;">Usuarios</div><div style="padding: 14px 12px;"><div style="display: flex; gap: 8px; align-items: center; background: #F3F6FA; border-radius: 8px; padding: 8px; margin-bottom: 7px;"><span style="width: 22px; height: 22px; border-radius: 50%; background: #215F9C; color: #FFF; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span><span style="line-height: 1.25;"><span style="display: block; font-size: 10.5px; font-weight: 600;">Operador de planta</span><span style="font-size: 9px; color: #6B7A8C;">Avisos de avería</span></span></div><div style="display: flex; gap: 8px; align-items: center; background: #F3F6FA; border-radius: 8px; padding: 8px; margin-bottom: 7px;"><span style="width: 22px; height: 22px; border-radius: 50%; background: #215F9C; color: #FFF; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span><span style="line-height: 1.25;"><span style="display: block; font-size: 10.5px; font-weight: 600;">Técnico mecánico</span><span style="font-size: 9px; color: #6B7A8C;">Avisos y Órdenes</span></span></div><div style="display: flex; gap: 8px; align-items: center; background: #F3F6FA; border-radius: 8px; padding: 8px; margin-bottom: 7px;"><span style="width: 22px; height: 22px; border-radius: 50%; background: #215F9C; color: #FFF; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span><span style="line-height: 1.25;"><span style="display: block; font-size: 10.5px; font-weight: 600;">Planificador PM</span><span style="font-size: 9px; color: #6B7A8C;">Órdenes de trabajo</span></span></div><div style="margin-top: 14px; background: #215F9C; color: #FFFFFF; border-radius: 7px; text-align: center; padding: 8px; font-size: 11px; font-weight: 600;">Ingresar</div></div><span aria-hidden="true" style="position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 34%; height: 14px; border-radius: 99px; background: #1F232A;"></span><span aria-hidden="true" style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 30%; height: 3px; border-radius: 99px; background: #C9D3DF;"></span></div>
+        </div></div>
+          </div>
+        </v-if>
+        </div>
+      </v-if>
+      <v-if data-if="mshow.wm" hidden>
+        <div class="m-swap">
+          <h2 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(23px, 2.08vw, 29px); line-height: 1.2;">WM Mobile · Recepción, Picking y Traspasos</h2>
+          <p style="color: #4A5568; font-size: 17px; margin-top: 10px; max-width: 64ch;">Los operarios de bodega reciben, ubican y despachan materiales leyendo códigos, con confirmación inmediata en SAP.</p>
+          <div role="tablist" style="display: flex; flex-wrap: wrap; gap: 10px; margin: 32px 0 33px;"><button type="button" data-bind-class="fcls.wm0" data-on-click="fpick.wm0"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex: none;"><path d="M3 7.5L12 3l9 4.5v9L12 21l-9-4.5z"></path><path d="M3 7.5l9 4.5 9-4.5M12 12v9"></path></svg><span>Recepción y ubicación</span></button><button type="button" data-bind-class="fcls.wm1" data-on-click="fpick.wm1"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex: none;"><path d="M4 8h14l-3-3M20 16H6l3 3"></path></svg><span>Picking y traspasos</span></button><button type="button" data-bind-class="fcls.wm2" data-on-click="fpick.wm2"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex: none;"><circle cx="9" cy="8" r="3.2"></circle><path d="M3 20a6 6 0 0 1 12 0"></path><circle cx="17" cy="9" r="2.4"></circle><path d="M15.5 14.2A5 5 0 0 1 21 19"></path></svg><span>Usuarios y accesos</span></button></div>
+        <v-if data-if="fshow.wm0" hidden>
+          <div class="m-swap m-row" style="display: flex; flex-wrap: wrap; gap: 35px 64px; align-items: flex-start; justify-content: flex-start; width: 100%; box-sizing: border-box;">
+            <div style="flex: 0 1 760px; min-width: 0;"><p style="color: #4A5568; font-size: 17px; margin-bottom: 28px;">Ingreso de mercadería sin papeles, desde el andén.</p><ol style="list-style: none; padding: 0; margin: 0;"><li style="display: flex; gap: 20px; position: relative; padding-bottom: 26px;"><span style="width: 44px; height: 44px; border-radius: 50%; background: #215F9C; color: #FFF; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; position: relative; z-index: 1;">1</span><span aria-hidden="true" style="position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: #C9D8EC;"></span><span><span style="display: block; font-weight: 600; font-size: 17px; color: #215F9C; margin-top: 9px;">Escanea la entrega o pedido</span><span style="color: #4A5568; font-size: 15px;">El operario escanea el documento del proveedor y la app trae las posiciones esperadas.</span></span></li>
+<li style="display: flex; gap: 20px; position: relative; padding-bottom: 26px;"><span style="width: 44px; height: 44px; border-radius: 50%; background: #215F9C; color: #FFF; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; position: relative; z-index: 1;">2</span><span aria-hidden="true" style="position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: #C9D8EC;"></span><span><span style="display: block; font-weight: 600; font-size: 17px; color: #215F9C; margin-top: 9px;">Confirma cantidades</span><span style="color: #4A5568; font-size: 15px;">Valida lo recibido contra lo pedido y registra diferencias si las hay.</span></span></li>
+<li style="display: flex; gap: 20px; position: relative; padding-bottom: 26px;"><span style="width: 44px; height: 44px; border-radius: 50%; background: #215F9C; color: #FFF; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; position: relative; z-index: 1;">3</span><span><span style="display: block; font-weight: 600; font-size: 17px; color: #215F9C; margin-top: 9px;">Ubicación confirmada en SAP</span><span style="color: #4A5568; font-size: 15px;">Escanea la ubicación de destino y el stock queda disponible en SAP.</span></span></li></ol><div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px;"><span style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 99px; background: #EEF3FA; color: #215F9C; font-size: 13.5px; font-weight: 600;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; flex: none;"><path d="M5 12l5 5 9-10"></path></svg>Sin digitación manual</span><span style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 99px; background: #EEF3FA; color: #215F9C; font-size: 13.5px; font-weight: 600;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; flex: none;"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg>Ubicación por código</span><span style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 99px; background: #EEF3FA; color: #215F9C; font-size: 13.5px; font-weight: 600;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; flex: none;"><path d="M20 11a8 8 0 0 0-14.5-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.5 4.5L20 16M20 20v-4h-4"></path></svg>Stock al instante</span></div></div>
+            <div class="m-ph" style="flex: 0 0 auto;"><div class="ph phone" style="width: 270px; height: 550px; border-radius: 43px; background: #1F232A; padding: 7px; box-sizing: border-box; box-shadow: 0 40px 70px -36px rgba(7,21,39,.7); ">
+          <div style="position: relative; width: 100%; height: 100%; border-radius: 35px; overflow: hidden; background: #FFFFFF; color: #13243A; font-family: 'Inter', sans-serif; line-height: 1.35;"><div style="background: #EA7628; color: #FFFFFF; padding: 30px 12px 11px; text-align: center; font-weight: 600; font-size: 12px;">Recepción</div><div style="padding: 12px;"><div style="border: 1.5px dashed #215F9C; border-radius: 8px; background: #EEF3FA; padding: 12px 8px; text-align: center; color: #215F9C; font-size: 10px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; flex: none;"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path><path d="M8 9v6M11 9v6M14 9v6M17 9v6"></path></svg>Escanear pedido de compra</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Pedido</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">4500128 · Pos. 10</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Material</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">Rodamiento 6309-2RS</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Cantidad recibida</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">12 UN</div><div style="margin-top: 14px; background: #215F9C; color: #FFFFFF; border-radius: 7px; text-align: center; padding: 8px; font-size: 11px; font-weight: 600;">Confirmar en SAP</div></div><span aria-hidden="true" style="position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 34%; height: 14px; border-radius: 99px; background: #1F232A;"></span><span aria-hidden="true" style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 30%; height: 3px; border-radius: 99px; background: #C9D3DF;"></span></div>
+        </div></div>
+          </div>
+        </v-if>
+        <v-if data-if="fshow.wm1" hidden>
+          <div class="m-swap m-row" style="display: flex; flex-wrap: wrap; gap: 35px 64px; align-items: flex-start; justify-content: flex-start; width: 100%; box-sizing: border-box;">
+            <div style="flex: 0 1 760px; min-width: 0;"><p style="color: #4A5568; font-size: 17px; margin-bottom: 28px;">Movimientos de bodega guiados y trazables.</p><div class="a-fgrid" style="display: grid; gap: 14px;"><div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M7 3h7l5 5v13H7z"></path><path d="M14 3v5h5M10 13h6M10 17h4"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Orden de transporte</span><span class="a-ft" style="font-size: 14px;">Tareas de picking asignadas al operario.</span></span></div>
+<div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path><path d="M8 9v6M11 9v6M14 9v6M17 9v6"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Material</span><span class="a-ft" style="font-size: 14px;">Se valida escaneando su código.</span></span></div>
+<div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21z"></path><circle cx="12" cy="9.5" r="2.5"></circle></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Ubicación de origen</span><span class="a-ft" style="font-size: 14px;">Desde dónde se retira el material.</span></span></div>
+<div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M3 10l9-6 9 6v10H3z"></path><path d="M9 20v-6h6v6"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Ubicación de destino</span><span class="a-ft" style="font-size: 14px;">Andén, otra bodega o centro.</span></span></div>
+<div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M6 3h12M6 21h12M7 3c0 5 10 5 10 9s-10 4-10 9M17 3c0 5-10 5-10 9s10 4 10 9"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Cantidad</span><span class="a-ft" style="font-size: 14px;">Unidades a mover o despachar.</span></span></div>
+<div class="a-field hl"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M7 18a4 4 0 0 1-.6-7.95A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"></path><path d="M12 11v6M9.5 13.5L12 11l2.5 2.5"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Confirmación en SAP</span><span class="a-ft" style="font-size: 14px;">El movimiento queda contabilizado en SAP.</span></span></div></div></div>
+            <div class="m-ph" style="flex: 0 0 auto;"><div class="ph phone" style="width: 270px; height: 550px; border-radius: 43px; background: #1F232A; padding: 7px; box-sizing: border-box; box-shadow: 0 40px 70px -36px rgba(7,21,39,.7); ">
+          <div style="position: relative; width: 100%; height: 100%; border-radius: 35px; overflow: hidden; background: #FFFFFF; color: #13243A; font-family: 'Inter', sans-serif; line-height: 1.35;"><div style="background: #EA7628; color: #FFFFFF; padding: 30px 12px 11px; text-align: center; font-weight: 600; font-size: 12px;">Picking</div><div style="padding: 12px;"><div style="border: 1.5px dashed #215F9C; border-radius: 8px; background: #EEF3FA; padding: 12px 8px; text-align: center; color: #215F9C; font-size: 10px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; flex: none;"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path><path d="M8 9v6M11 9v6M14 9v6M17 9v6"></path></svg>Escanear material</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Orden de transporte</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">0000671 · Pos. 2</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Origen</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">B-12-04</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Destino</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">Andén 2</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Cantidad</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">20 UN</div><div style="margin-top: 14px; background: #EA7628; color: #FFFFFF; border-radius: 7px; text-align: center; padding: 8px; font-size: 11px; font-weight: 600;">Confirmar picking</div></div><span aria-hidden="true" style="position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 34%; height: 14px; border-radius: 99px; background: #1F232A;"></span><span aria-hidden="true" style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 30%; height: 3px; border-radius: 99px; background: #C9D3DF;"></span></div>
+        </div></div>
+          </div>
+        </v-if>
+        <v-if data-if="fshow.wm2" hidden>
+          <div class="m-swap m-row" style="display: flex; flex-wrap: wrap; gap: 35px 64px; align-items: flex-start; justify-content: flex-start; width: 100%; box-sizing: border-box;">
+            <div style="flex: 0 1 760px; min-width: 0;"><p style="color: #4A5568; font-size: 17px; margin-bottom: 28px;">Cada operario ve las tareas de su bodega.</p><div style="display: flex; flex-wrap: wrap; gap: 32px;">
+              <ul style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 22px;"><li style="display: flex; gap: 16px;"><span style="width: 44px; height: 44px; border-radius: 12px; background: #EEF3FA; color: #215F9C; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16.5px; color: #215F9C;">Selección de usuario al ingresar</span><span style="color: #4A5568; font-size: 15px;">Al abrir la app se elige uno de los usuarios configurados.</span></span></li>
+<li style="display: flex; gap: 16px;"><span style="width: 44px; height: 44px; border-radius: 12px; background: #EEF3FA; color: #215F9C; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg></span><span><span style="display: block; font-weight: 600; font-size: 16.5px; color: #215F9C;">Funciones según perfil</span><span style="color: #4A5568; font-size: 15px;">Cada usuario ve Recepción, Picking o ambas, según su configuración.</span></span></li>
+<li style="display: flex; gap: 16px;"><span style="width: 44px; height: 44px; border-radius: 12px; background: #EEF3FA; color: #215F9C; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><rect x="7" y="2.5" width="10" height="19" rx="2"></rect><path d="M11 18.5h2"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16.5px; color: #215F9C;">Un dispositivo, varios usuarios</span><span style="color: #4A5568; font-size: 15px;">Ideal para turnos y equipos que comparten el mismo equipo.</span></span></li></ul>
+            </div></div>
+            <div class="m-ph" style="flex: 0 0 auto;"><div class="ph phone" style="width: 270px; height: 550px; border-radius: 43px; background: #1F232A; padding: 7px; box-sizing: border-box; box-shadow: 0 40px 70px -36px rgba(7,21,39,.7); ">
+          <div style="position: relative; width: 100%; height: 100%; border-radius: 35px; overflow: hidden; background: #FFFFFF; color: #13243A; font-family: 'Inter', sans-serif; line-height: 1.35;"><div style="background: #EA7628; color: #FFFFFF; padding: 30px 12px 11px; text-align: center; font-weight: 600; font-size: 12px;">Usuarios</div><div style="padding: 14px 12px;"><div style="display: flex; gap: 8px; align-items: center; background: #F3F6FA; border-radius: 8px; padding: 8px; margin-bottom: 7px;"><span style="width: 22px; height: 22px; border-radius: 50%; background: #215F9C; color: #FFF; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span><span style="line-height: 1.25;"><span style="display: block; font-size: 10.5px; font-weight: 600;">Operario de andén</span><span style="font-size: 9px; color: #6B7A8C;">Recepción y ubicación</span></span></div><div style="display: flex; gap: 8px; align-items: center; background: #F3F6FA; border-radius: 8px; padding: 8px; margin-bottom: 7px;"><span style="width: 22px; height: 22px; border-radius: 50%; background: #215F9C; color: #FFF; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span><span style="line-height: 1.25;"><span style="display: block; font-size: 10.5px; font-weight: 600;">Operario de bodega</span><span style="font-size: 9px; color: #6B7A8C;">Picking y traspasos</span></span></div><div style="display: flex; gap: 8px; align-items: center; background: #F3F6FA; border-radius: 8px; padding: 8px; margin-bottom: 7px;"><span style="width: 22px; height: 22px; border-radius: 50%; background: #215F9C; color: #FFF; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span><span style="line-height: 1.25;"><span style="display: block; font-size: 10.5px; font-weight: 600;">Jefe de bodega</span><span style="font-size: 9px; color: #6B7A8C;">Recepción y Picking</span></span></div><div style="margin-top: 14px; background: #215F9C; color: #FFFFFF; border-radius: 7px; text-align: center; padding: 8px; font-size: 11px; font-weight: 600;">Ingresar</div></div><span aria-hidden="true" style="position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 34%; height: 14px; border-radius: 99px; background: #1F232A;"></span><span aria-hidden="true" style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 30%; height: 3px; border-radius: 99px; background: #C9D3DF;"></span></div>
+        </div></div>
+          </div>
+        </v-if>
+        </div>
+      </v-if>
+      <v-if data-if="mshow.qm" hidden>
+        <div class="m-swap">
+          <h2 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(23px, 2.08vw, 29px); line-height: 1.2;">QM Mobile · Inspecciones y Notificaciones de Calidad</h2>
+          <p style="color: #4A5568; font-size: 17px; margin-top: 10px; max-width: 64ch;">Los inspectores registran resultados y defectos donde ocurren, y liberan o rechazan lotes sin papeleo.</p>
+          <div role="tablist" style="display: flex; flex-wrap: wrap; gap: 10px; margin: 32px 0 33px;"><button type="button" data-bind-class="fcls.qm0" data-on-click="fpick.qm0"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex: none;"><path d="M9 3h6M10 3v6L4.5 19a1.5 1.5 0 0 0 1.3 2h12.4a1.5 1.5 0 0 0 1.3-2L14 9V3"></path><path d="M7 15h10"></path></svg><span>Inspecciones</span></button><button type="button" data-bind-class="fcls.qm1" data-on-click="fpick.qm1"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex: none;"><path d="M12 3l9.5 17h-19z"></path><path d="M12 10v4M12 17.5v.01"></path></svg><span>Notificaciones de defecto</span></button><button type="button" data-bind-class="fcls.qm2" data-on-click="fpick.qm2"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex: none;"><circle cx="9" cy="8" r="3.2"></circle><path d="M3 20a6 6 0 0 1 12 0"></path><circle cx="17" cy="9" r="2.4"></circle><path d="M15.5 14.2A5 5 0 0 1 21 19"></path></svg><span>Usuarios y accesos</span></button></div>
+        <v-if data-if="fshow.qm0" hidden>
+          <div class="m-swap m-row" style="display: flex; flex-wrap: wrap; gap: 35px 64px; align-items: flex-start; justify-content: flex-start; width: 100%; box-sizing: border-box;">
+            <div style="flex: 0 1 760px; min-width: 0;"><p style="color: #4A5568; font-size: 17px; margin-bottom: 28px;">Resultados por característica, directo desde la línea.</p><ol style="list-style: none; padding: 0; margin: 0;"><li style="display: flex; gap: 20px; position: relative; padding-bottom: 26px;"><span style="width: 44px; height: 44px; border-radius: 50%; background: #215F9C; color: #FFF; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; position: relative; z-index: 1;">1</span><span aria-hidden="true" style="position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: #C9D8EC;"></span><span><span style="display: block; font-weight: 600; font-size: 17px; color: #215F9C; margin-top: 9px;">Escanea el lote</span><span style="color: #4A5568; font-size: 15px;">El inspector escanea el lote y la app trae su plan de inspección.</span></span></li>
+<li style="display: flex; gap: 20px; position: relative; padding-bottom: 26px;"><span style="width: 44px; height: 44px; border-radius: 50%; background: #215F9C; color: #FFF; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; position: relative; z-index: 1;">2</span><span aria-hidden="true" style="position: absolute; left: 21px; top: 44px; bottom: 0; width: 2px; background: #C9D8EC;"></span><span><span style="display: block; font-weight: 600; font-size: 17px; color: #215F9C; margin-top: 9px;">Registra los resultados</span><span style="color: #4A5568; font-size: 15px;">Ingresa valores por característica; la app marca lo que está fuera de tolerancia.</span></span></li>
+<li style="display: flex; gap: 20px; position: relative; padding-bottom: 26px;"><span style="width: 44px; height: 44px; border-radius: 50%; background: #215F9C; color: #FFF; font-weight: 700; display: flex; align-items: center; justify-content: center; flex: none; position: relative; z-index: 1;">3</span><span><span style="display: block; font-weight: 600; font-size: 17px; color: #215F9C; margin-top: 9px;">Decisión de empleo en SAP</span><span style="color: #4A5568; font-size: 15px;">El lote se libera o se rechaza en SAP en el mismo momento.</span></span></li></ol><div style="display: flex; flex-wrap: wrap; gap: 10px; margin-top: 6px;"><span style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 99px; background: #EEF3FA; color: #215F9C; font-size: 13.5px; font-weight: 600;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; flex: none;"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"></path><path d="M8.5 12l2.5 2.5 4.5-5"></path></svg>Fuera de tolerancia destacado</span><span style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 99px; background: #EEF3FA; color: #215F9C; font-size: 13.5px; font-weight: 600;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; flex: none;"><path d="M20 11a8 8 0 0 0-14.5-4.5L4 8M4 4v4h4M4 13a8 8 0 0 0 14.5 4.5L20 16M20 20v-4h-4"></path></svg>Liberación al instante</span><span style="display: inline-flex; align-items: center; gap: 8px; padding: 9px 16px; border-radius: 99px; background: #EEF3FA; color: #215F9C; font-size: 13.5px; font-weight: 600;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 16px; height: 16px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg>Trazabilidad por inspector</span></div></div>
+            <div class="m-ph" style="flex: 0 0 auto;"><div class="ph phone" style="width: 270px; height: 550px; border-radius: 43px; background: #1F232A; padding: 7px; box-sizing: border-box; box-shadow: 0 40px 70px -36px rgba(7,21,39,.7); ">
+          <div style="position: relative; width: 100%; height: 100%; border-radius: 35px; overflow: hidden; background: #FFFFFF; color: #13243A; font-family: 'Inter', sans-serif; line-height: 1.35;"><div style="background: #EA7628; color: #FFFFFF; padding: 30px 12px 11px; text-align: center; font-weight: 600; font-size: 12px;">Inspección</div><div style="padding: 12px;"><div style="border: 1.5px dashed #215F9C; border-radius: 8px; background: #EEF3FA; padding: 12px 8px; text-align: center; color: #215F9C; font-size: 10px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; flex: none;"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path><path d="M8 9v6M11 9v6M14 9v6M17 9v6"></path></svg>Escanear lote</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Lote de inspección</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">0100038841</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Característica</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">pH · 6,8 – 7,2</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Resultado</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">7,0 ✓</div><div style="margin-top: 14px; background: #215F9C; color: #FFFFFF; border-radius: 7px; text-align: center; padding: 8px; font-size: 11px; font-weight: 600;">Registrar en SAP</div></div><span aria-hidden="true" style="position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 34%; height: 14px; border-radius: 99px; background: #1F232A;"></span><span aria-hidden="true" style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 30%; height: 3px; border-radius: 99px; background: #C9D3DF;"></span></div>
+        </div></div>
+          </div>
+        </v-if>
+        <v-if data-if="fshow.qm1" hidden>
+          <div class="m-swap m-row" style="display: flex; flex-wrap: wrap; gap: 35px 64px; align-items: flex-start; justify-content: flex-start; width: 100%; box-sizing: border-box;">
+            <div style="flex: 0 1 760px; min-width: 0;"><p style="color: #4A5568; font-size: 17px; margin-bottom: 28px;">Cada defecto documentado con su causa y evidencia.</p><div class="a-fgrid" style="display: grid; gap: 14px;"><div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path><path d="M8 9v6M11 9v6M14 9v6M17 9v6"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Material / Lote</span><span class="a-ft" style="font-size: 14px;">Se identifica escaneando su código.</span></span></div>
+<div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M3 12V4h8l10 10-8 8z"></path><circle cx="7.5" cy="8.5" r="1.5"></circle></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Tipo de defecto</span><span class="a-ft" style="font-size: 14px;">Selección desde el catálogo de defectos.</span></span></div>
+<div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><circle cx="12" cy="12" r="3"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Causa</span><span class="a-ft" style="font-size: 14px;">Origen del problema para su análisis.</span></span></div>
+<div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M4 8h3l2-3h6l2 3h3v11H4z"></path><circle cx="12" cy="13" r="3.5"></circle></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Evidencia</span><span class="a-ft" style="font-size: 14px;">Foto del defecto desde el dispositivo.</span></span></div>
+<div class="a-field"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M6 3h12M6 21h12M7 3c0 5 10 5 10 9s-10 4-10 9M17 3c0 5-10 5-10 9s10 4 10 9"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Cantidad defectuosa</span><span class="a-ft" style="font-size: 14px;">Unidades afectadas.</span></span></div>
+<div class="a-field hl"><span class="a-ic"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M7 18a4 4 0 0 1-.6-7.95A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"></path><path d="M12 11v6M9.5 13.5L12 11l2.5 2.5"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16px;">Notificación en SAP</span><span class="a-ft" style="font-size: 14px;">La notificación QM queda creada en SAP.</span></span></div></div></div>
+            <div class="m-ph" style="flex: 0 0 auto;"><div class="ph phone" style="width: 270px; height: 550px; border-radius: 43px; background: #1F232A; padding: 7px; box-sizing: border-box; box-shadow: 0 40px 70px -36px rgba(7,21,39,.7); ">
+          <div style="position: relative; width: 100%; height: 100%; border-radius: 35px; overflow: hidden; background: #FFFFFF; color: #13243A; font-family: 'Inter', sans-serif; line-height: 1.35;"><div style="background: #EA7628; color: #FFFFFF; padding: 30px 12px 11px; text-align: center; font-weight: 600; font-size: 12px;">Notificación de defecto</div><div style="padding: 12px;"><div style="border: 1.5px dashed #215F9C; border-radius: 8px; background: #EEF3FA; padding: 12px 8px; text-align: center; color: #215F9C; font-size: 10px; font-weight: 600; display: flex; flex-direction: column; align-items: center; gap: 4px;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 24px; height: 24px; flex: none;"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path><path d="M8 9v6M11 9v6M14 9v6M17 9v6"></path></svg>Escanear lote</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Tipo de defecto</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">Envase deformado</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Causa</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">Ajuste de máquina</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Cantidad defectuosa</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">15 UN</div><p style="font-size: 9.5px; color: #6B7A8C; margin: 8px 0 3px;">Foto</p><div style="border: 1px solid #DCE3EC; border-radius: 6px; background: #FFFFFF; padding: 6px 9px; font-size: 11px;">IMG_0533.jpg ✓</div><div style="margin-top: 14px; background: #EA7628; color: #FFFFFF; border-radius: 7px; text-align: center; padding: 8px; font-size: 11px; font-weight: 600;">Crear notificación</div></div><span aria-hidden="true" style="position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 34%; height: 14px; border-radius: 99px; background: #1F232A;"></span><span aria-hidden="true" style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 30%; height: 3px; border-radius: 99px; background: #C9D3DF;"></span></div>
+        </div></div>
+          </div>
+        </v-if>
+        <v-if data-if="fshow.qm2" hidden>
+          <div class="m-swap m-row" style="display: flex; flex-wrap: wrap; gap: 35px 64px; align-items: flex-start; justify-content: flex-start; width: 100%; box-sizing: border-box;">
+            <div style="flex: 0 1 760px; min-width: 0;"><p style="color: #4A5568; font-size: 17px; margin-bottom: 28px;">Inspectores y jefaturas con permisos distintos.</p><div style="display: flex; flex-wrap: wrap; gap: 32px;">
+              <ul style="flex: 1 1 280px; display: flex; flex-direction: column; gap: 22px;"><li style="display: flex; gap: 16px;"><span style="width: 44px; height: 44px; border-radius: 12px; background: #EEF3FA; color: #215F9C; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16.5px; color: #215F9C;">Selección de usuario al ingresar</span><span style="color: #4A5568; font-size: 15px;">Al abrir la app se elige uno de los usuarios configurados.</span></span></li>
+<li style="display: flex; gap: 16px;"><span style="width: 44px; height: 44px; border-radius: 12px; background: #EEF3FA; color: #215F9C; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><path d="M4 6h10M18 6h2M4 12h4M12 12h8M4 18h12M20 18h0"></path><circle cx="16" cy="6" r="2"></circle><circle cx="10" cy="12" r="2"></circle><circle cx="18" cy="18" r="2"></circle></svg></span><span><span style="display: block; font-weight: 600; font-size: 16.5px; color: #215F9C;">Funciones según perfil</span><span style="color: #4A5568; font-size: 15px;">Cada usuario ve Inspecciones, Defectos o ambas, según su configuración.</span></span></li>
+<li style="display: flex; gap: 16px;"><span style="width: 44px; height: 44px; border-radius: 12px; background: #EEF3FA; color: #215F9C; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 22px; height: 22px; flex: none;"><rect x="7" y="2.5" width="10" height="19" rx="2"></rect><path d="M11 18.5h2"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 16.5px; color: #215F9C;">Un dispositivo, varios usuarios</span><span style="color: #4A5568; font-size: 15px;">Ideal para turnos y equipos que comparten el mismo equipo.</span></span></li></ul>
+            </div></div>
+            <div class="m-ph" style="flex: 0 0 auto;"><div class="ph phone" style="width: 270px; height: 550px; border-radius: 43px; background: #1F232A; padding: 7px; box-sizing: border-box; box-shadow: 0 40px 70px -36px rgba(7,21,39,.7); ">
+          <div style="position: relative; width: 100%; height: 100%; border-radius: 35px; overflow: hidden; background: #FFFFFF; color: #13243A; font-family: 'Inter', sans-serif; line-height: 1.35;"><div style="background: #EA7628; color: #FFFFFF; padding: 30px 12px 11px; text-align: center; font-weight: 600; font-size: 12px;">Usuarios</div><div style="padding: 14px 12px;"><div style="display: flex; gap: 8px; align-items: center; background: #F3F6FA; border-radius: 8px; padding: 8px; margin-bottom: 7px;"><span style="width: 22px; height: 22px; border-radius: 50%; background: #215F9C; color: #FFF; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span><span style="line-height: 1.25;"><span style="display: block; font-size: 10.5px; font-weight: 600;">Inspector de línea</span><span style="font-size: 9px; color: #6B7A8C;">Inspecciones y Defectos</span></span></div><div style="display: flex; gap: 8px; align-items: center; background: #F3F6FA; border-radius: 8px; padding: 8px; margin-bottom: 7px;"><span style="width: 22px; height: 22px; border-radius: 50%; background: #215F9C; color: #FFF; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span><span style="line-height: 1.25;"><span style="display: block; font-size: 10.5px; font-weight: 600;">Analista de laboratorio</span><span style="font-size: 9px; color: #6B7A8C;">Inspecciones</span></span></div><div style="display: flex; gap: 8px; align-items: center; background: #F3F6FA; border-radius: 8px; padding: 8px; margin-bottom: 7px;"><span style="width: 22px; height: 22px; border-radius: 50%; background: #215F9C; color: #FFF; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px; flex: none;"><circle cx="12" cy="8" r="3.5"></circle><path d="M5 20a7 7 0 0 1 14 0"></path></svg></span><span style="line-height: 1.25;"><span style="display: block; font-size: 10.5px; font-weight: 600;">Operador de planta</span><span style="font-size: 9px; color: #6B7A8C;">Notificaciones de defecto</span></span></div><div style="margin-top: 14px; background: #215F9C; color: #FFFFFF; border-radius: 7px; text-align: center; padding: 8px; font-size: 11px; font-weight: 600;">Ingresar</div></div><span aria-hidden="true" style="position: absolute; top: 7px; left: 50%; transform: translateX(-50%); width: 34%; height: 14px; border-radius: 99px; background: #1F232A;"></span><span aria-hidden="true" style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 30%; height: 3px; border-radius: 99px; background: #C9D3DF;"></span></div>
+        </div></div>
+          </div>
+        </v-if>
+        </div>
+      </v-if>
+    </div>
+  </div>
+</section><section id="funciona" style="padding: 55px 0; background: #F7F9FC; border-top: 1px solid #E4E8EE; border-bottom: 1px solid #E4E8EE">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 3vw, 48px);">
+    <p style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #205A9B; margin-bottom: 14px;">Cómo funciona</p>
+    <h2 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(25px, 2.4vw, 34px); line-height: 1.15; color: #0A1F3D;">La app trabaja online y offline</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 29px 52px; margin-top: 32px; align-items: center;">
+      <div style="flex: 1 1 420px; max-width: 580px; min-width: 0; display: flex; flex-direction: column; gap: 30px;">
+        <div style="display: flex; gap: 18px;"><span style="width: 56px; height: 56px; border-radius: 50%; background: #215F9C; color: #FFF; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px; flex: none;"><path d="M7 18a4 4 0 0 1-.6-7.95A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 22px; color: #215F9C; margin-bottom: 4px;">Modo online</span><span style="color: #4A5568; font-size: 18px; line-height: 1.55;">Cada registro llega a SAP al instante.</span></span></div>
+        <div style="display: flex; gap: 18px;"><span style="width: 56px; height: 56px; border-radius: 50%; background: #FFFFFF; border: 1px solid #DCE8F6; color: #215F9C; display: flex; align-items: center; justify-content: center; flex: none;"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px; flex: none;"><path d="M7 18a4 4 0 0 1-.6-7.95M9.5 6.3A6 6 0 0 1 18 9a4.5 4.5 0 0 1 2 8.2M3 3l18 18"></path></svg></span><span><span style="display: block; font-weight: 600; font-size: 22px; color: #215F9C; margin-bottom: 4px;">Modo offline</span><span style="color: #4A5568; font-size: 18px; line-height: 1.55;">Sin señal, los registros se guardan en el dispositivo y se envían a SAP al sincronizar.</span></span></div>
+        <p style="color: #4A5568; font-size: 16.5px; padding-left: 18px; border-left: 3px solid #EA7628;">Sobre SAP Mobile Service (SAP BTP), con conexión segura a SAP S/4HANA, en Android e iOS.</p>
+      </div>
+      <div class="a-sync-col" style="flex: 1 1 380px; min-width: 0;">
+        <div class="a-sync" style="position: relative; width: 100%; max-width: 620px; margin-left: auto;">
+          <div style="position: relative;"><svg viewBox="0 20 600 240" role="img" aria-label="Animación: los registros se guardan en el dispositivo sin conexión y se sincronizan con SAP al recuperar la señal" style="width: 100%; height: auto; display: block; overflow: visible;">
+<defs><linearGradient id="lnk" x1="0" x2="1"><stop offset="0" stop-color="#2BB6A3"></stop><stop offset="1" stop-color="#8DBAF0"></stop></linearGradient></defs>
+<path d="M134 140 L256 140" stroke="url(#lnk)" stroke-width="2" stroke-dasharray="6 6" fill="none"><animate attributeName="stroke-dashoffset" from="24" to="0" dur="1s" repeatCount="indefinite"></animate></path>
+<path d="M344 140 L466 140" stroke="#8DBAF0" stroke-width="2" stroke-dasharray="6 6" fill="none"><animate attributeName="stroke-opacity" dur="6s" repeatCount="indefinite" values="0.2;0.2;1;1;0.2" keyTimes="0;0.49;0.5;0.8;1"></animate><animate attributeName="stroke-dashoffset" from="24" to="0" dur="1s" repeatCount="indefinite"></animate></path>
+<circle cx="90" cy="140" r="44" fill="none" stroke="#2BB6A3" stroke-width="2"><animate attributeName="r" values="44;66" dur="2s" repeatCount="indefinite"></animate><animate attributeName="opacity" values="0.7;0" dur="2s" repeatCount="indefinite"></animate></circle>
+<circle cx="510" cy="140" r="44" fill="none" stroke="#F5B80A" stroke-width="2" opacity="0"><animate attributeName="r" dur="6s" repeatCount="indefinite" values="44;44;44;70;70" keyTimes="0;0.6;0.62;0.9;1"></animate><animate attributeName="opacity" dur="6s" repeatCount="indefinite" values="0;0;0.8;0;0" keyTimes="0;0.6;0.62;0.9;1"></animate></circle>
+<circle cx="90" cy="140" r="44" fill="#FFFFFF" stroke="#2BB6A3" stroke-width="1.5"></circle>
+<circle cx="90" cy="140" r="34" fill="none" stroke="rgba(32,90,155,0.25)" stroke-dasharray="2 4"><animateTransform attributeName="transform" type="rotate" from="0 90 140" to="360 90 140" dur="14s" repeatCount="indefinite"></animateTransform></circle>
+<g transform="translate(75.0 125.0) scale(1.25)" fill="none" stroke="#205A9B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5a1 1 0 0 1 1-1h3M16 4h3a1 1 0 0 1 1 1v3M20 16v3a1 1 0 0 1-1 1h-3M8 20H5a1 1 0 0 1-1-1v-3"></path><path d="M8 9v6M11 9v6M14 9v6M17 9v6"></path></g>
+<text x="90" y="212" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#0A1F3D">Registro en terreno</text>
+<text x="90" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#205A9B">escaneo · formulario</text>
+<circle cx="300" cy="140" r="44" fill="#FFFFFF" stroke="#8DBAF0" stroke-width="1.5"></circle>
+<circle cx="300" cy="140" r="34" fill="none" stroke="rgba(32,90,155,0.25)" stroke-dasharray="2 4"><animateTransform attributeName="transform" type="rotate" from="0 300 140" to="360 300 140" dur="14s" repeatCount="indefinite"></animateTransform></circle>
+<g transform="translate(285.0 125.0) scale(1.25)" fill="none" stroke="#205A9B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"></ellipse><path d="M5 5.5v13c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5v-13M5 12c0 1.4 3.1 2.5 7 2.5s7-1.1 7-2.5"></path></g>
+<text x="300" y="212" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#0A1F3D">Guardado en el dispositivo</text>
+<text x="300" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#205A9B">cola local cifrada</text>
+<circle cx="510" cy="140" r="44" fill="#FFFFFF" stroke="#F5B80A" stroke-width="1.5"></circle>
+<circle cx="510" cy="140" r="34" fill="none" stroke="rgba(32,90,155,0.25)" stroke-dasharray="2 4"><animateTransform attributeName="transform" type="rotate" from="0 510 140" to="360 510 140" dur="14s" repeatCount="indefinite"></animateTransform></circle>
+<g transform="translate(495.0 125.0) scale(1.25)" fill="none" stroke="#205A9B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 18a4 4 0 0 1-.6-7.95A6 6 0 0 1 18 9a4.5 4.5 0 0 1-.5 9z"></path></g>
+<text x="510" y="212" text-anchor="middle" font-family="Inter, sans-serif" font-size="13" font-weight="600" fill="#0A1F3D">SAP S/4HANA</text>
+<text x="510" y="230" text-anchor="middle" font-family="Inter, sans-serif" font-size="12" font-weight="500" fill="#205A9B">SAP Mobile Service · BTP</text>
+<rect x="279" y="70" width="12" height="6" rx="2" fill="#F5B80A" opacity="0"><animate attributeName="opacity" dur="6s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.10;0.12;0.50;0.52;1"></animate></rect><rect x="294" y="70" width="12" height="6" rx="2" fill="#F5B80A" opacity="0"><animate attributeName="opacity" dur="6s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.22;0.24;0.55;0.57;1"></animate></rect><rect x="309" y="70" width="12" height="6" rx="2" fill="#F5B80A" opacity="0"><animate attributeName="opacity" dur="6s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.34;0.36;0.60;0.62;1"></animate></rect>
+<circle r="4" fill="#2BB6A3" opacity="0"><animateMotion dur="2s" begin="0s" repeatCount="indefinite" path="M134 140 L256 140" keyPoints="0;1" keyTimes="0;1" calcMode="linear"></animateMotion><animate attributeName="opacity" dur="2s" begin="0s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.9;1"></animate></circle><circle r="4" fill="#2BB6A3" opacity="0"><animateMotion dur="2s" begin="0.7s" repeatCount="indefinite" path="M134 140 L256 140" keyPoints="0;1" keyTimes="0;1" calcMode="linear"></animateMotion><animate attributeName="opacity" dur="2s" begin="0.7s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.9;1"></animate></circle><circle r="4" fill="#2BB6A3" opacity="0"><animateMotion dur="2s" begin="1.4s" repeatCount="indefinite" path="M134 140 L256 140" keyPoints="0;1" keyTimes="0;1" calcMode="linear"></animateMotion><animate attributeName="opacity" dur="2s" begin="1.4s" repeatCount="indefinite" values="0;1;1;0" keyTimes="0;0.1;0.9;1"></animate></circle><circle r="4" fill="#F5B80A" opacity="0"><animateMotion dur="6s" begin="0s" repeatCount="indefinite" path="M344 140 L466 140" keyPoints="0;0;1;1" keyTimes="0;0.5;0.8;1" calcMode="linear"></animateMotion><animate attributeName="opacity" dur="6s" begin="0s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.5;0.52;0.79;0.8;1"></animate></circle><circle r="4" fill="#F5B80A" opacity="0"><animateMotion dur="6s" begin="0.3s" repeatCount="indefinite" path="M344 140 L466 140" keyPoints="0;0;1;1" keyTimes="0;0.5;0.8;1" calcMode="linear"></animateMotion><animate attributeName="opacity" dur="6s" begin="0.3s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.5;0.52;0.79;0.8;1"></animate></circle><circle r="4" fill="#F5B80A" opacity="0"><animateMotion dur="6s" begin="0.6s" repeatCount="indefinite" path="M344 140 L466 140" keyPoints="0;0;1;1" keyTimes="0;0.5;0.8;1" calcMode="linear"></animateMotion><animate attributeName="opacity" dur="6s" begin="0.6s" repeatCount="indefinite" values="0;0;1;1;0;0" keyTimes="0;0.5;0.52;0.79;0.8;1"></animate></circle>
+<g font-family="Inter, sans-serif" font-size="11.5" font-weight="600" text-anchor="middle">
+<g><rect x="310.0" y="36" width="190" height="24" rx="11" fill="rgba(234,118,40,0.10)" stroke="#EA7628"></rect><text x="405.0" y="52" fill="#B4530F">● Sin señal · en cola</text><animate attributeName="opacity" dur="6s" repeatCount="indefinite" values="1;1;0;0;1" keyTimes="0;0.48;0.5;0.98;1"></animate></g>
+<g opacity="0"><rect x="310.0" y="36" width="190" height="24" rx="11" fill="rgba(43,182,163,0.10)" stroke="#2BB6A3"></rect><text x="405.0" y="52" fill="#1F8C7E">● En línea · sincronizando</text><animate attributeName="opacity" dur="6s" repeatCount="indefinite" values="0;0;1;1;0" keyTimes="0;0.48;0.5;0.98;1"></animate></g>
+</g>
+</svg></div>
+        </div>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <button class="back-to-top" id="backToTop" aria-label="Volver arriba">↑</button>
+<!-- Llamado a la acción -->
+<section style="background: linear-gradient(160deg, #0A1F3D 0%, #071527 100%); color: #FFFFFF;">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 58px clamp(20px, 3vw, 48px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 35px;">
+    <div>
+      <h2 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(23px, 2.08vw, 29px); line-height: 1.2;">¿Quiere llevar SAP a terreno?</h2>
+      <p style="color: rgba(255,255,255,0.72); margin-top: 10px;">Le mostramos las apps funcionando con sus propios procesos.</p>
+    </div>
+    <a href="index.html#contacto" style="display: inline-flex; align-items: center; gap: 10px; padding: 15px 30px; background: #F5B80A; color: #071527; font-size: 15px; font-weight: 600; text-decoration: none; border-radius: 4px;">Solicitar demo <span aria-hidden="true">→</span></a>
+  </div>
+</section>
 
-  <script src="js/main.js"></script>
+<footer style="background: #071527; color: rgba(255,255,255,0.6); font-size: 13px; border-top: 1px solid rgba(255,255,255,0.08);">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 24px clamp(20px, 3vw, 48px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;">
+    <p>© 2026 vSApp Ltda. Todos los derechos reservados.</p>
+    <p>contacto@vsapp.cl · +56 2 2287 1796</p>
+  </div>
+</footer>
+
+</div>
+
+<script src="js/vsapp-dc.js"></script>
+<script src="js/vsapp-motion.js"></script>
+<script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { navOpen: false, mod: 'pp', fn: 0 };
+    this.mods = ['pp', 'pm', 'wm', 'qm'];
+  }
+  renderVals() {
+    const open = this.state.navOpen;
+    const mshow = {}, mcls = {}, mpick = {}, fshow = {}, fcls = {}, fpick = {};
+    this.mods.forEach((id) => {
+      const on = this.state.mod === id;
+      mshow[id] = on;
+      mcls[id] = on ? 'm-tab on' : 'm-tab';
+      mpick[id] = () => this.setState({ mod: id, fn: 0 });
+      [0, 1, 2].forEach((k) => {
+        fshow[id + k] = on && this.state.fn === k;
+        fcls[id + k] = on && this.state.fn === k ? 'a-tab on' : 'a-tab';
+        fpick[id + k] = () => this.setState({ fn: k });
+      });
+    });
+    return {
+      mshow, mcls, mpick, fshow, fcls, fpick,
+      navOpen: open,
+      navClosed: !open,
+      navExpanded: open ? 'true' : 'false',
+      toggleNav: () => this.setState({ navOpen: !this.state.navOpen }),
+    };
+  }
+}
+vsappMount(Component);
+</script>
 </body>
 </html>
