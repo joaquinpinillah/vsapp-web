@@ -84,7 +84,7 @@ v-if:has(> .m-row){display:block;width:100%}
 /* Carga uniforme: los bloques aparecen al llegar a ellos (js/vsapp-motion.js) */
 .v-reveal,.v-up,.s-card{animation:none!important}
 .js-motion [data-rv]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);transition-delay:var(--rv-d,0ms)}
-.js-motion [data-rv].rv-in{opacity:1;transform:none}
+.js-motion [data-rv="in"]{opacity:1;transform:none}
 /* Pantalla esqueleto: solo aparece si la carga tarda más de 0,3 s */
 .vs-skel{position:fixed;inset:0;z-index:5000;background:#FFFFFF;opacity:0;pointer-events:none;animation:skelIn .25s .3s forwards;transition:opacity .4s;overflow:hidden}
 .vs-skel.done{opacity:0!important;animation:none}
@@ -103,6 +103,37 @@ v-if:has(> .m-row){display:block;width:100%}
 @keyframes skelIn{to{opacity:1}}
 @keyframes skelShine{from{background-position:200% 0}to{background-position:-200% 0}}
 @media (prefers-reduced-motion:reduce){.js-motion [data-rv]{transition:opacity .3s;transform:none}.vs-skel i{animation:none}}
+/* Celular y tablet */
+.v-navtog{display:none;align-items:center;justify-content:center;width:46px;height:46px;border-radius:12px;border:0;background:rgba(255,255,255,0.14);color:#FFFFFF;cursor:pointer}
+@media (max-width:1279px){.m-row>div:first-child{flex:1 1 380px!important}.m-row .m-ph{margin:0 auto!important}}
+@media (max-width:1100px){div:has(> .m-tab){grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width:900px){
+.v-navtog{display:flex}
+.v-navbar>div{width:100%;box-sizing:border-box;justify-content:space-between;gap:8px!important;padding:10px 10px 10px 20px!important}
+.v-navbar nav{display:none!important;width:100%;flex-direction:column;align-items:stretch!important;gap:2px!important;padding-bottom:6px}
+.v-navbar.open nav{display:flex!important}
+.v-navbar.open>div{background:rgba(10,31,61,0.96);border-color:rgba(255,255,255,0.12)!important}
+#inicio{min-height:600px!important}
+}
+@media (max-width:640px){
+#inicio{min-height:540px!important}
+.v-mini[style*="grid-template-columns"]{width:120px!important}
+.v-mini[style*="grid-template-columns"]>div{height:40px!important}
+svg[aria-label^="Anillo"]{width:240px!important}
+.a-sync-col{display:none}
+}
+@media (max-width:560px){div:has(> .m-tab){grid-template-columns:1fr!important}}
+@media (max-width:900px){
+.nav-pill{display:flex!important;width:100%;justify-content:space-between;gap:8px!important;padding:10px 10px 10px 20px!important}
+.nav-pill nav{display:contents!important}
+.nav-pill .nav-btn{margin-left:auto}
+.nav-pill .nav-row{width:100%;flex-direction:column;align-items:stretch!important;gap:2px!important;padding-bottom:6px}
+}
+@media (max-width:1100px) and (min-width:561px){ul:has(> .a-tile){grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+/* Pantallas grandes: se escala todo el sitio para no quedar chico al centro */
+@media (min-width:1800px){html{zoom:1.15}}
+@media (min-width:2200px){html{zoom:1.35}}
+@media (min-width:3000px){html{zoom:1.75}}
 </style>
 </head>
 <body>
