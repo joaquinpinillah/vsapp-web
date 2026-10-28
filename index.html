@@ -1,737 +1,225 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> Consultoría SAP y Desarrollo de Aplicaciones Móbiles | vSApp</title> 
-  <meta name="description" content="vSApp es una consultora chilena boutique especialista en SAP PM (Mantenimiento de Planta), SAP PP (Planificación de Producción) y aplicaciones móviles conectadas a SAP S/4HANA. Más de 25 años de experiencia.">
-  <meta name="theme-color" content="#0A1F3D">
-
-  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
-
-  <!-- Tipografías: Playfair Display (titulares, serif elegante) + Inter (cuerpo, sans moderna) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="css/styles.css">
-
-  <!-- Fallback sin JavaScript: evita que las secciones queden invisibles si el script no carga -->
-  <noscript>
-    <style>[data-animate] { opacity: 1 !important; transform: none !important; }</style>
-  </noscript>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>vSApp · Inicio</title>
+<meta name="description" content="vSApp, especialistas en soluciones SAP de mantenimiento de planta (PM) y planificación de producción (PP) sobre S/4HANA.">
+<link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap">
+<style>
+v-if{display:contents}v-if[hidden]{display:none!important}
+body{margin:0}
+h1,h2,h3,h4,p,ul,figure{margin:0}
+ul{padding:0;list-style:none}
+a{color:#0A1F3D}a:hover{color:#1F8C7E}
+.v-drift{animation:heroDrift 24s ease-in-out infinite alternate}
+.v-grid{animation:heroGrid 12s linear infinite}
+.v-net .pulse{transform-box:fill-box;transform-origin:center;animation:nodePulse 4s ease-in-out infinite}
+.v-net .d2{animation-delay:1.3s}.v-net .d3{animation-delay:2.6s}
+.v-net .flow{stroke-dasharray:4 12;animation:flow 7s linear infinite}
+.v-cue{animation:scrollCue 1.8s infinite}
+/* Viñetas dinámicas */
+.v-row{display:flex;flex-wrap:wrap;gap:24px}
+.v-card{position:relative;overflow:hidden;flex:1 1 440px;min-width:0;min-height:359px;border-radius:20px;text-decoration:none;display:flex;flex-direction:column;justify-content:space-between;transition:flex-grow .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .7s}
+.v-row:hover .v-card{flex-grow:.75}
+.v-row .v-card:hover{flex-grow:1.5;transform:translateY(-6px);box-shadow:0 40px 80px -30px rgba(7,21,39,.55)}
+.v-burst{position:absolute;width:1100px;height:1100px;border-radius:50%;right:-550px;bottom:-550px;transform:scale(.08);transition:transform 1s cubic-bezier(.22,1,.36,1);pointer-events:none}
+.v-card:hover .v-burst{transform:scale(1)}
+.v-arrow{display:inline-block;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.v-card:hover .v-arrow{transform:translateX(10px)}
+.v-mini{transition:transform 1s cubic-bezier(.22,1,.36,1)}
+.v-card:hover .v-mini{transform:scale(1.15) rotate(-12deg)}
+.v-spin{animation:spin 40s linear infinite;transform-origin:60px 60px}
+.v-float{animation:float 5s ease-in-out infinite}
+.v-float.d2{animation-delay:1.2s}.v-float.d3{animation-delay:2.4s}
+@keyframes heroDrift{0%{transform:translate3d(-4%,-3%,0) rotate(0deg) scale(1)}100%{transform:translate3d(5%,4%,0) rotate(8deg) scale(1.12)}}
+@keyframes heroGrid{from{background-position:0 0}to{background-position:64px 64px}}
+@keyframes nodePulse{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:1;transform:scale(1.7)}}
+@keyframes flow{to{stroke-dashoffset:-160}}
+@keyframes scrollCue{0%{opacity:1;transform:translateY(0)}70%,100%{opacity:0;transform:translateY(12px)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@media (prefers-reduced-motion:reduce){.v-drift,.v-grid,.v-net .pulse,.v-net .flow,.v-cue,.v-spin,.v-float{animation:none}.v-card,.v-burst,.v-arrow,.v-mini{transition:none}}
+@media (max-width:640px){.ph.f1,.ph.f3{display:none}}
+.v-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none}
+.v-navbar.is-scrolled>div{background:rgba(10,31,61,0.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border-color:rgba(255,255,255,0.12)!important;box-shadow:0 10px 30px rgba(7,21,39,0.3)}
+.v-navbar{pointer-events:none}.v-navbar>div{pointer-events:auto}
+</style>
+<style>
+/* Carga uniforme: los bloques aparecen al llegar a ellos (js/vsapp-motion.js) */
+.v-reveal,.v-up,.s-card{animation:none!important}
+.js-motion [data-rv]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);transition-delay:var(--rv-d,0ms)}
+.js-motion [data-rv].rv-in{opacity:1;transform:none}
+/* Pantalla esqueleto: solo aparece si la carga tarda más de 0,3 s */
+.vs-skel{position:fixed;inset:0;z-index:5000;background:#FFFFFF;opacity:0;pointer-events:none;animation:skelIn .25s .3s forwards;transition:opacity .4s;overflow:hidden}
+.vs-skel.done{opacity:0!important;animation:none}
+.vs-skel i{display:block;border-radius:10px;background:linear-gradient(90deg,#EDF1F6 0%,#F6F8FB 40%,#EDF1F6 80%);background-size:200% 100%;animation:skelShine 1.3s linear infinite}
+.vs-skel .sk-in{max-width:1440px;margin:0 auto;padding:16px clamp(16px,3vw,48px)}
+.vs-skel .sk-nav{width:min(520px,70%);height:66px;border-radius:16px}
+.vs-skel .sk-hero{display:flex;gap:48px;align-items:center;margin-top:72px}
+.vs-skel .sk-col{flex:1 1 0;min-width:0}
+.vs-skel .sk-kick{width:160px;height:14px;margin-bottom:22px}
+.vs-skel .sk-h{height:44px;margin-bottom:14px}
+.vs-skel .sk-t{height:14px;margin-top:12px}
+.vs-skel .sk-media{flex:0 0 38%;height:320px;border-radius:20px}
+.vs-skel .sk-cards{display:flex;gap:24px;margin-top:64px}
+.vs-skel .sk-card{flex:1 1 0;height:180px;border-radius:20px}
+@media (max-width:760px){.vs-skel .sk-media,.vs-skel .sk-card:nth-child(n+2){display:none}}
+@keyframes skelIn{to{opacity:1}}
+@keyframes skelShine{from{background-position:200% 0}to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.js-motion [data-rv]{transition:opacity .3s;transform:none}.vs-skel i{animation:none}}
+</style>
 </head>
 <body>
+<div class="vs-skel" id="vsSkel" aria-hidden="true"><div class="sk-in">
+  <i class="sk-nav"></i>
+  <div class="sk-hero"><div class="sk-col"><i class="sk-kick"></i><i class="sk-h" style="width:88%"></i><i class="sk-h" style="width:64%"></i><i class="sk-t" style="width:72%"></i><i class="sk-t" style="width:58%"></i></div><i class="sk-media"></i></div>
+  <div class="sk-cards"><i class="sk-card"></i><i class="sk-card"></i><i class="sk-card"></i></div>
+</div></div>
+<noscript><style>.vs-skel{display:none}</style></noscript>
+<div style="font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.6; color: #0A1F3D; background: #FFFFFF; -webkit-font-smoothing: antialiased;">
 
-  <!-- ==================== SKIP LINK (accesibilidad) ==================== -->
-  <a class="skip-link" href="#main">Saltar al contenido principal</a>
+<!-- ================= INICIO ================= -->
+<section id="inicio" style="position: relative; min-height: 720px; display: flex; align-items: center; overflow: hidden; background: linear-gradient(160deg, #0A1F3D 0%, #071527 65%, #050F1E 100%);">
+  <div aria-hidden="true" style="position: absolute; inset: 0; background: radial-gradient(circle at 78% 22%, rgba(43,182,163,0.22), transparent 45%);"></div>
+  <div class="v-drift" aria-hidden="true" style="position: absolute; inset: -25%; background: radial-gradient(circle at 25% 75%, rgba(43,182,163,0.20), transparent 38%), radial-gradient(circle at 78% 28%, rgba(59,130,246,0.20), transparent 40%), radial-gradient(circle at 55% 55%, rgba(124,92,255,0.10), transparent 35%);"></div>
+  <div class="v-grid" aria-hidden="true" style="position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 64px 64px; -webkit-mask-image: linear-gradient(180deg, transparent, rgba(0,0,0,0.7) 40%, transparent 95%); mask-image: linear-gradient(180deg, transparent, rgba(0,0,0,0.7) 40%, transparent 95%);"></div>
+  <canvas class="v-canvas" id="heroCanvas" aria-hidden="true"></canvas>
 
-  <!-- ==================== NAVBAR FLOTANTE + MENÚ LATERAL DESDE LA IZQUIERDA ==================== -->
-  <header class="navbar" id="navbar">
-    <div class="navbar__inner">
-      <a href="#home" class="navbar__brand" aria-label="vSApp - Inicio">
-        <img class="navbar__logo" src="assets/img/logo-header.svg" alt="" width="113" height="44">
-      </a>
-
-      <button class="navbar__toggle" id="navToggle" aria-expanded="false" aria-controls="navMenu" aria-label="Abrir menú de navegación">
-        <span class="navbar__toggle-bar"></span>
-        <span class="navbar__toggle-bar"></span>
-        <span class="navbar__toggle-bar"></span>
-      </button>
+  <header id="navbar" class="v-navbar" style="position: fixed; z-index: 900; top: 16px; left: 0; right: 0; max-width: 1536px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 48px); box-sizing: border-box; display: flex; flex-wrap: wrap;">
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 35px; padding: 10px 12px 10px 26px; border: 1px solid rgba(255,255,255,0.22); border-radius: 16px; transition: background .25s, box-shadow .25s, border-color .25s;">
+      <a href="index.html" aria-label="vSApp, inicio" style="display: flex; align-items: center;"><img src="assets/img/logo-blanco.svg" alt="vSApp" style="height: 44px; width: auto; display: block;"></a>
+      <nav aria-label="Navegación principal" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+        <a href="conozcanos.html" style="color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 500; text-decoration: none; padding: 10px 18px; border-radius: 8px;">Sobre nosotros</a>
+        <a href="servicios.html" style="color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 500; text-decoration: none; padding: 10px 18px; border-radius: 8px;">Nuestros Servicios</a>
+        <a href="aplicaciones-moviles.html" style="color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 500; text-decoration: none; padding: 10px 18px; border-radius: 8px;">Aplicaciones móviles</a>
+        <a href="#contacto" style="color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 500; text-decoration: none; padding: 10px 18px; border-radius: 8px;">Contáctanos</a>
+      </nav>
     </div>
-
-    <nav class="navbar__menu" id="navMenu" aria-label="Navegación principal">
-      <span class="navbar__indicator" aria-hidden="true"></span>
-      <ul class="navbar__list">
-        <li><a href="#sobre" class="navbar__link">Sobre nosotros</a></li>
-        <li><a href="#servicios" class="navbar__link">Nuestros Servicios</a></li>
-        <li><a href="aplicaciones-moviles.html" class="navbar__link">Aplicaciones móviles</a></li>
-        <li><a href="#contacto" class="navbar__link">Contáctanos</a></li>
-      </ul>
-    </nav>
-
-    <div class="navbar__backdrop" id="navBackdrop" aria-hidden="true"></div>
   </header>
 
-  <main id="main">
+  <div style="position: relative; z-index: 1; width: 100%; max-width: 1536px; margin: 0 auto; padding: 92px clamp(20px, 3vw, 48px) 69px; box-sizing: border-box;">
+    <p style="color: #2BB6A3; font-size: 14px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 24px;">Bienvenido a vSApp</p>
+    <h1 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; color: #FFFFFF; font-size: clamp(32px, 3.84vw, 51px); line-height: 1.15; max-width: 22em; margin-bottom: 0;">Especialistas en soluciones <span style="color: #2BB6A3;">SAP</span> de mantenimiento de planta y planificación de producción</h1>
+  </div>
 
-    <!-- ==================== 1. HERO / HOME ==================== -->
-    <section class="hero" id="home">
-      <div class="hero__bg" aria-hidden="true"></div>
-      <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
-      <div class="container hero__inner">
-        <p class="hero__eyebrow" data-animate="fade-up">Bienvenido a vSApp</p>
-        <h1 class="hero__title" data-animate="fade-up" data-delay="1">
-          Especialistas en soluciones 
-          <span class="hero__title-accent">SAP</span>
-          de mantenimiento planta y planificación de producción
-        </h1>
-        <!--
-        <p class="hero__subtitle" data-animate="fade-up" data-delay="2">
-          Más de 25 años transformando desafíos operacionales en oportunidades de negocio para la industria chilena y regional,
-          con un acompañamiento experto y personalizado en SAP PM y PP.
-        </p>
-        -->
-        <div class="hero__actions" data-animate="fade-up" data-delay="3">
-          <!-- <a href="#contacto" class="btn btn--primary">Conversemos su proyecto</a> -->
-          <a href="#sobre" class="btn btn--warm">Conózcanos <span class="btn__arrow" aria-hidden="true">→</span></a>
-        </div>
-      </div>
-      <a href="#sobre" class="hero__scroll-cue" aria-label="Bajar a la siguiente sección">
-        <span></span>
-      </a>
-    </section>
+  <a href="#explorar" aria-label="Bajar a la siguiente sección" style="position: absolute; z-index: 2; left: 50%; bottom: 32px; transform: translateX(-50%); width: 26px; height: 42px; box-sizing: border-box; border: 1px solid rgba(255,255,255,0.4); border-radius: 14px; display: flex; justify-content: center; padding-top: 8px;"><span class="v-cue" style="display: block; width: 4px; height: 8px; border-radius: 2px; background: #2BB6A3;"></span></a>
+</section>
 
-    <!-- ==================== 1. SOBRE VSAPP + CLIENTES + POR QUÉ VSAPP (todo en la sección 01) ====================
-         Izquierda: información. Derecha: collage animado de logos de empresas con las que hemos trabajado.
-         El collage tiene 2 columnas. Los logos reales están en assets/img/clientes/. Para agregar uno nuevo: duplicar un
-         <li class="logo-carousel__item"> y usar <img src="assets/img/clientes/nombre.ext" alt="Nombre de la empresa">
-         (js/main.js duplica cada columna automáticamente para el loop continuo).
-         El collage tiene 3 columnas; cada <li> puede llevar --s (bajo) o --l (alto) para variar el tamaño. -->
-    <section class="about" id="sobre">
-      <div class="container">
-
-      <div class="about__grid">
-
-        <div class="about__content-col">
-          <span class="section-kicker">01 — Sobre vSApp</span>
-          <h2 class="section-title" data-animate="fade-up">
-            Acompañamiento experto que transforma desafíos en oportunidades de negocio
-          </h2>
-          <p class="about__text" data-animate="fade-up" data-delay="1">
-            vSApp es una consultora chilena especialista en soluciones de <strong>mantenimiento de planta (SAP PM)</strong> y
-            <strong>planificación de cadena de suministro (SAP PP)</strong> sobre SAP S/4HANA. Ofrecemos servicios de
-            asesoría, proyectos de implementación y mejora continua, con más de <strong>25 años de experiencia</strong> en
-            proyectos SAP en Chile y Sudamérica.
-          </p>
-          <p class="about__text" data-animate="fade-up" data-delay="2">
-            Entendemos las necesidades de cada cliente y entregamos el máximo valor: metodologías probadas, cobertura
-            integral en los módulos SAP clave y una atención personalizada basada en las mejores prácticas de la industria.
-          </p>
-
-          <div class="about__stats" data-animate="fade-up" data-delay="3">
-            <div class="stat">
-              <span class="stat__number" data-count="25" aria-hidden="true">0</span><span class="stat__suffix" aria-hidden="true">+</span>
-              <span class="stat__label"><span class="sr-only">25+ </span>años de experiencia en proyectos SAP</span>
-            </div>
-            <div class="stat">
-              <span class="stat__number" data-count="100" aria-hidden="true">0</span><span class="stat__suffix" aria-hidden="true">%</span>
-              <span class="stat__label"><span class="sr-only">100% </span>proyectos altamente existosos y con calidad en la entrega a nuestros clientes</span>
-            </div>
-          </div>
-        </div>
-
-        <aside class="logo-carousel" aria-labelledby="clientesTitle" data-animate="fade-left">
-          <h3 class="logo-carousel__title" id="clientesTitle">Empresas con las que hemos trabajado</h3>
-          <div class="logo-carousel__viewport">
-            <div class="logo-carousel__col">
-            <div class="logo-carousel__track">
-              <ul class="logo-carousel__group">
-                <li class="logo-carousel__item logo-carousel__item--l"><img src="assets/img/clientes/cial.webp" alt="CIAL Alimentos"></li>
-                <li class="logo-carousel__item logo-carousel__item--s"><img src="assets/img/clientes/cintac.jpg" alt="Cintac"></li>
-                <li class="logo-carousel__item"><img src="assets/img/clientes/oxiquim.png" alt="Oxiquim S.A."></li>
-                <li class="logo-carousel__item logo-carousel__item--s"><img src="assets/img/clientes/antalis.png" alt="Antalis"></li>
-                <li class="logo-carousel__item logo-carousel__item--l"><img src="assets/img/clientes/aquachile.webp" alt="AquaChile"></li>
-                <li class="logo-carousel__item"><img src="assets/img/clientes/agrosuper.webp" alt="Agrosuper"></li>
-              </ul>
-            </div>
-          </div>
-            <div class="logo-carousel__col logo-carousel__col--reverse">
-            <div class="logo-carousel__track">
-              <ul class="logo-carousel__group">
-                <li class="logo-carousel__item logo-carousel__item--s"><img src="assets/img/clientes/agrosuper.webp" alt="Agrosuper"></li>
-                <li class="logo-carousel__item logo-carousel__item--l"><img src="assets/img/clientes/antalis.png" alt="Antalis"></li>
-                <li class="logo-carousel__item"><img src="assets/img/clientes/cintac.jpg" alt="Cintac"></li>
-                <li class="logo-carousel__item logo-carousel__item--s"><img src="assets/img/clientes/oxiquim.png" alt="Oxiquim S.A."></li>
-                <li class="logo-carousel__item"><img src="assets/img/clientes/aquachile.webp" alt="AquaChile"></li>
-                <li class="logo-carousel__item logo-carousel__item--l"><img src="assets/img/clientes/cial.webp" alt="CIAL Alimentos"></li>
-              </ul>
-            </div>
-          </div>
-          </div>
-        </aside>
-
-      </div>
-
-      <div class="about__why">
-        <h3 class="about__why-title" data-animate="fade-up">Experiencia, agilidad y calidad basada en mejores prácticas</h3>
-
-        <div class="why__grid">
-          <div class="why-card" data-animate="fade-up" data-delay="1">
-            <h3 class="why-card__title">Experiencia multi-rubro</h3>
-            <p class="why-card__text">Amplia trayectoria en proyectos PM y PP en diversos rubros industriales de Chile y la región.</p>
-          </div>
-          <div class="why-card" data-animate="fade-up" data-delay="2">
-            <h3 class="why-card__title">Agilidad</h3>
-            <p class="why-card__text">Agilidad en el servicio y en los proyectos, con respuestas ágiles y especializadas a cada requerimiento.</p>
-          </div>
-          <div class="why-card" data-animate="fade-up" data-delay="3">
-            <h3 class="why-card__title">Soluciones estándar de alto valor</h3>
-            <p class="why-card__text">Búsqueda de soluciones estándares sobre SAP S/4HANA, evitando desarrollos innecesarios.</p>
-          </div>
-          <div class="why-card" data-animate="fade-up" data-delay="4">
-            <h3 class="why-card__title">Calidad y atención personalizada</h3>
-            <p class="why-card__text">Calidad de la solución basada en mejores prácticas, con una atención personalizada a cada cliente.</p>
-          </div>
-        </div>
-      </div>
-
-      </div>
-    </section>
-
-    <!-- ==================== 2. SERVICIOS (selector interactivo) ====================
-         Panel con lista de pilares a la izquierda; al hacer clic (o navegar con flechas)
-         initServicesTabs() en js/main.js alterna la clase "is-active" entre botones y
-         paneles — el contenido de la derecha se actualiza sin recargar la página. -->
-    <section class="services" id="servicios">
-      <div class="container">
-        <div class="section-heading" data-animate="fade-up">
-          <span class="section-kicker">02 — Servicios</span>
-          <h2 class="section-title">Cuatro pilares para su operación SAP</h2>
-          <p class="section-intro">
-            Somos una empresa especialista en mantenimiento y planificación de producción. Seleccione un pilar para ver
-            el detalle de cada servicio.
-          </p>
-        </div>
-
-        <div class="services__panel" data-animate="fade-up" data-delay="1">
-
-          <div class="services__nav" role="tablist" aria-label="Pilares de servicio">
-            <button type="button" class="services__nav-btn is-active" id="tab-modulares" role="tab" aria-selected="true" aria-controls="pane-modulares" tabindex="0">
-              <span class="services__nav-dot"></span> Proyectos modulares
-            </button>
-            <button type="button" class="services__nav-btn" id="tab-ams" role="tab" aria-selected="false" aria-controls="pane-ams" tabindex="-1">
-              <span class="services__nav-dot services__nav-dot--sky"></span> Servicio AMS especializado
-            </button>
-            <button type="button" class="services__nav-btn" id="tab-movil" role="tab" aria-selected="false" aria-controls="pane-movil" tabindex="-1">
-              <span class="services__nav-dot services__nav-dot--navy"></span> Aplicaciones móviles BTP / Fiori
-            </button>
-            <button type="button" class="services__nav-btn" id="tab-optimizacion" role="tab" aria-selected="false" aria-controls="pane-optimizacion" tabindex="-1">
-              <span class="services__nav-dot services__nav-dot--warm"></span> Proyectos de optimización
-            </button>
-          </div>
-
-          <div class="services__content">
-
-            <!-- Cada panel lleva una ilustración propia (SVG en línea, sin imágenes externas)
-                 que refuerza visualmente de qué trata el servicio. -->
-            <article class="services__pane is-active" id="pane-modulares" role="tabpanel" aria-labelledby="tab-modulares">
-              <div class="services__pane-body">
-                <span class="services__pane-index">01</span>
-                <h3 class="services__pane-title">Proyectos modulares</h3>
-                <p class="services__pane-text">
-                  Implementamos los módulos <strong>SAP PM y PP</strong> integrados completamente con los procesos de compras,
-                  logística, WMS y FI-CO, con un método acelerado y confiable respaldado por más de 25 años de experiencia.
-                </p>
-                <ul class="services__pane-list">
-                  <li>Gestión y mantenimiento de activos empresariales (SAP PM)</li>
-                  <li>Planificación y control de piso de planta (SAP PP)</li>
-                  <li>Modelo preconfigurado de levantamiento acelerado</li>
-                  <li>Activación de apps en SAP Fiori</li>
-                </ul>
-              </div>
-              <div class="services__pane-media" aria-hidden="true">
-                <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="14" y="14" width="32" height="32" rx="7"/>
-                  <rect x="54" y="14" width="32" height="32" rx="7"/>
-                  <rect x="14" y="54" width="32" height="32" rx="7"/>
-                  <rect x="54" y="54" width="32" height="32" rx="7"/>
-                </svg>
-              </div>
-            </article>
-
-            <article class="services__pane services__pane--sky" id="pane-ams" role="tabpanel" aria-labelledby="tab-ams">
-              <div class="services__pane-body">
-                <span class="services__pane-index">02</span>
-                <h3 class="services__pane-title">Servicio AMS especializado</h3>
-                <p class="services__pane-text">
-                  Mejora continua personalizada en PM y PP a través de una <strong>bolsa mínima de horas mensuales</strong>,
-                  acumulable por 3 meses, con consultores dedicados a mantener y evolucionar sus operaciones SAP.
-                </p>
-                <ul class="services__pane-list">
-                  <li>Respuestas ágiles y especializadas</li>
-                  <li>Flexible a su demanda y requerimiento</li>
-                  <li>Asesoría y entrenamiento personalizado</li>
-                  <li>Facturación mensual</li>
-                </ul>
-              </div>
-              <div class="services__pane-media" aria-hidden="true">
-                <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M78 32a28 28 0 1 1 -6 -8"/>
-                  <path d="M78 14v18h-18"/>
-                </svg>
-              </div>
-            </article>
-
-            <article class="services__pane services__pane--navy" id="pane-movil" role="tabpanel" aria-labelledby="tab-movil">
-              <div class="services__pane-body">
-                <span class="services__pane-index">03</span>
-                <h3 class="services__pane-title">Aplicaciones móviles BTP / Fiori</h3>
-                <p class="services__pane-text">
-                  Desarrollamos aplicaciones móviles sobre <strong>SAP BTP y Fiori</strong>, llevando la operación al campo con
-                  experiencias simples, ágiles y en tiempo real, integradas nativamente con SAP S/4HANA.
-                </p>
-                <ul class="services__pane-list">
-                  <li>Gestión de órdenes, avisos e inspecciones de mantenimiento</li>
-                  <li>Control de piso, notificación y picking</li>
-                  <li>Integración online y offline</li>
-                </ul>
-                <a href="aplicaciones-moviles.html" class="services__pane-link" target="_blank" rel="noopener">
-                  Probar el simulador de la app ↗
-                  <span class="sr-only"> (se abre en una pestaña nueva)</span>
-                </a>
-              </div>
-              <div class="services__pane-media" aria-hidden="true">
-                <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="32" y="10" width="36" height="80" rx="9"/>
-                  <line x1="43" y1="80" x2="57" y2="80"/>
-                  <line x1="41" y1="28" x2="59" y2="28"/>
-                  <line x1="41" y1="40" x2="59" y2="40"/>
-                  <line x1="41" y1="52" x2="52" y2="52"/>
-                </svg>
-              </div>
-            </article>
-
-            <article class="services__pane services__pane--warm" id="pane-optimizacion" role="tabpanel" aria-labelledby="tab-optimizacion">
-              <div class="services__pane-body">
-                <span class="services__pane-index">04</span>
-                <h3 class="services__pane-title">Proyectos de optimización</h3>
-                <p class="services__pane-text">
-                  Ejecutamos proyectos de mejora operativa en <strong>MRP</strong>, gestión de repuestos y costo real de
-                  inventario, generando eficiencia medible en la cadena productiva.
-                </p>
-                <ul class="services__pane-list">
-                  <li>Reducción de quiebres de stock y excesos de repuestos</li>
-                  <li>Mayor precisión en planificación y programación</li>
-                  <li>Distribución de diferencias de inventario por consumo real</li>
-                </ul>
-              </div>
-              <div class="services__pane-media" aria-hidden="true">
-                <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-                  <line x1="18" y1="86" x2="18" y2="14"/>
-                  <line x1="18" y1="86" x2="86" y2="86"/>
-                  <rect x="30" y="60" width="12" height="26"/>
-                  <rect x="50" y="44" width="12" height="42"/>
-                  <rect x="70" y="28" width="12" height="58"/>
-                </svg>
-              </div>
-            </article>
-
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ==================== 4. APLICACIONES MÓVILES — OCULTA (vive ahora en aplicaciones-moviles.html) ====================
-         4 apps (PM, WM, QM, PP) sobre SAP Mobile Service. Este mismo bloque (selector de módulos + teléfono
-         interactivo) ahora vive como página propia en aplicaciones-moviles.html, enlazada desde el pilar
-         "Aplicaciones móviles" de la sección 02 — Servicios. Para volver a mostrarla aquí también: eliminar
-         los marcadores de comentario que envuelven esta sección. -->
-    <!--
-    <section class="mobile-app" id="app-movil">
-      <div class="container">
-
-        <div class="section-heading" data-animate="fade-up">
-          <span class="section-kicker section-kicker--light">03 — Desarrollo de Aplicaciones</span>
-          <h2 class="section-title section-title--light">Cuatro apps móviles, un mismo motor: SAP Mobile Service</h2>
-          <p class="section-intro section-intro--light">
-            Implementamos aplicaciones móviles sobre <strong>SAP Mobile Service</strong> (SAP BTP) para los módulos PM, WM, QM y PP,
-            con integración nativa online / offline a SAP S/4HANA. Seleccione un módulo para ver su app en acción.
-          </p>
-        </div>
-
-        <div class="app-showcase" data-animate="fade-up" data-delay="1">
-
-          <div class="app-showcase__modules" role="tablist" aria-label="Módulos SAP">
-            <button type="button" class="app-showcase__module-btn app-showcase__module-btn--pm is-active" id="module-pm" role="tab" aria-selected="true" data-module="pm" tabindex="0">
-              <span class="app-showcase__module-code">PM</span>
-              <span>
-                <span class="app-showcase__module-name">Mantenimiento de Planta</span>
-                <span class="app-showcase__module-desc">Avisos, órdenes y repuestos</span>
-              </span>
-            </button>
-            <button type="button" class="app-showcase__module-btn app-showcase__module-btn--wm" id="module-wm" role="tab" aria-selected="false" data-module="wm" tabindex="-1">
-              <span class="app-showcase__module-code">WM</span>
-              <span>
-                <span class="app-showcase__module-name">Gestión de Almacenes</span>
-                <span class="app-showcase__module-desc">Picking, traspasos y conteos</span>
-              </span>
-            </button>
-            <button type="button" class="app-showcase__module-btn app-showcase__module-btn--qm" id="module-qm" role="tab" aria-selected="false" data-module="qm" tabindex="-1">
-              <span class="app-showcase__module-code">QM</span>
-              <span>
-                <span class="app-showcase__module-name">Gestión de Calidad</span>
-                <span class="app-showcase__module-desc">Inspecciones y liberación de lotes</span>
-              </span>
-            </button>
-            <button type="button" class="app-showcase__module-btn app-showcase__module-btn--pp" id="module-pp" role="tab" aria-selected="false" data-module="pp" tabindex="-1">
-              <span class="app-showcase__module-code">PP</span>
-              <span>
-                <span class="app-showcase__module-name">Planificación de Producción</span>
-                <span class="app-showcase__module-desc">Confirmaciones y avance de orden</span>
-              </span>
-            </button>
-          </div>
-
-          <div class="app-showcase__stage">
-
-            <div class="app-showcase__info">
-
-              <div class="app-showcase__info-pane is-active" data-module="pm" aria-labelledby="module-pm">
-                <h3 class="app-showcase__info-title">PM Mobile — Mantenimiento de Planta</h3>
-                <p class="app-showcase__info-text">
-                  Sus técnicos gestionan avisos, órdenes y repuestos en modo <strong>online / offline</strong>, con captura
-                  fotográfica de averías directamente desde el equipo en terreno.
-                </p>
-                <ul class="app-showcase__info-list">
-                  <li>Gestión de avisos y órdenes de mantenimiento</li>
-                  <li>Captura fotográfica de averías</li>
-                  <li>Verificación de stock de repuestos</li>
-                  <li>Integración online / offline</li>
-                </ul>
-              </div>
-
-              <div class="app-showcase__info-pane app-showcase__info-pane--wm" data-module="wm" aria-labelledby="module-wm">
-                <h3 class="app-showcase__info-title">WM Mobile — Gestión de Almacenes</h3>
-                <p class="app-showcase__info-text">
-                  Sus operarios ejecutan picking, traspasos y conteos guiados desde el piso de bodega, con lectura de
-                  códigos y confirmación inmediata en SAP.
-                </p>
-                <ul class="app-showcase__info-list">
-                  <li>Recepción y ubicación de materiales</li>
-                  <li>Picking guiado por código</li>
-                  <li>Traspasos entre bodegas</li>
-                  <li>Conteo cíclico de inventario</li>
-                </ul>
-              </div>
-
-              <div class="app-showcase__info-pane app-showcase__info-pane--qm" data-module="qm" aria-labelledby="module-qm">
-                <h3 class="app-showcase__info-title">QM Mobile — Gestión de Calidad</h3>
-                <p class="app-showcase__info-text">
-                  Sus inspectores registran resultados de inspección y liberan o rechazan lotes desde cualquier punto de
-                  la planta, sin papeleo adicional.
-                </p>
-                <ul class="app-showcase__info-list">
-                  <li>Inspecciones de entrada y de proceso</li>
-                  <li>Registro de resultados por característica</li>
-                  <li>Notificaciones de calidad</li>
-                  <li>Liberación o rechazo de lotes</li>
-                </ul>
-              </div>
-
-              <div class="app-showcase__info-pane app-showcase__info-pane--pp" data-module="pp" aria-labelledby="module-pp">
-                <h3 class="app-showcase__info-title">PP Mobile — Planificación de Producción</h3>
-                <p class="app-showcase__info-text">
-                  Sus operadores confirman operaciones y consumos de componentes en línea, con visibilidad inmediata del
-                  avance de cada orden de producción.
-                </p>
-                <ul class="app-showcase__info-list">
-                  <li>Confirmación de operaciones</li>
-                  <li>Consumo de componentes</li>
-                  <li>Seguimiento de avance de la orden</li>
-                  <li>Reporte de paradas y tiempos muertos</li>
-                </ul>
-              </div>
-
-            </div>
-
-            <div class="app-showcase__device">
-              <div class="phone phone--single" aria-hidden="true">
-                <div class="phone__notch"></div>
-                <div class="phone__screen">
-
-                  <div class="app-screen app-screen--pm is-active" data-module="pm">
-                    <div class="app-screen__header">
-                      <span class="app-screen__icon">
-                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-                          <polygon points="50,8 87,29 87,71 50,92 13,71 13,29"/>
-                          <circle cx="50" cy="50" r="15"/>
-                        </svg>
-                      </span>
-                      <span class="app-screen__name">PM Mobile</span>
-                    </div>
-                    <div class="app-screen__tiles">
-                      <button type="button" class="app-screen__tile is-active" data-detail="Cree y dé seguimiento a avisos de avería, con estado y prioridad en tiempo real.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 14a20 20 0 0 0-20 20v12l-10 16h60l-10-16V34A20 20 0 0 0 50 14Z"/><path d="M42 84a8 8 0 0 0 16 0"/></svg></span>
-                        <span class="app-screen__tile-label">Avisos</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Visualice, modifique y cierre órdenes de mantenimiento directamente desde el equipo.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><line x1="34" y1="42" x2="66" y2="42"/><line x1="34" y1="56" x2="66" y2="56"/><line x1="34" y1="70" x2="54" y2="70"/></svg></span>
-                        <span class="app-screen__tile-label">Órdenes</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Consulte el stock disponible y asígnelo como componente en la orden.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8 90 29v42l-40 21-40-21V29Z"/><path d="M10 29l40 21 40-21"/><line x1="50" y1="50" x2="50" y2="92"/></svg></span>
-                        <span class="app-screen__tile-label">Repuestos</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Fotografíe la avería; la imagen queda anexada en el Content Server de SAP.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="12" y="28" width="76" height="52" rx="10"/><path d="M34 28l8-12h16l8 12"/><circle cx="50" cy="54" r="16"/></svg></span>
-                        <span class="app-screen__tile-label">Fotos</span>
-                      </button>
-                    </div>
-                    <div class="app-screen__detail">
-                      <p class="app-screen__detail-text">Cree y dé seguimiento a avisos de avería, con estado y prioridad en tiempo real.</p>
-                    </div>
-                  </div>
-
-                  <div class="app-screen app-screen--wm" data-module="wm">
-                    <div class="app-screen__header">
-                      <span class="app-screen__icon">
-                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M50 8 90 29v42l-40 21-40-21V29Z"/>
-                          <path d="M10 29l40 21 40-21"/>
-                          <line x1="50" y1="50" x2="50" y2="92"/>
-                        </svg>
-                      </span>
-                      <span class="app-screen__name">WM Mobile</span>
-                    </div>
-                    <div class="app-screen__tiles">
-                      <button type="button" class="app-screen__tile is-active" data-detail="Registre la recepción de materiales y confirme su ubicación en bodega.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M14 44h22l8 14h12l8-14h22"/><path d="M14 44V24a4 4 0 0 1 4-4h64a4 4 0 0 1 4 4v20"/><path d="M14 44v30a6 6 0 0 0 6 6h60a6 6 0 0 0 6-6V44"/></svg></span>
-                        <span class="app-screen__tile-label">Recepción</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Ejecute picking guiado leyendo el código de barras de cada ítem.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><line x1="16" y1="20" x2="16" y2="80"/><line x1="28" y1="20" x2="28" y2="80"/><line x1="38" y1="20" x2="38" y2="80"/><line x1="50" y1="20" x2="50" y2="80"/><line x1="58" y1="20" x2="58" y2="80"/><line x1="70" y1="20" x2="70" y2="80"/><line x1="84" y1="20" x2="84" y2="80"/></svg></span>
-                        <span class="app-screen__tile-label">Picking</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Mueva materiales entre bodegas y confirme el traspaso al instante.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 34h54"/><path d="M58 20l14 14-14 14"/><path d="M82 66H28"/><path d="M42 52L28 66l14 14"/></svg></span>
-                        <span class="app-screen__tile-label">Traspasos</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Realice conteos de inventario por zona y reporte diferencias.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><path d="M34 54l10 10 22-24"/></svg></span>
-                        <span class="app-screen__tile-label">Conteo cíclico</span>
-                      </button>
-                    </div>
-                    <div class="app-screen__detail">
-                      <p class="app-screen__detail-text">Registre la recepción de materiales y confirme su ubicación en bodega.</p>
-                    </div>
-                  </div>
-
-                  <div class="app-screen app-screen--qm" data-module="qm">
-                    <div class="app-screen__header">
-                      <span class="app-screen__icon">
-                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M50 8 84 20v28c0 26-15 40-34 44-19-4-34-18-34-44V20Z"/>
-                          <path d="M34 50l11 11 21-23"/>
-                        </svg>
-                      </span>
-                      <span class="app-screen__name">QM Mobile</span>
-                    </div>
-                    <div class="app-screen__tiles">
-                      <button type="button" class="app-screen__tile is-active" data-detail="Registre inspecciones de entrada y de proceso con sus resultados.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><line x1="34" y1="42" x2="66" y2="42"/><line x1="34" y1="56" x2="66" y2="56"/><line x1="34" y1="70" x2="54" y2="70"/></svg></span>
-                        <span class="app-screen__tile-label">Inspecciones</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Capture el resultado de cada característica evaluada del lote.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><path d="M34 54l10 10 22-24"/></svg></span>
-                        <span class="app-screen__tile-label">Resultados</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Genere notificaciones de calidad ante una desviación detectada.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 14a20 20 0 0 0-20 20v12l-10 16h60l-10-16V34A20 20 0 0 0 50 14Z"/><path d="M42 84a8 8 0 0 0 16 0"/></svg></span>
-                        <span class="app-screen__tile-label">Notificaciones</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Libere o rechace lotes según el resultado de la inspección.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8 84 20v28c0 26-15 40-34 44-19-4-34-18-34-44V20Z"/><path d="M34 50l11 11 21-23"/></svg></span>
-                        <span class="app-screen__tile-label">Liberación</span>
-                      </button>
-                    </div>
-                    <div class="app-screen__detail">
-                      <p class="app-screen__detail-text">Registre inspecciones de entrada y de proceso con sus resultados.</p>
-                    </div>
-                  </div>
-
-                  <div class="app-screen app-screen--pp" data-module="pp">
-                    <div class="app-screen__header">
-                      <span class="app-screen__icon">
-                        <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
-                          <circle cx="18" cy="26" r="9"/><circle cx="50" cy="74" r="9"/><circle cx="82" cy="26" r="9"/>
-                          <line x1="25" y1="32" x2="44" y2="66"/><line x1="75" y1="32" x2="56" y2="66"/>
-                        </svg>
-                      </span>
-                      <span class="app-screen__name">PP Mobile</span>
-                    </div>
-                    <div class="app-screen__tiles">
-                      <button type="button" class="app-screen__tile is-active" data-detail="Confirme operaciones de producción a medida que se ejecutan.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><rect x="22" y="16" width="56" height="74" rx="8"/><rect x="38" y="10" width="24" height="14" rx="4"/><path d="M34 54l10 10 22-24"/></svg></span>
-                        <span class="app-screen__tile-label">Confirmaciones</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Registre el consumo de componentes contra la orden de producción.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 8 90 29v42l-40 21-40-21V29Z"/><path d="M10 29l40 21 40-21"/><line x1="50" y1="50" x2="50" y2="92"/></svg></span>
-                        <span class="app-screen__tile-label">Consumo</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Consulte el porcentaje de avance de cada orden en tiempo real.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 74a32 32 0 1 1 64 0"/><line x1="50" y1="74" x2="66" y2="48"/><circle cx="50" cy="74" r="5"/></svg></span>
-                        <span class="app-screen__tile-label">Avance</span>
-                      </button>
-                      <button type="button" class="app-screen__tile" data-detail="Reporte paradas y tiempos muertos con su motivo asociado.">
-                        <span class="app-screen__tile-icon"><svg viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"><path d="M50 16 90 84H10Z"/><line x1="50" y1="40" x2="50" y2="62"/><circle cx="50" cy="72" r="3" fill="currentColor" stroke="none"/></svg></span>
-                        <span class="app-screen__tile-label">Paradas</span>
-                      </button>
-                    </div>
-                    <div class="app-screen__detail">
-                      <p class="app-screen__detail-text">Confirme operaciones de producción a medida que se ejecutan.</p>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <p class="app-showcase__note">
-            Todas las apps corren sobre <strong>SAP Mobile Service</strong> en SAP BTP, con la misma base de seguridad,
-            sincronización y administración — reduciendo el papeleo y aumentando la precisión de los datos en terreno.
-          </p>
-
-        </div>
-      </div>
-    </section>
-    -->
-
-    <!-- ==================== 5. METODOLOGÍA (RAPID DEPLOYMENT) — OCULTA TEMPORALMENTE ====================
-         Para volver a mostrarla: eliminar los marcadores de comentario que envuelven esta sección. -->
-    <!--
-    <section class="methodology" id="metodologia">
-      <div class="container">
-        <div class="section-heading" data-animate="fade-up">
-          <span class="section-kicker">04 — Metodología</span>
-          <h2 class="section-title">Rapid Deployment: prototipo base en 3 a 3.5 meses</h2>
-          <p class="section-intro">
-            Un método acelerado y confiable, respaldado por más de 25 años de implementación de proyectos SAP en Chile y la región.
-          </p>
-        </div>
-
-        <ol class="timeline" data-animate="fade-up" data-delay="1">
-          <li class="timeline__step">
-            <span class="timeline__marker">01</span>
-            <h3 class="timeline__title">Preparación</h3>
-            <p class="timeline__text">Levantamiento de datos y procesos en base a un modelo preconfigurado. Definición de alcance y equipo de proyecto.</p>
-          </li>
-          <li class="timeline__step">
-            <span class="timeline__marker">02</span>
-            <h3 class="timeline__title">Ajustes</h3>
-            <p class="timeline__text">Configuración y ajuste del modelo estándar a los procesos específicos del negocio, validando con los usuarios clave.</p>
-          </li>
-          <li class="timeline__step">
-            <span class="timeline__marker">03</span>
-            <h3 class="timeline__title">Desarrollo</h3>
-            <p class="timeline__text">Construcción de desarrollos específicos, integración con compras, logística, WMS y FI-CO, y pruebas integrales.</p>
-          </li>
-          <li class="timeline__step">
-            <span class="timeline__marker">04</span>
-            <h3 class="timeline__title">Paso a productivo</h3>
-            <p class="timeline__text">Capacitación, migración de datos maestros y puesta en marcha, con acompañamiento post-arranque.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-    -->
-
-    <!-- ==================== 7. CONTACTO ==================== -->
-    <section class="contact" id="contacto">
-      <div class="container contact__grid">
-
-        <div class="contact__info" data-animate="fade-up">
-          <span class="section-kicker">03 — Contacto</span>
-          <h2 class="section-title">Conversemos sobre su próximo proyecto SAP</h2>
-          <p class="contact__lead">
-            Escríbanos y un consultor especialista de vSApp se pondrá en contacto para entender sus necesidades y
-            proponer el mejor camino.
-          </p>
-
-          <ul class="contact__details">
-            <li>
-              <span class="contact__label">Dirección</span>
-              <span>Avda. Costa de Montemar 287, Concón, V Región<br>Edificio Marina de Montemar II</span>
-            </li>
-            <li>
-              <span class="contact__label">Teléfono</span>
-              <a href="tel:+56222871796">+56 2 2287 1796</a>
-            </li>
-            <li>
-              <span class="contact__label">Correo</span>
-              <a href="mailto:contacto@vsapp.cl">contacto@vsapp.cl</a>
-            </li>
-          </ul>
-        </div>
-
-        <!-- Formulario de contacto desactivado temporalmente (inactivo, no se muestra en pantalla).
-             Para reactivarlo: descomentar este bloque y en css/styles.css devolver
-             .contact__grid a su layout de dos columnas (ver comentario junto a esa regla). -->
-        <!--
-        <form class="contact__form" id="contactForm" data-animate="fade-left" novalidate>
-          <div class="form-field">
-            <label for="name">Nombre completo</label>
-            <input type="text" id="name" name="name" autocomplete="name" required>
-            <span class="form-field__error" id="nameError" role="alert"></span>
-          </div>
-
-          <div class="form-field">
-            <label for="email">Correo electrónico</label>
-            <input type="email" id="email" name="email" autocomplete="email" required>
-            <span class="form-field__error" id="emailError" role="alert"></span>
-          </div>
-
-          <div class="form-field">
-            <label for="company">Empresa</label>
-            <input type="text" id="company" name="company" autocomplete="organization">
-          </div>
-
-          <div class="form-field">
-            <label for="subject">Motivo de contacto</label>
-            <select id="subject" name="subject" required>
-              <option value="" selected disabled>Seleccione una opción</option>
-              <option value="proyectos-modulares">Proyectos modulares (PM / PP)</option>
-              <option value="ams">Servicio AMS especializado</option>
-              <option value="app-movil">Aplicaciones móviles BTP / Fiori</option>
-              <option value="optimizacion">Proyectos de optimización</option>
-              <option value="otro">Otro</option>
-            </select>
-            <span class="form-field__error" id="subjectError" role="alert"></span>
-          </div>
-
-          <div class="form-field">
-            <label for="message">Mensaje</label>
-            <textarea id="message" name="message" rows="5" required></textarea>
-            <span class="form-field__error" id="messageError" role="alert"></span>
-          </div>
-
-          <button type="submit" class="btn btn--primary btn--block">Enviar mensaje</button>
-          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
-        </form>
-        -->
-
-      </div>
-    </section>
-
-  </main>
-
-  <!-- ==================== FOOTER ==================== -->
-  <footer class="footer">
-    <div class="container footer__grid">
-      <div class="footer__brand">
-        <img class="footer__logo" src="assets/img/logo-header.svg" alt="vSApp" width="165" height="64">
-        <p class="footer__tagline">vSApp especialista en soluciones de mantenimiento de planta y planificación de cadena de suministro en SAP S/4&nbsp;HANA.</p>
-      </div>
-
-      <nav class="footer__nav" aria-label="Navegación secundaria">
-        <a href="#sobre">Sobre vSApp</a>
-        <a href="#servicios">Servicios</a>
-        <a href="aplicaciones-moviles.html">Apps móviles</a>
-        <!-- <a href="#metodologia">Metodología</a> -->
-        <!-- <a href="#contacto">Contacto</a> -->
-      </nav>
-
-      <div class="footer__legal">
-        <p>&copy; <span id="year"></span> vSApp Ltda. Todos los derechos reservados.</p>
+<!-- ================= VIÑETAS: SERVICIOS / CONÓZCANOS ================= -->
+<section id="explorar" style="padding: 60px 0; background: #F7F8FA;">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 3vw, 48px);">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-end; gap: 16px 35px; margin-bottom: 35px;">
+      <div>
+        <p style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1F8C7E; margin-bottom: 16px;">Descubra vSApp</p>
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(26px, 2.56vw, 34px); line-height: 1.2;">¿Por dónde quiere comenzar?</h2>
+        <p style="color: #4A5568; font-size: 17px; max-width: 60ch; margin-top: 16px;">Explore nuestros servicios SAP o conozca quiénes somos y las empresas que han confiado en nosotros.</p>
       </div>
     </div>
-  </footer>
 
-  <!-- ==================== BOTÓN VOLVER ARRIBA ==================== -->
-  <button class="back-to-top" id="backToTop" aria-label="Volver arriba">↑</button>
+    <div class="v-row">
+      <!-- Viñeta 1: Servicios -->
+      <a class="v-card" href="servicios.html" style="background: linear-gradient(150deg, #0A1F3D 0%, #071527 100%); color: #FFFFFF; padding: 38px;">
+        <span class="v-burst" aria-hidden="true" style="background: radial-gradient(circle, rgba(43,182,163,0.55) 0%, rgba(43,182,163,0.18) 35%, transparent 62%);"></span>
+        <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px;">
+          <p style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #2BB6A3;">Nuestros servicios</p>
+          <svg class="v-mini" aria-hidden="true" viewBox="0 0 120 120" style="width: 140px; height: 140px; flex: none;">
+            <g class="v-spin" fill="none" stroke-width="18">
+              <path d="M14.9 59.1A45 45 0 0 1 59.1 14.9" stroke="#205A9B"></path>
+              <path d="M60.9 14.9A45 45 0 0 1 105.1 59.1" stroke="#A7C8EC"></path>
+              <path d="M105.1 60.9A45 45 0 0 1 60.9 105.1" stroke="#DCE8F6"></path>
+              <path d="M59.1 105.1A45 45 0 0 1 14.9 60.9" stroke="#E6E6E6"></path>
+            </g>
+            <path fill="#F5B80A" d="M60 46Q60 60 70 60Q60 60 60 74Q60 60 50 60Q60 60 60 46Z"></path>
+          </svg>
+        </div>
+        <div style="position: relative;">
+          <h3 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(26px, 2.4vw, 35px); line-height: 1.15; margin-bottom: 16px;">Cuatro pilares para su operación SAP</h3>
+          <p style="color: rgba(255,255,255,0.72); font-size: 16px; max-width: 46ch; margin-bottom: 28px;">Proyectos modulares, servicio AMS especializado, aplicaciones móviles BTP / Fiori y proyectos de optimización.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px;">
+            <span style="font-size: 13px; padding: 6px 12px; border-radius: 99px; border: 1px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.85);">Proyectos</span>
+            <span style="font-size: 13px; padding: 6px 12px; border-radius: 99px; border: 1px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.85);">AMS</span>
+            <span style="font-size: 13px; padding: 6px 12px; border-radius: 99px; border: 1px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.85);">BTP / Fiori</span>
+            <span style="font-size: 13px; padding: 6px 12px; border-radius: 99px; border: 1px solid rgba(255,255,255,0.22); color: rgba(255,255,255,0.85);">Optimización</span>
+          </div>
+          <span style="font-weight: 600; font-size: 16px; color: #2BB6A3;">Explorar servicios <span class="v-arrow" aria-hidden="true">→</span></span>
+        </div>
+      </a>
 
-  <script src="js/main.js"></script>
+      <!-- Viñeta 2: Conózcanos -->
+      <a class="v-card" href="conozcanos.html" style="background: #FFFFFF; border: 1px solid #E4E8EE; color: #0A1F3D; padding: 38px;">
+        <span class="v-burst" aria-hidden="true" style="background: radial-gradient(circle, rgba(245,184,10,0.32) 0%, rgba(245,184,10,0.10) 35%, transparent 62%);"></span>
+        <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-start; gap: 24px;">
+          <p style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1F8C7E;">Conózcanos</p>
+          <div class="v-mini" aria-hidden="true" style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; width: 180px; flex: none;">
+            <div class="v-float" style="height: 54px; background: #FFFFFF; border: 1px solid #E4E8EE; border-radius: 8px; box-shadow: 0 6px 16px rgba(10,31,61,0.06); display: flex; align-items: center; justify-content: center;"><img src="assets/img/clientes/agrosuper.webp" alt="" style="max-height: 50%; max-width: 70%; object-fit: contain; filter: grayscale(1); opacity: 0.7;"></div>
+            <div class="v-float d2" style="height: 54px; background: #FFFFFF; border: 1px solid #E4E8EE; border-radius: 8px; box-shadow: 0 6px 16px rgba(10,31,61,0.06); display: flex; align-items: center; justify-content: center; margin-top: 18px;"><img src="assets/img/clientes/aquachile.webp" alt="" style="max-height: 50%; max-width: 70%; object-fit: contain; filter: grayscale(1); opacity: 0.7;"></div>
+            <div class="v-float d3" style="height: 54px; background: #FFFFFF; border: 1px solid #E4E8EE; border-radius: 8px; box-shadow: 0 6px 16px rgba(10,31,61,0.06); display: flex; align-items: center; justify-content: center;"><img src="assets/img/clientes/oxiquim.png" alt="" style="max-height: 50%; max-width: 70%; object-fit: contain; filter: grayscale(1); opacity: 0.7;"></div>
+            <div class="v-float" style="height: 54px; background: #FFFFFF; border: 1px solid #E4E8EE; border-radius: 8px; box-shadow: 0 6px 16px rgba(10,31,61,0.06); display: flex; align-items: center; justify-content: center; margin-top: 18px;"><img src="assets/img/clientes/cial.webp" alt="" style="max-height: 50%; max-width: 70%; object-fit: contain; filter: grayscale(1); opacity: 0.7;"></div>
+          </div>
+        </div>
+        <div style="position: relative;">
+          <h3 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(26px, 2.4vw, 35px); line-height: 1.15; margin-bottom: 16px;">Más de 25 años junto a la industria</h3>
+          <p style="color: #4A5568; font-size: 16px; max-width: 46ch; margin-bottom: 28px;">Quiénes somos, cómo trabajamos y las empresas que han confiado en nuestro acompañamiento experto.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 32px; margin-bottom: 32px;">
+            <p style="font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 27px; line-height: 1;">25<span style="color: #2BB6A3;">+</span><span style="display: block; font-family: 'Inter', sans-serif; font-weight: 400; font-size: 13px; color: #4A5568; margin-top: 6px;">años en proyectos SAP</span></p>
+            <p style="font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: 27px; line-height: 1;">100<span style="color: #2BB6A3;">%</span><span style="display: block; font-family: 'Inter', sans-serif; font-weight: 400; font-size: 13px; color: #4A5568; margin-top: 6px;">proyectos exitosos</span></p>
+          </div>
+          <span style="font-weight: 600; font-size: 16px; color: #1F8C7E;">Conózcanos <span class="v-arrow" aria-hidden="true">→</span></span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACTO ================= -->
+<section id="contacto" style="padding: 60px 0; background: #FFFFFF;">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 3vw, 48px); display: flex; flex-wrap: wrap; gap: 29px 52px; align-items: center;">
+    <div style="flex: 6 1 420px; min-width: 0;">
+      <p style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1F8C7E; margin-bottom: 16px;">Contacto</p>
+      <h2 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(26px, 2.56vw, 34px); line-height: 1.2; margin-bottom: 24px;">Conversemos sobre su próximo proyecto SAP</h2>
+      <p style="color: #4A5568; font-size: 17px; max-width: 46ch;">Escríbanos y un consultor especialista de vSApp se pondrá en contacto para entender sus necesidades y proponer el mejor camino.</p>
+    </div>
+    <ul style="flex: 5 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 24px;">
+      <li style="display: flex; flex-direction: column; gap: 2px; font-size: 15px; padding-bottom: 16px; border-bottom: 1px solid #E4E8EE;"><span style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #1F8C7E;">Dirección</span><span>Avda. Costa de Montemar 287, Concón, V Región<br>Edificio Marina de Montemar II</span></li>
+      <li style="display: flex; flex-direction: column; gap: 2px; font-size: 15px; padding-bottom: 16px; border-bottom: 1px solid #E4E8EE;"><span style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #1F8C7E;">Teléfono</span><span>+56 2 2287 1796</span></li>
+      <li style="display: flex; flex-direction: column; gap: 2px; font-size: 15px; padding-bottom: 16px; border-bottom: 1px solid #E4E8EE;"><span style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #1F8C7E;">Correo</span><span>contacto@vsapp.cl</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer style="background: #071527; color: rgba(255,255,255,0.7); padding: 58px 0 32px;">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 3vw, 48px);">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 35px; padding-bottom: 32px; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 24px;">
+      <div>
+        <img src="assets/img/logo-blanco.svg" alt="vSApp" style="display: block; height: 64px; width: auto;">
+        <p style="font-size: 14.5px; max-width: 44ch; margin-top: 16px;">vSApp especialista en soluciones de mantenimiento de planta y planificación de cadena de suministro en SAP S/4 HANA.</p>
+      </div>
+      <nav aria-label="Navegación secundaria" style="display: flex; flex-direction: column; gap: 10px; font-size: 14.5px;">
+        <a href="conozcanos.html" style="color: rgba(255,255,255,0.7); text-decoration: none;">Sobre vSApp</a>
+        <a href="servicios.html" style="color: rgba(255,255,255,0.7); text-decoration: none;">Servicios</a>
+        <a href="aplicaciones-moviles.html" style="color: rgba(255,255,255,0.7); text-decoration: none;">Apps móviles</a>
+      </nav>
+      <div style="font-size: 13px;"><p>© 2026 vSApp Ltda. Todos los derechos reservados.</p></div>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script src="js/vsapp-hero.js"></script>
+<script src="js/vsapp-dc.js"></script>
+<script src="js/vsapp-motion.js"></script>
+<script>
+class Component extends DCLogic {
+  renderVals() {
+    return { warm: this.props.warm ?? '#F5B80A' };
+  }
+}
+vsappMount(Component);
+</script>
 </body>
 </html>

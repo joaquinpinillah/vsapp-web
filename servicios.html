@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>vSApp · Nuestros servicios</title>
+<meta name="description" content="Servicios SAP de vSApp: proyectos modulares, aplicaciones móviles BTP/Fiori, AMS especializado y proyectos de optimización.">
+<link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap">
+<style>
+v-if{display:contents}v-if[hidden]{display:none!important}
+body{margin:0}
+h1,h2,h3,h4,p,ul{margin:0}
+ul{padding:0;list-style:none}
+a{color:#0A1F3D}a:hover{color:#1F8C7E}
+.v-reveal{animation:reveal 1.1s cubic-bezier(.65,0,.35,1) both}
+.orbit{transform-box:view-box;transform-origin:60px 60px;animation:spin 30s linear infinite}
+@keyframes reveal{from{clip-path:circle(0% at 30% 75%)}to{clip-path:circle(150% at 30% 75%)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes up{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+
+/* Cuatro viñetas dinámicas: en cada fila la tarjeta con el mouse crece y la vecina se angosta */
+.s-rows{display:flex;flex-direction:column;gap:24px}
+.s-row{display:flex;flex-wrap:wrap;gap:24px}
+.s-card{position:relative;overflow:hidden;flex:1 1 440px;min-width:0;min-height:0;box-sizing:border-box;padding:32px;border-radius:20px;background:linear-gradient(155deg,#FFFFFF 0%,#F3F6FA 100%);border:1px solid #E4E8EE;color:#0A1F3D;display:flex;flex-direction:column;justify-content:flex-start;gap:20px;animation:up .9s cubic-bezier(.22,1,.36,1) both;transition:flex-grow .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1),box-shadow .7s}
+.s-card.d1{animation-delay:.4s}.s-card.d2{animation-delay:.55s}.s-card.d3{animation-delay:.7s}.s-card.d4{animation-delay:.85s}
+.s-row:hover .s-card{flex-grow:.75}
+.s-row .s-card:hover{flex-grow:1.45;transform:translateY(-6px);box-shadow:0 32px 64px -28px rgba(10,31,61,.22)}
+.s-bar{position:absolute;top:0;left:0;height:4px;width:72px;transition:width .8s cubic-bezier(.22,1,.36,1)}
+.s-card:hover .s-bar{width:100%}
+.s-burst{position:absolute;width:1000px;height:1000px;border-radius:50%;right:-500px;bottom:-500px;transform:scale(.1);transition:transform 1s cubic-bezier(.22,1,.36,1);pointer-events:none}
+.s-card:hover .s-burst{transform:scale(1)}
+.s-icon{transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.s-card:hover .s-icon{transform:scale(1.12) rotate(-8deg)}
+.s-arrow{display:inline-block;transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.s-card:hover .s-arrow{transform:translateX(10px)}
+.s-list li{transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.s-card:hover .s-list li{transform:translateX(6px)}
+.s-card:hover .s-list li:nth-child(2){transition-delay:.06s}
+.s-card:hover .s-list li:nth-child(3){transition-delay:.12s}
+@media (max-width:560px){.s-card{padding:28px 24px;min-height:0}}
+@media (prefers-reduced-motion:reduce){.v-reveal,.orbit,.s-card{animation:none}.s-card,.s-bar,.s-burst,.s-icon,.s-arrow,.s-list li{transition:none}}
+.nav-row{display:none!important}
+.nav-ic-open{display:none}
+@media (hover:hover){.nav-pill:hover .nav-row{display:flex!important}.nav-pill:hover .nav-ic-open{display:block}.nav-pill:hover .nav-ic-closed{display:none}}
+.nav-pill[data-open="true"] .nav-row{display:flex!important}
+.nav-pill[data-open="true"] .nav-ic-open{display:block}.nav-pill[data-open="true"] .nav-ic-closed{display:none}
+.nav-btn{transition:background .3s}.nav-btn:hover{background:rgba(255,255,255,0.22)}
+.nav-row{animation:navSlide .45s cubic-bezier(.22,1,.36,1) both}
+.nav-link{transition:background .2s,color .2s}.nav-link:hover{background:rgba(255,255,255,0.10);color:#FFFFFF}
+@keyframes navSlide{from{opacity:0;transform:translateX(-14px)}to{opacity:1;transform:none}}
+.s-photo img{transition:transform 1.2s cubic-bezier(.22,1,.36,1)}.s-photo:hover img{transform:scale(1.04)}
+@media (max-width:640px){.ph.f1,.ph.f3{display:none}}
+</style>
+<style>
+/* Carga uniforme: los bloques aparecen al llegar a ellos (js/vsapp-motion.js) */
+.v-reveal,.v-up,.s-card{animation:none!important}
+.js-motion [data-rv]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);transition-delay:var(--rv-d,0ms)}
+.js-motion [data-rv].rv-in{opacity:1;transform:none}
+/* Pantalla esqueleto: solo aparece si la carga tarda más de 0,3 s */
+.vs-skel{position:fixed;inset:0;z-index:5000;background:#FFFFFF;opacity:0;pointer-events:none;animation:skelIn .25s .3s forwards;transition:opacity .4s;overflow:hidden}
+.vs-skel.done{opacity:0!important;animation:none}
+.vs-skel i{display:block;border-radius:10px;background:linear-gradient(90deg,#EDF1F6 0%,#F6F8FB 40%,#EDF1F6 80%);background-size:200% 100%;animation:skelShine 1.3s linear infinite}
+.vs-skel .sk-in{max-width:1440px;margin:0 auto;padding:16px clamp(16px,3vw,48px)}
+.vs-skel .sk-nav{width:min(520px,70%);height:66px;border-radius:16px}
+.vs-skel .sk-hero{display:flex;gap:48px;align-items:center;margin-top:72px}
+.vs-skel .sk-col{flex:1 1 0;min-width:0}
+.vs-skel .sk-kick{width:160px;height:14px;margin-bottom:22px}
+.vs-skel .sk-h{height:44px;margin-bottom:14px}
+.vs-skel .sk-t{height:14px;margin-top:12px}
+.vs-skel .sk-media{flex:0 0 38%;height:320px;border-radius:20px}
+.vs-skel .sk-cards{display:flex;gap:24px;margin-top:64px}
+.vs-skel .sk-card{flex:1 1 0;height:180px;border-radius:20px}
+@media (max-width:760px){.vs-skel .sk-media,.vs-skel .sk-card:nth-child(n+2){display:none}}
+@keyframes skelIn{to{opacity:1}}
+@keyframes skelShine{from{background-position:200% 0}to{background-position:-200% 0}}
+@media (prefers-reduced-motion:reduce){.js-motion [data-rv]{transition:opacity .3s;transform:none}.vs-skel i{animation:none}}
+</style>
+</head>
+<body>
+<div class="vs-skel" id="vsSkel" aria-hidden="true"><div class="sk-in">
+  <i class="sk-nav"></i>
+  <div class="sk-hero"><div class="sk-col"><i class="sk-kick"></i><i class="sk-h" style="width:88%"></i><i class="sk-h" style="width:64%"></i><i class="sk-t" style="width:72%"></i><i class="sk-t" style="width:58%"></i></div><i class="sk-media"></i></div>
+  <div class="sk-cards"><i class="sk-card"></i><i class="sk-card"></i><i class="sk-card"></i></div>
+</div></div>
+<noscript><style>.vs-skel{display:none}</style></noscript>
+<div class="v-reveal" style="font-family: 'Inter', -apple-system, 'Segoe UI', sans-serif; font-size: 16px; line-height: 1.6; color: #0A1F3D; background: #FFFFFF; -webkit-font-smoothing: antialiased;">
+
+<!-- Barra superior: mismo navbar del Inicio, con menú desplegable que indica la sección actual -->
+<header style="position: sticky; top: 0; z-index: 20; pointer-events: none;">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 16px clamp(16px, 3vw, 48px);">
+    <div class="nav-pill" data-bind-data-open="navExpanded" style="display: inline-flex; flex-wrap: wrap; align-items: center; gap: 12px 32px; padding: 10px 12px 10px 26px; border: 1px solid rgba(255,255,255,0.22); border-radius: 16px; max-width: 100%; box-sizing: border-box; pointer-events: auto; background: rgba(10,31,61,0.92); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); box-shadow: 0 18px 40px -22px rgba(7,21,39,0.6);">
+      <a href="index.html" aria-label="vSApp, inicio" style="display: flex; align-items: center;"><img src="assets/img/logo-blanco.svg" alt="vSApp" style="height: 44px; width: auto; display: block;"></a>
+      <nav aria-label="Navegación principal" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+        <button type="button" class="nav-btn" data-on-click="toggleNav" data-bind-aria-expanded="navExpanded" aria-label="Menú de secciones" style="display: flex; align-items: center; gap: 0; padding: 14px; border-radius: 12px; border: 0; background: rgba(255,255,255,0.14); color: #FFFFFF; font-family: inherit; font-size: 18px; font-weight: 600; cursor: pointer;">
+          <svg class="nav-ic-open" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex: none;"><path d="M15 6l-6 6 6 6"></path></svg>
+          <svg class="nav-ic-closed" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="width: 20px; height: 20px; flex: none;"><path d="M9 6l6 6-6 6"></path></svg>
+        </button>
+        <div class="nav-row" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
+          <a href="index.html" class="nav-link" style="color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 500; text-decoration: none; padding: 10px 18px; border-radius: 8px; white-space: nowrap;">Inicio</a>
+          <a href="conozcanos.html" class="nav-link" style="color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 500; text-decoration: none; padding: 10px 18px; border-radius: 8px; white-space: nowrap;">Sobre nosotros</a>
+          <a href="aplicaciones-moviles.html" class="nav-link" style="color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 500; text-decoration: none; padding: 10px 18px; border-radius: 8px; white-space: nowrap;">Aplicaciones móviles</a>
+          <a href="index.html#contacto" class="nav-link" style="color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 500; text-decoration: none; padding: 10px 18px; border-radius: 8px; white-space: nowrap;">Contáctanos</a>
+        </div>
+      </nav>
+    </div>
+  </div>
+</header>
+
+<!-- Encabezado -->
+<section style="padding: 46px 0 38px;">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 3vw, 48px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 32px 46px;">
+    <div style="flex: 1 1 520px; min-width: 0;">
+      <p style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #1F8C7E; margin-bottom: 16px;">Nuestros servicios SAP</p>
+      <h1 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(26px, 3.2vw, 40px); line-height: 1.15; max-width: 20em;">Somos una empresa especialista en mantenimiento y planificación de producción</h1>
+      <p style="color: #4A5568; font-size: 17px; margin-top: 20px; max-width: 60ch;">Cuatro pilares para su operación SAP sobre S/4HANA.</p>
+    </div>
+    <svg viewBox="0 0 120 120" role="img" aria-label="Anillo de los cuatro pilares de vSApp" style="width: 340px; max-width: 100%; height: auto; flex: none; overflow: visible">
+      <g class="orbit"><circle cx="60" cy="60" r="58" fill="none" stroke="#C9D3DF" stroke-width="0.8" stroke-dasharray="1.5 5"></circle><circle cx="60" cy="2" r="2.5" fill="#F5B80A"></circle></g>
+      <g fill="none" stroke-width="16" style="width: 179px; height: 177px">
+        <path d="M15 58.4A45 45 0 0 1 58.4 15" stroke="#205A9B"></path>
+        <path d="M61.6 15A45 45 0 0 1 105 58.4" stroke="#A7C8EC"></path>
+        <path d="M105 61.6A45 45 0 0 1 61.6 105" stroke="#DCE8F6"></path>
+        <path d="M58.4 105A45 45 0 0 1 15 61.6" stroke="#E6E6E6"></path>
+      </g>
+      <text x="61" y="65" text-anchor="middle" font-family="Inter, sans-serif" font-size="15" font-weight="800" fill="#0A1F3D">vSApp</text>
+      <path fill="#F5B80A" d="M42 46Q42 52 46 52Q42 52 42 58Q42 52 38 52Q42 52 42 46Z"></path>
+    </svg>
+  </div>
+</section>
+
+<!-- Cuatro viñetas -->
+<section style="padding: 0 0 60px;">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 0 clamp(20px, 3vw, 48px);">
+    <div class="s-rows">
+
+      <div class="s-row">
+        <!-- Proyectos modulares -->
+        <article class="s-card d1">
+          <span class="s-bar" style="background: #205A9B;"></span>
+          <span class="s-burst" aria-hidden="true" style="background: radial-gradient(circle, rgba(32,90,155,0.14) 0%, rgba(32,90,155,0.05) 36%, transparent 62%);"></span>
+          <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
+            <p style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #205A9B;">MODULARES</p>
+            <span class="s-icon" style="width: 60px; height: 60px; flex: none; border-radius: 50%; background: #205A9B; color: #FFFFFF; display: flex; align-items: center; justify-content: center;"><svg aria-hidden="true" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px;"><rect x="14" y="14" width="32" height="32" rx="7"></rect><rect x="54" y="14" width="32" height="32" rx="7"></rect><rect x="14" y="54" width="32" height="32" rx="7"></rect><rect x="54" y="54" width="32" height="32" rx="7"></rect></svg></span>
+          </div>
+          <div style="position: relative;">
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(23px, 1.92vw, 27px); line-height: 1.15; margin-bottom: 14px;">Proyectos modulares</h2>
+            <p style="color: #4A5568; font-size: 15.5px; margin-bottom: 18px; max-width: 54ch;">Implementamos soluciones integrales en mantenimiento y producción en S/4HANA, garantizando procesos end-to-end alineados con su modelo de negocio.</p>
+            <ul class="s-list" style="display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; color: #2D3748;">
+              <li style="display: flex; gap: 12px;"><span style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #205A9B; margin-top: 9px;"></span>Metodologías probadas con foco en adopción y calidad</li>
+              <li style="display: flex; gap: 12px;"><span style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #205A9B; margin-top: 9px;"></span>Cobertura integral en módulos SAP claves</li>
+              <li style="display: flex; gap: 12px;"><span style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #205A9B; margin-top: 9px;"></span>Experiencia basada en best practices</li>
+            </ul>
+            
+          </div>
+        </article>
+
+        <!-- Aplicaciones móviles -->
+        <article class="s-card d2">
+          <span class="s-bar" style="background: #A7C8EC;"></span>
+          <span class="s-burst" aria-hidden="true" style="background: radial-gradient(circle, rgba(32,90,155,0.14) 0%, rgba(32,90,155,0.05) 36%, transparent 62%);"></span>
+          <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
+            <p style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #205A9B;">BTP / Fiori</p>
+            <span class="s-icon" style="width: 60px; height: 60px; flex: none; border-radius: 50%; background: #205A9B; color: #FFFFFF; display: flex; align-items: center; justify-content: center;"><svg aria-hidden="true" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px;"><rect x="32" y="10" width="36" height="80" rx="9"></rect><line x1="43" y1="78" x2="57" y2="78"></line></svg></span>
+          </div>
+          <div style="position: relative;">
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(23px, 1.92vw, 27px); line-height: 1.15; margin-bottom: 14px;">Aplicaciones móviles BTP / Fiori</h2>
+            <p style="color: #4A5568; font-size: 15.5px; margin-bottom: 18px; max-width: 54ch;">Desarrollamos y configuramos aplicaciones móviles sobre SAP BTP y Fiori, llevando la operación al campo con experiencias simples, ágiles y en tiempo real.</p>
+            <ul class="s-list" style="display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; color: #2D3748;">
+              <li style="display: flex; gap: 12px;"><span style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #205A9B; margin-top: 9px;"></span>Gestión de órdenes, avisos e inspecciones de mantenimiento</li>
+              <li style="display: flex; gap: 12px;"><span style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #205A9B; margin-top: 9px;"></span>Control de piso, notificación y picking</li>
+              <li style="display: flex; gap: 12px;"><span style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #205A9B; margin-top: 9px;"></span>Integración con S/4HANA, online y offline</li>
+            </ul>
+            <a href="aplicaciones-moviles.html" style="display: inline-block; margin-top: 24px; font-weight: 600; font-size: 15px; color: #205A9B; text-decoration: none;">Ver las apps móviles <span class="s-arrow" aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </div>
+
+      <div class="s-row">
+        <!-- Servicio AMS -->
+        <article class="s-card d3">
+          <span class="s-bar" style="background: #C9C9C9;"></span>
+          <span class="s-burst" aria-hidden="true" style="background: radial-gradient(circle, rgba(32,90,155,0.14) 0%, rgba(32,90,155,0.05) 36%, transparent 62%);"></span>
+          <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
+            <p style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #205A9B;">AMS<br></p>
+            <span class="s-icon" style="width: 60px; height: 60px; flex: none; border-radius: 50%; background: #205A9B; color: #FFFFFF; display: flex; align-items: center; justify-content: center;"><svg aria-hidden="true" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px;"><path d="M78 32a28 28 0 1 1 -6 -8"></path><path d="M78 14v18h-18"></path></svg></span>
+          </div>
+          <div style="position: relative;">
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(23px, 1.92vw, 27px); line-height: 1.15; margin-bottom: 14px;">Servicio AMS especializado</h2>
+            <p style="color: #4A5568; font-size: 15.5px; margin-bottom: 18px; max-width: 54ch;">Brindamos un servicio de mejora continua especializado y personalizado en PP y PM a través de una bolsa mínima de horas mensuales, con consultores especialistas dedicados a mantener y evolucionar sus operaciones SAP.</p>
+            <ul class="s-list" style="display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; color: #2D3748;">
+              <li style="display: flex; gap: 12px;"><span style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #205A9B; margin-top: 9px;"></span>Respuestas ágiles especializadas</li>
+              <li style="display: flex; gap: 12px;"><span style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #205A9B; margin-top: 9px;"></span>Flexibles a su demanda y requerimiento</li>
+              <li style="display: flex; gap: 12px;"><span style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #205A9B; margin-top: 9px;"></span>Asesoría especializada</li>
+            </ul>
+            
+          </div>
+        </article>
+
+        <!-- Optimización -->
+        <article class="s-card d4">
+          <span class="s-bar" style="background: #B9D0EC;"></span>
+          <span class="s-burst" aria-hidden="true" style="background: radial-gradient(circle, rgba(32,90,155,0.14) 0%, rgba(32,90,155,0.05) 36%, transparent 62%);"></span>
+          <div style="position: relative; display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;">
+            <p style="font-size: 12.5px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: #205A9B;">Optimización</p>
+            <span class="s-icon" style="width: 60px; height: 60px; flex: none; border-radius: 50%; background: #205A9B; color: #FFFFFF; display: flex; align-items: center; justify-content: center;"><svg aria-hidden="true" viewBox="0 0 100 100" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" style="width: 28px; height: 28px;"><line x1="18" y1="86" x2="18" y2="14"></line><line x1="18" y1="86" x2="86" y2="86"></line><rect x="30" y="60" width="12" height="26"></rect><rect x="50" y="44" width="12" height="42"></rect><rect x="70" y="28" width="12" height="58"></rect></svg></span>
+          </div>
+          <div style="position: relative;">
+            <h2 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(23px, 1.92vw, 27px); line-height: 1.15; margin-bottom: 14px;">Proyectos de optimización</h2>
+            <p style="color: #4A5568; font-size: 15.5px; margin-bottom: 18px; max-width: 54ch;">Ejecutamos proyectos específicos de mejora operativa en MRP, planificación de capacidad y optimización de inventarios, generando eficiencia medible en su cadena productiva.</p>
+            <ul class="s-list" style="display: flex; flex-direction: column; gap: 8px; font-size: 14.5px; color: #2D3748;">
+              <li style="display: flex; gap: 12px;"><span style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #205A9B; margin-top: 9px;"></span>Reducción de quiebres de stock y excesos de inventarios de repuestos</li>
+              <li style="display: flex; gap: 12px;"><span style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #205A9B; margin-top: 9px;"></span>Mayor precisión en la planificación y programación de producción</li>
+              <li style="display: flex; gap: 12px;"><span style="flex: none; width: 6px; height: 6px; border-radius: 50%; background: #205A9B; margin-top: 9px;"></span>Distribución de diferencias de inventario según el consumo de las órdenes de producción</li>
+            </ul>
+            
+          </div>
+        </article>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Imagen con título -->
+<section style="padding: 0 0 60px">
+  <div>
+    <div class="s-photo" style="position: relative; height: clamp(320px, 38vw, 520px); overflow: hidden;">
+      <img src="assets/img/tecnico-app.jpg" alt="Consultor vSApp trabajando en terreno" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;">
+      <div aria-hidden="true" style="position: absolute; inset: 0; background: linear-gradient(90deg, rgba(7,21,39,0.82) 0%, rgba(7,21,39,0.45) 50%, rgba(7,21,39,0.05) 100%)"></div>
+      <div style="position: absolute; left: 0; right: 0; bottom: clamp(28px, 5vw, 64px); max-width: 1536px; margin: 0 auto; padding: 0 clamp(20px, 3vw, 48px); box-sizing: border-box; color: #FFFFFF;">
+        <p style="font-size: 13px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #A7C8EC; margin-bottom: 14px;">En terreno con su equipo</p>
+        <h2 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(25px, 2.72vw, 38px); line-height: 1.15; max-width: 16em;">Llevamos SAP a donde ocurre la operación</h2>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Llamado a la acción -->
+<section style="background: linear-gradient(160deg, #0A1F3D 0%, #071527 100%); color: #FFFFFF;">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 58px clamp(20px, 3vw, 48px); display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px 35px;">
+    <div>
+      <h2 style="font-family: 'Playfair Display', Georgia, serif; font-weight: 600; font-size: clamp(23px, 2.08vw, 29px); line-height: 1.2;">¿Qué servicio necesita su operación?</h2>
+      <p style="color: rgba(255,255,255,0.72); margin-top: 10px;">Conversemos y le proponemos el mejor camino para su planta.</p>
+    </div>
+    <a href="index.html#contacto" style="display: inline-flex; align-items: center; gap: 10px; padding: 15px 30px; background: #F5B80A; color: #071527; font-size: 15px; font-weight: 600; text-decoration: none; border-radius: 4px;">Contáctanos <span aria-hidden="true">→</span></a>
+  </div>
+</section>
+
+<footer style="background: #071527; color: rgba(255,255,255,0.6); font-size: 13px; border-top: 1px solid rgba(255,255,255,0.08);">
+  <div style="max-width: 1440px; margin: 0 auto; padding: 24px clamp(20px, 3vw, 48px); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px;">
+    <p>© 2026 vSApp Ltda. Todos los derechos reservados.</p>
+    <p>contacto@vsapp.cl · +56 2 2287 1796</p>
+  </div>
+</footer>
+
+</div>
+
+<script src="js/vsapp-dc.js"></script>
+<script src="js/vsapp-motion.js"></script>
+<script>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { navOpen: false };
+  }
+  renderVals() {
+    const open = this.state.navOpen;
+    return {
+      navOpen: open,
+      navClosed: !open,
+      navExpanded: open ? 'true' : 'false',
+      toggleNav: () => this.setState({ navOpen: !this.state.navOpen }),
+    };
+  }
+}
+vsappMount(Component);
+</script>
+</body>
+</html>
