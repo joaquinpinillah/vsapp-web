@@ -44,7 +44,7 @@ a{color:#0A1F3D}a:hover{color:#1F8C7E}
 /* Carga uniforme: los bloques aparecen al llegar a ellos (js/vsapp-motion.js) */
 .v-reveal,.v-up,.s-card{animation:none!important}
 .js-motion [data-rv]{opacity:0;transform:translateY(28px);transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1);transition-delay:var(--rv-d,0ms)}
-.js-motion [data-rv].rv-in{opacity:1;transform:none}
+.js-motion [data-rv="in"]{opacity:1;transform:none}
 /* Pantalla esqueleto: solo aparece si la carga tarda más de 0,3 s */
 .vs-skel{position:fixed;inset:0;z-index:5000;background:#FFFFFF;opacity:0;pointer-events:none;animation:skelIn .25s .3s forwards;transition:opacity .4s;overflow:hidden}
 .vs-skel.done{opacity:0!important;animation:none}
