@@ -70,6 +70,32 @@ a{color:#0A1F3D}a:hover{color:#1F8C7E}
 @keyframes skelIn{to{opacity:1}}
 @keyframes skelShine{from{background-position:200% 0}to{background-position:-200% 0}}
 @media (prefers-reduced-motion:reduce){.js-motion [data-rv]{transition:opacity .3s;transform:none}.vs-skel i{animation:none}}
+/* Celular y tablet */
+.v-navtog{display:none;align-items:center;justify-content:center;width:46px;height:46px;border-radius:12px;border:0;background:rgba(255,255,255,0.14);color:#FFFFFF;cursor:pointer}
+@media (max-width:1279px){.m-row>div:first-child{flex:1 1 380px!important}.m-row .m-ph{margin:0 auto!important}}
+@media (max-width:1100px){div:has(> .m-tab){grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width:900px){
+.v-navtog{display:flex}
+.v-navbar>div{width:100%;box-sizing:border-box;justify-content:space-between;gap:8px!important;padding:10px 10px 10px 20px!important}
+.v-navbar nav{display:none!important;width:100%;flex-direction:column;align-items:stretch!important;gap:2px!important;padding-bottom:6px}
+.v-navbar.open nav{display:flex!important}
+.v-navbar.open>div{background:rgba(10,31,61,0.96);border-color:rgba(255,255,255,0.12)!important}
+#inicio{min-height:600px!important}
+}
+@media (max-width:640px){
+#inicio{min-height:540px!important}
+.v-mini[style*="grid-template-columns"]{width:120px!important}
+.v-mini[style*="grid-template-columns"]>div{height:40px!important}
+svg[aria-label^="Anillo"]{width:240px!important}
+.a-sync-col{display:none}
+}
+@media (max-width:560px){div:has(> .m-tab){grid-template-columns:1fr!important}}
+@media (max-width:900px){
+.nav-pill{display:flex!important;width:100%;justify-content:space-between;gap:8px!important;padding:10px 10px 10px 20px!important}
+.nav-pill nav{display:contents!important}
+.nav-pill .nav-btn{margin-left:auto}
+.nav-pill .nav-row{width:100%;flex-direction:column;align-items:stretch!important;gap:2px!important;padding-bottom:6px}
+}
 </style>
 </head>
 <body>
@@ -91,6 +117,7 @@ a{color:#0A1F3D}a:hover{color:#1F8C7E}
   <header id="navbar" class="v-navbar" style="position: fixed; z-index: 900; top: 16px; left: 0; right: 0; max-width: 1536px; margin: 0 auto; padding: 0 clamp(16px, 3vw, 48px); box-sizing: border-box; display: flex; flex-wrap: wrap;">
     <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 35px; padding: 10px 12px 10px 26px; border: 1px solid rgba(255,255,255,0.22); border-radius: 16px; transition: background .25s, box-shadow .25s, border-color .25s;">
       <a href="index.html" aria-label="vSApp, inicio" style="display: flex; align-items: center;"><img src="assets/img/logo-blanco.svg" alt="vSApp" style="height: 44px; width: auto; display: block;"></a>
+      <button type="button" class="v-navtog" id="navToggle" aria-expanded="false" aria-label="Abrir menú"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       <nav aria-label="Navegación principal" style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px;">
         <a href="conozcanos.html" style="color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 500; text-decoration: none; padding: 10px 18px; border-radius: 8px;">Sobre nosotros</a>
         <a href="servicios.html" style="color: rgba(255,255,255,0.85); font-size: 15px; font-weight: 500; text-decoration: none; padding: 10px 18px; border-radius: 8px;">Nuestros Servicios</a>

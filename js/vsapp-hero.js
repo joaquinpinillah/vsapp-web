@@ -6,6 +6,17 @@
     const onScroll = () => navbar.classList.toggle('is-scrolled', window.scrollY > 40);
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+    // Celular/tablet: el botón abre y cierra el menú
+    const toggle = document.getElementById('navToggle');
+    if (toggle) {
+      const setOpen = (open) => {
+        navbar.classList.toggle('open', open);
+        toggle.setAttribute('aria-expanded', String(open));
+        toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+      };
+      toggle.addEventListener('click', () => setOpen(!navbar.classList.contains('open')));
+      navbar.querySelectorAll('nav a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+    }
   }
 
   const hero = document.getElementById('inicio');
