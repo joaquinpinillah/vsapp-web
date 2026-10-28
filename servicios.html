@@ -76,6 +76,13 @@ a{color:#0A1F3D}a:hover{color:#1F8C7E}
 @keyframes skelIn{to{opacity:1}}
 @keyframes skelShine{from{background-position:200% 0}to{background-position:-200% 0}}
 @media (prefers-reduced-motion:reduce){.js-motion [data-rv]{transition:opacity .3s;transform:none}.vs-skel i{animation:none}}
+/* Navbar: recuadro que se desliza bajo el link con el cursor (como la web anterior) */
+.vs-ind-host{position:relative}
+.vs-ind-host>a{position:relative;z-index:1;transition:color .2s}
+.vs-ind-host>a:hover{color:#FFFFFF!important;background:transparent!important}
+.vs-ind{position:absolute;top:0;left:0;z-index:0;width:0;height:0;border-radius:11px;background:rgba(255,255,255,0.14);border:1px solid rgba(255,255,255,0.06);opacity:0;pointer-events:none;transition:transform .5s cubic-bezier(.22,1,.36,1),width .5s cubic-bezier(.22,1,.36,1),height .5s cubic-bezier(.22,1,.36,1),opacity .3s}
+.vs-ind.instant{transition:opacity .3s}
+@media (max-width:900px){.vs-ind{display:none}.vs-ind-host>a:hover{background:rgba(255,255,255,0.1)!important}}
 /* Celular y tablet */
 .v-navtog{display:none;align-items:center;justify-content:center;width:46px;height:46px;border-radius:12px;border:0;background:rgba(255,255,255,0.14);color:#FFFFFF;cursor:pointer}
 @media (max-width:1279px){.m-row>div:first-child{flex:1 1 380px!important}.m-row .m-ph{margin:0 auto!important}}

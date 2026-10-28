@@ -12,6 +12,29 @@
   else window.addEventListener('load', hideSkel);
   setTimeout(hideSkel, 6000);
 
+  // Navbar: un recuadro se desliza hasta el link bajo el cursor
+  if (window.matchMedia('(hover: hover)').matches) {
+    document.querySelectorAll('.v-navbar nav, .nav-row').forEach((host) => {
+      const links = Array.from(host.querySelectorAll(':scope > a'));
+      if (!links.length) return;
+      host.classList.add('vs-ind-host');
+      const ind = document.createElement('span');
+      ind.className = 'vs-ind';
+      ind.setAttribute('aria-hidden', 'true');
+      host.prepend(ind);
+      const PAD = 3;
+      links.forEach((link) => link.addEventListener('mouseenter', () => {
+        const first = ind.style.opacity !== '1';
+        ind.classList.toggle('instant', first);
+        ind.style.width = link.offsetWidth + PAD * 2 + 'px';
+        ind.style.height = link.offsetHeight + PAD * 2 + 'px';
+        ind.style.transform = `translate(${link.offsetLeft - PAD}px, ${link.offsetTop - PAD}px)`;
+        ind.style.opacity = '1';
+      }));
+      host.addEventListener('mouseleave', () => { ind.style.opacity = '0'; });
+    });
+  }
+
   if (!('IntersectionObserver' in window)) return;
   document.documentElement.classList.add('js-motion');
 
